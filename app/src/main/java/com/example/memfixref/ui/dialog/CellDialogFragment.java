@@ -46,6 +46,7 @@ public class CellDialogFragment extends DialogFragment {
                 KitViewModel kitViewModel = new ViewModelProvider(getActivity()).get(KitViewModel.class);
                 kitViewModel.getKit().cells.add(new Cell(cellKeyEditText.getText().toString(),
                         cellValueEditText.getText().toString()));//мб обновить адаптер нужно
+                kitViewModel.getArrayAdapter().notifyDataSetChanged();
                 dismiss();
             }
         });

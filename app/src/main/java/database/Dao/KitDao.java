@@ -12,6 +12,7 @@ import database.entities.Kit;
 
 @Dao
 public interface KitDao {
+    //Insert находится в CellDao поскольку проиходит вставка отношения one to many, так очень удобно
     @Query("SELECT * FROM kit")
     List<Kit> getAll();
     //Получить все пакеты с большим или равным коэфиценту использования чем входящий
@@ -22,16 +23,10 @@ public interface KitDao {
     @Query("SELECT * FROM kit WHERE kit_name LIKE :kitName")
     Kit getKitByName(String kitName);
 
-    @Insert
-    void insertAll(List<Kit> kits);
-
     @Delete
     void deleteKit(Kit kit);
 
     @Update
     void updateKit(Kit... kit);
-
-
-
 
 }

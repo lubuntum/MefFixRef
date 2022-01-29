@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import database.Dao.CellDao;
 import database.Dao.KitDao;
@@ -15,22 +17,32 @@ import database.entities.Kit;
 
 public class Repository {
     private Database appDatabase;
+    private Executor diskIOExecutor;
+
     public KitDao kitDao;
     public CellDao cellDao;
     public SessionDao sessionDao;
 
     public Repository(Application app){
         appDatabase = Database.getInstance(app);
+        diskIOExecutor = Executors.newCachedThreadPool();
         kitDao = appDatabase.kitDao();
         cellDao = appDatabase.cellDao();
         sessionDao = appDatabase.sessionDao();
     }
-    public void insertKit(List<Kit> kits){
-        new InsertKitsAsyncTask(kitDao).execute(kits);
+    public void insertKitWithCells(Kit kit, List<Cell> cells){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                cellDao.insert(kit,cells);
+            }
+        };
+        diskIOExecutor.execute(runnable);
     }
     public Kit getKit(String kitName){
         return kitDao.getKitByName(kitName);
     }
+    /**
     public void insertCell (List<Cell> cells){
         new InsertCellsAsyncTask(cellDao).execute(cells);
     }
@@ -50,18 +62,6 @@ public class Repository {
             return null;
         }
     }
-    private static class InsertKitsAsyncTask extends
-            AsyncTask<List<Kit>,Void,Void>{
-
-        private KitDao kitDao;
-        public InsertKitsAsyncTask(KitDao kitDao){
-            this.kitDao = kitDao;
-        }
-
-        @Override
-        protected Void doInBackground(List<Kit>... lists) {
-            kitDao.insertAll(lists[0]);
-            return null;
-        }
-    }
+        */
 }
+

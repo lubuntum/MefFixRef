@@ -37,13 +37,12 @@ public class HomeFragment extends Fragment {
         OptionsListAdapter optionsListAdapter =
                 new OptionsListAdapter(getContext(),R.layout.options_list_item,homeViewModel.getMainMenuItems());
         mainMenu.setAdapter(optionsListAdapter);
+        //действия всех опций меню
         mainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-
                     Toast.makeText(getContext(),"Game",Toast.LENGTH_SHORT).show();
-
                 }
                 else if (position == 1){
                     Intent intent = new Intent(getContext(), ChangeKitActivity.class);

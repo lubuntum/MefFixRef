@@ -2,13 +2,18 @@ package database.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
-@Entity(tableName = "session")//дописать внешний ключ
+@Entity(tableName = "session",
+        foreignKeys = @ForeignKey(entity = Kit.class, parentColumns = "id",childColumns = "kit_id"),
+indices = {@Index(value = {"kit_id"})})
 public class Session {
-    @ColumnInfo
-    public int id;
+    @PrimaryKey
+    public long id;
     @ColumnInfo(name = "kit_id")
-    public int kitId;
+    public long kitId;
     @ColumnInfo(name = "use_date")
     public String useDate;
     @ColumnInfo(name = "is_succeed")

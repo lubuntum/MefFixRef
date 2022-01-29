@@ -2,6 +2,7 @@ package database.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -16,16 +17,18 @@ public class Kit {
         this.kitName = "";
         cells = new LinkedList<>();
     }
+    @Ignore
     public Kit(String kitName){
         this.kitName = kitName;
         cells = new LinkedList<>();
     }
+    @Ignore
     public Kit(String kitName,List<Cell> cells){
         this.kitName = kitName;
         this.cells = cells;
     }
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
     @ColumnInfo(name = "kit_name")
     public String kitName;
     @ColumnInfo(name = "last_use")
@@ -36,7 +39,7 @@ public class Kit {
     public float Rating;
     @ColumnInfo(name = "creation_date")
     public String creationDate;
-
+    @Ignore
     public List<Cell> cells;
 
 }
