@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.slideshow;
+package com.example.memfixref.ui.mainfragments.slideshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

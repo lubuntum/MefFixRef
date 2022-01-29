@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity(tableName = "kit",
         indices = {@Index(value = {"kit_name"},unique = true)})
 public class Kit {
@@ -21,5 +23,7 @@ public class Kit {
     public float Rating;
     @ColumnInfo(name = "creation_date")
     public String creationDate;
+
+    public List<Cell> cells;
 
 }

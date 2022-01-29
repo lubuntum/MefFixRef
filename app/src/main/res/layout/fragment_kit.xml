@@ -4,18 +4,35 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/text_kit"
+    <LinearLayout
+        android:id="@+id/kitInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <EditText
+            android:id="@+id/kitNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:inputType="text"
+            android:hint="@string/kit_name"/>
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:text="@string/add_kit"
+            app:roundedCorners="true"
+            app:bootstrapBrand="info"
+            app:bootstrapSize="lg"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/cellListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/kitInfoContainer"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textSize="20sp"
-        android:textAlignment="center"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

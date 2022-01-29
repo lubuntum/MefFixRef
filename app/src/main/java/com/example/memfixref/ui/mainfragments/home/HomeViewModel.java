@@ -1,13 +1,9 @@
-package com.example.memfixref.ui.home;
+package com.example.memfixref.ui.mainfragments.home;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.memfixref.R;
 import com.example.memfixref.ui.optionslist.OptionsItem;

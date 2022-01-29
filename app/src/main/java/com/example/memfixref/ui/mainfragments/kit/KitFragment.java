@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.kit;
+package com.example.memfixref.ui.mainfragments.kit;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +22,7 @@ public class KitFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView textKit = view.findViewById(R.id.text_kit);
-        textKit.setText("Kit Fragment");
+        //TextView textKit = view.findViewById(R.id.text_kit);
+        //textKit.setText("Kit Fragment");
     }
 }
