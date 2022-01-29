@@ -29,7 +29,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows'
             }
         }
     }

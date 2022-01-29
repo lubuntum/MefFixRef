@@ -16,4 +16,10 @@
 
     <string name="main_menu_item_1">Start</string>
     <string name="main_menu_item_2">Add new kit</string>
+    <string name="kit_name">Kit name</string>
+    <string name="add_kit">Add kit</string>
+    <string name="cell_name">Cell name</string>
+    <string name="memorize_key">memorize key</string>
+    <string name="confirm">Confirm</string>
+    <string name="data">data</string>
 </resources>
