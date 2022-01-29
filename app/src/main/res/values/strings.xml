@@ -22,4 +22,7 @@
     <string name="memorize_key">memorize key</string>
     <string name="confirm">Confirm</string>
     <string name="data">data</string>
+    <string name="add_cell">Add cell</string>
+    <string name="user_name">User name</string>
+    <string name="some_inspiration_quote">Some inspiration quote</string>
 </resources>

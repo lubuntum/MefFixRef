@@ -7,11 +7,6 @@
     android:padding="10dp">
 
     <EditText
-        android:id="@+id/CellNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/cell_name"/>
-    <EditText
         android:id="@+id/cellKey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,9 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/confirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/confirm"
+            app:bootstrapSize="lg"
             app:bootstrapBrand="success"
             app:roundedCorners="true"/>
     </LinearLayout>

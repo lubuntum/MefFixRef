@@ -8,6 +8,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "cell",
         foreignKeys = @ForeignKey(entity = Kit.class,parentColumns = "id", childColumns = "kit_id"))
 public class Cell {
+    public Cell(String key, String value){
+        this.value = value;
+        this.key = key;
+    }
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo(name = "kit_id")
