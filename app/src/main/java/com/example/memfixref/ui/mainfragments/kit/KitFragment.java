@@ -40,7 +40,7 @@ public class KitFragment extends Fragment {
         BootstrapButton addCellBtn = view.findViewById(R.id.addCellBtn);
 
         cellListView  = view.findViewById(R.id.cellListView);
-        arrayAdapter = new ArrayAdapter<Cell>(getContext(), android.R.layout.simple_list_item_1,kitViewModel.getCellList());
+        arrayAdapter = new ArrayAdapter<Cell>(getContext(), android.R.layout.simple_list_item_1,kitViewModel.getKit().cells);
         cellListView.setAdapter(arrayAdapter);
 
         addCellBtn.setOnClickListener(v->{

@@ -1,16 +1,21 @@
 package com.example.memfixref.ui.optionslist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.memfixref.ChangeKitActivity;
+import com.example.memfixref.MainActivity;
 import com.example.memfixref.R;
 
 import java.util.List;
@@ -41,4 +46,5 @@ public class OptionsListAdapter extends ArrayAdapter<OptionsItem> {
 
         return convertView;
     }
+
 }

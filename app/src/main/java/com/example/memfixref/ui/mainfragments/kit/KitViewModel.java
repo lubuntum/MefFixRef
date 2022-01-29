@@ -10,16 +10,19 @@ import java.util.List;
 import java.util.Random;
 
 import database.entities.Cell;
+import database.entities.Kit;
 
 public class KitViewModel extends AndroidViewModel {
-    private List<Cell> cellList;
+    //private List<Cell> cellList;
+    private Kit kit;
     public KitViewModel(@NonNull Application application) {
         super(application);
-        cellList = new LinkedList<>();
-        cellList.add(new Cell(String.valueOf(new Random().nextInt()),"TestValue"));
+        kit = new Kit();
+        kit.cells = new LinkedList<>();
+        kit.cells.add(new Cell(String.valueOf(new Random().nextInt()),"TestValue"));
     }
 
-    public List<Cell> getCellList() {
-        return cellList;
+    public Kit getKit() {
+        return kit;
     }
 }

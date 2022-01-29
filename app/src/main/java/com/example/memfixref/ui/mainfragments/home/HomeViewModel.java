@@ -27,6 +27,8 @@ public class HomeViewModel extends AndroidViewModel {
                     context.getResources().getString(R.string.main_menu_item_1)));
             mainMenuItems.add(new OptionsItem(R.drawable.ic_add_new,
                     context.getResources().getString(R.string.main_menu_item_2)));
+            mainMenuItems.add(new OptionsItem(R.drawable.ic_network,
+                    context.getResources().getString(R.string.main_menu_item_3)));
         }
     }
 
