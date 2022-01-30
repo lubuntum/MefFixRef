@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.mainfragments.kit;
+package com.example.memfixref.ui.mainfragments.kit.onekitdata;
 
 import android.app.Application;
 import android.widget.ArrayAdapter;

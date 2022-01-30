@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_my_data"
-        android:name="com.example.memfixref.ui.mainfragments.kit.KitFragment"
+        android:name="com.example.memfixref.ui.mainfragments.kit.onekitdata.KitFragment"
         android:label="@string/menu_kit"
         tools:layout="@layout/fragment_kit"/>
 </navigation>

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.memfixref.ui.mainfragments.kit.KitFragment;
+import com.example.memfixref.ui.mainfragments.kit.onekitdata.KitFragment;
 
 public class ChangeKitActivity extends AppCompatActivity {
     @Override

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
-import com.example.memfixref.ui.mainfragments.kit.KitViewModel;
+import com.example.memfixref.ui.mainfragments.kit.onekitdata.KitViewModel;
 
 import org.jetbrains.annotations.NotNull;
 

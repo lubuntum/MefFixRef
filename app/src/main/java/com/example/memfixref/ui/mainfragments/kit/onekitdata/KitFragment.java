@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.mainfragments.kit;
+package com.example.memfixref.ui.mainfragments.kit.onekitdata;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,14 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
-
-import java.io.IOException;
 
 import database.entities.Cell;
 //FIXME s:
