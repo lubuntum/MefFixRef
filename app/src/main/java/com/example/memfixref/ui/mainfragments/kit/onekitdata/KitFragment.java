@@ -1,6 +1,7 @@
 package com.example.memfixref.ui.mainfragments.kit.onekitdata;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
+import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
 
 import database.entities.Cell;
 //FIXME s:
-// - Необходимо создать собственный адаптер для отображения cells 3
+// - Необходимо создать собственный адаптер для отображения cells 3 //сделано
 // - Сделать свой адаптер для списка Kit и отобразитб все сохраненные kit в данном списке 2
 // - По клику сделать редактирование выбранного Kit 4
 // - В новой менюшке боковой панели показывать все доступные kits, так же сделать поиск в DAO, пока нету 1
@@ -59,7 +61,7 @@ public class KitFragment extends Fragment {
 
         cellListView  = view.findViewById(R.id.cellListView);
         kitViewModel.setArrayAdapter(
-                new ArrayAdapter<Cell>(getContext(), android.R.layout.simple_list_item_1,kitViewModel.getKit().cells));
+                new CellAdapter(getContext(), R.layout.cell_item,kitViewModel.getKit().cells));
         cellListView.setAdapter(kitViewModel.getArrayAdapter());
 
         addCellBtn.setOnClickListener(v->{

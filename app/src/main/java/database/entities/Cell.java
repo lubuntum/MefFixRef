@@ -30,4 +30,40 @@ public class Cell {
     public int incorrect;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public byte[] image;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public float getAccuracy() {
+        return accuracy;
+    }
+
+    public int getCorrect() {
+        return correct;
+    }
+
+    public int getIncorrect() {
+        return incorrect;
+    }
 }
