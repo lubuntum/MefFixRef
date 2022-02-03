@@ -29,17 +29,18 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows', 'src\\main\\res\\layouts\\change_kit'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows', 'src\\main\\res\\layouts\\change_kit', 'src\\main\\res\\layouts\\kit_list'
             }
         }
     }
 }
 
 dependencies {
+    def sas;
     implementation 'com.beardedhen:androidbootstrap:2.3.2'
     implementation 'androidx.room:room-runtime:2.4.1'
     annotationProcessor 'android.arch.persistence.room:compiler:2.4.1'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'androidx.navigation:navigation-fragment:2.2.2'
