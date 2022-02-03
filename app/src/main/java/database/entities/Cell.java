@@ -6,10 +6,13 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "cell",
-        foreignKeys = @ForeignKey(entity = Kit.class,parentColumns = "id", childColumns = "kit_id"),
+        foreignKeys = @ForeignKey(entity = Kit.class,parentColumns = "id", childColumns = "kit_id",
+                onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE),
         indices = @Index({"kit_id"}))
-public class Cell {
+public class Cell implements Serializable {
     public Cell(String key, String value){
         this.value = value;
         this.key = key;

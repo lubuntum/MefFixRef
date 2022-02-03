@@ -1,9 +1,12 @@
 package database;
 
 import android.app.Application;
+import android.content.Context;
 import android.media.Ringtone;
 import android.os.AsyncTask;
 
+
+import androidx.room.Room;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -23,6 +26,19 @@ public class Repository {
     public CellDao cellDao;
     public SessionDao sessionDao;
 
+    public static volatile Repository INSTANCE = null;
+
+    public static Repository getInstance(Application app){
+        if (INSTANCE == null){
+            synchronized (Repository.class){
+                if (INSTANCE == null){
+                    INSTANCE = new Repository(app);
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
     public Repository(Application app){
         appDatabase = Database.getInstance(app);
         diskIOExecutor = Executors.newCachedThreadPool();
@@ -30,11 +46,21 @@ public class Repository {
         cellDao = appDatabase.cellDao();
         sessionDao = appDatabase.sessionDao();
     }
-    public void insertKitWithCells(Kit kit, List<Cell> cells){
+    public void insertKitWithCells(Kit kit){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                cellDao.insert(kit,cells);
+                //Передать связанные сущности в явном виде посольку Cell отдельные сущности в Бд
+                cellDao.insert(kit,kit.cells);
+            }
+        };
+        diskIOExecutor.execute(runnable);
+    }
+    public void updateKitWithCells(Kit kit){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                cellDao.update(kit,kit.cells);
             }
         };
         diskIOExecutor.execute(runnable);
