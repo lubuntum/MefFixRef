@@ -32,15 +32,15 @@
             app:bootstrapBrand="info"
             app:bootstrapSize="lg"/>
         <com.beardedhen.androidbootstrap.BootstrapButton
-            android:id="@+id/saveBtn"
+            android:id="@+id/changeKitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:layout_marginStart="1dp"
-            android:text="@string/save"
+            android:text="@string/update"
             app:roundedCorners="true"
             app:bootstrapBrand="success"
-            app:bootstrapSize="lg"/>
+            app:bootstrapSize="lg" />
     </LinearLayout>
     <ListView
         android:id="@+id/cellListView"

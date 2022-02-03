@@ -22,12 +22,10 @@ public class KitViewModel extends AndroidViewModel {
     private Kit kit;
     private ArrayAdapter<Cell> arrayAdapter;
     private Repository repo;
-    private LiveData<String> kitName;
     public KitViewModel(@NonNull Application application) {
         super(application);
-        repo = new Repository(application);
+        repo = Repository.getInstance(application);
 
-        kitName = new MutableLiveData<>();
         kit = new Kit();
         kit.cells = new LinkedList<>();
         kit.cells.add(new Cell(String.valueOf(new Random().nextInt()),"TestValue"));
@@ -36,12 +34,18 @@ public class KitViewModel extends AndroidViewModel {
     public Kit getKit() {
         return kit;
     }
-    public void saveKit(){
-        repo.insertKitWithCells(kit,kit.cells);
+
+    public void setKit(Kit kit) {
+        this.kit = kit;
+        if(kit.cells == null)
+            kit.cells = new LinkedList<>();
     }
 
-    public LiveData<String> getKitName() {
-        return kitName;
+    public void saveKit(){
+        repo.insertKitWithCells(kit);
+    }
+    public void updateKit(){
+        repo.updateKitWithCells(kit);
     }
 
     public ArrayAdapter<Cell> getArrayAdapter() {

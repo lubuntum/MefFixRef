@@ -6,12 +6,13 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity(tableName = "kit",
         indices = {@Index(value = {"kit_name"},unique = true)})
-public class Kit {
+public class Kit implements Serializable {
 
     public Kit(){
         this.kitName = "";
