@@ -19,16 +19,22 @@ import database.entities.Kit;
 
 public class KitViewModel extends AndroidViewModel {
     //private List<Cell> cellList;
+    private MutableLiveData<List<Cell>> cellList;
     private Kit kit;
     private ArrayAdapter<Cell> arrayAdapter;
     private Repository repo;
     public KitViewModel(@NonNull Application application) {
         super(application);
         repo = Repository.getInstance(application);
-
+        cellList = new MutableLiveData<>();
+        /*
         kit = new Kit();
         kit.cells = new LinkedList<>();
-        kit.cells.add(new Cell(String.valueOf(new Random().nextInt()),"TestValue"));
+        cellList = new MutableLiveData<>();
+        cellList.setValue(kit.cells);
+
+         */
+        //kit.cells.add(new Cell(String.valueOf(new Random().nextInt(10)),"TestValue"));
     }
 
     public Kit getKit() {
@@ -41,8 +47,16 @@ public class KitViewModel extends AndroidViewModel {
             kit.cells = new LinkedList<>();
     }
 
+    public void uploadCells(){
+        repo.getAllCellsByKit(kit, cellList);
+    }
+
     public void saveKit(){
         repo.insertKitWithCells(kit);
+    }
+    //Если изменяем уже сущ Kit, то необходимо подгрузить все его Cell
+    public void loadKitData(){
+
     }
     public void updateKit(){
         repo.updateKitWithCells(kit);
@@ -55,4 +69,10 @@ public class KitViewModel extends AndroidViewModel {
     public void setArrayAdapter(ArrayAdapter<Cell> arrayAdapter) {
         this.arrayAdapter = arrayAdapter;
     }
+
+
+    public MutableLiveData<List<Cell>> getCellList() {
+        return cellList;
+    }
+
 }

@@ -4,10 +4,17 @@ import android.app.Application;
 import android.content.Context;
 import android.media.Ringtone;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
+import java.lang.reflect.Array;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -21,12 +28,15 @@ import database.entities.Kit;
 public class Repository {
     private Database appDatabase;
     private Executor diskIOExecutor;
+    private Executor mainThreadExecutor;
 
     public KitDao kitDao;
     public CellDao cellDao;
     public SessionDao sessionDao;
 
     public static volatile Repository INSTANCE = null;
+
+    public volatile List<Kit> kitList;
 
     public static Repository getInstance(Application app){
         if (INSTANCE == null){
@@ -42,6 +52,15 @@ public class Repository {
     public Repository(Application app){
         appDatabase = Database.getInstance(app);
         diskIOExecutor = Executors.newCachedThreadPool();
+        //Ссылка для выполнения операций в главном потоке (UI)
+        mainThreadExecutor = new Executor() {
+            private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+            @Override
+            public void execute(Runnable runnable) {
+                mainThreadHandler.post(runnable);
+            }
+        };
+
         kitDao = appDatabase.kitDao();
         cellDao = appDatabase.cellDao();
         sessionDao = appDatabase.sessionDao();
@@ -67,6 +86,25 @@ public class Repository {
     }
     public Kit getKit(String kitName){
         return kitDao.getKitByName(kitName);
+    }
+    public void getAllKits(MutableLiveData<List<Kit>> kitList){
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                kitList.postValue(kitDao.getAll());
+            }
+        };
+        diskIOExecutor.execute(runnable);
+    }
+    public void getAllCellsByKit(Kit kit, MutableLiveData<List<Cell>> cellList){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                cellList.postValue(cellDao.getCellsByKitId(kit.id));
+            }
+        };
+        diskIOExecutor.execute(runnable);
     }
     /**
     public void insertCell (List<Cell> cells){

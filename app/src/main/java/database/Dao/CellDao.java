@@ -14,11 +14,16 @@ import java.util.List;
 import database.entities.Cell;
 import database.entities.Kit;
 
+/**
+ * Из за one to many поместил сюда некоторые методы из KitDao
+ * Поскольку необходимо добавлять в базу транзакцию сразу Kit и List<Cell> вместе
+ * все методы связанные с Kit помимо updateKit и insertKit находятся в kitDao
+ */
 @Dao
 public abstract class CellDao {
 
     @Query("SELECT * FROM cell WHERE kit_id == :kitId")
-    abstract List<Cell> getCellsByKitId(int kitId);
+    public abstract List<Cell> getCellsByKitId(long kitId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void insertCell(Cell cell);
@@ -42,9 +47,6 @@ public abstract class CellDao {
         updateKit(kit);
         updateCells(cells);
     }
-
-    @Query("SELECT * FROM kit WHERE kit_name == :kitName")
-    public abstract Kit getKit(String kitName);
 
     @Delete
     public abstract void deleteCell(Cell cell);

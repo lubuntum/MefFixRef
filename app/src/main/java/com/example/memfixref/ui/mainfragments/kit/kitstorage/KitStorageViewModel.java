@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.memfixref.ui.mainfragments.kit.kitlist.KitAdapter;
 
@@ -19,28 +20,22 @@ import database.entities.Kit;
 
 public class KitStorageViewModel extends AndroidViewModel {
 
-    private List<Kit> kitList;
+    private MutableLiveData<List<Kit>> kitListLive;
     private ArrayAdapter<Kit> kitAdapter;
     private Repository repo;
 
     public KitStorageViewModel(@NonNull Application application) {
         super(application);
         repo = Repository.getInstance(application);
-        kitList = new LinkedList<>();
-        testKitListInit();
-    }
+        kitListLive = new MutableLiveData<>();
+        uploadKitListLive();
 
-    private void testKitListInit(){
-        for(int i = 0 ; i < 5;i++){
-            Kit kit = new Kit("KitName" + i);
-            kit.frequencyUse = 51 + ((new Random().nextInt())%50);
-            kit.lastUse = "02.02.2022";
-            kitList.add(kit);
-            kit.cells = new LinkedList<>();
-            kit.cells.add(new Cell("key" + i,"value" + "i"));
-        }
+        //kitList = new LinkedList<>();
+        //testKitListInit();
     }
-
+    public void uploadKitListLive(){
+        repo.getAllKits(kitListLive);
+    }
     public ArrayAdapter<Kit> getKitAdapter() {
         return kitAdapter;
     }
@@ -49,11 +44,11 @@ public class KitStorageViewModel extends AndroidViewModel {
         this.kitAdapter = kitAdapter;
     }
 
-    public List<Kit> getKitList() {
-        return kitList;
+    public MutableLiveData<List<Kit>> getKitListLive() {
+        return kitListLive;
     }
 
-    public void setKitList(List<Kit> kitList) {
-        this.kitList = kitList;
+    public void setKitListLive(MutableLiveData<List<Kit>> kitListLive) {
+        this.kitListLive = kitListLive;
     }
 }

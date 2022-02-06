@@ -15,26 +15,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
+import com.example.memfixref.ui.mainfragments.kit.kitstorage.KitStorageViewModel;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
 
+import java.util.List;
+
+import database.entities.Cell;
 import database.entities.Kit;
-//FIXME s:
-// - Необходимо создать собственный адаптер для отображения cells 3 //сделано
-// - Сделать свой адаптер для списка Kit и отобразитб все сохраненные kit в данном списке 2 //сделано(без базы)
-// - По клику сделать редактирование выбранного Kit 4//сделано(без базы)
-// - В новой менюшке боковой панели показывать все доступные kits, так же сделать поиск в DAO, пока нету 1
-// - Доступ к созданию Kit только из HomeFragment, а не через боковую панель //сделано
-// - Доступ ко всем наборам(Вынести KitFragment как простой отдельный фрагмент, //сделано
-// а не элем боковой панели в layouts, там создать новую и заменить) //сделано
-// - Начать работать со статистикой, сделать фрагмент Stats
-// - Сделать фрагмент Settings
-// - Проетистировать и разодраться с CellDao, проверить работу Insert, Update, каскадное удаление/ обновление
-// - Разобрать с кнопкой сохранения в KitFragment
 
 
 public class KitFragment extends Fragment {
@@ -64,6 +57,17 @@ public class KitFragment extends Fragment {
         EditText kitNameEditText = view.findViewById(R.id.kitNameEditText);
         BootstrapButton addCellBtn = view.findViewById(R.id.addCellBtn);
         BootstrapButton changeKitBtn = view.findViewById(R.id.changeKitBtn);
+
+        cellListView  = view.findViewById(R.id.cellListView);
+        kitViewModel.getCellList().observe(getViewLifecycleOwner(), new Observer<List<Cell>>() {
+            @Override
+            public void onChanged(List<Cell> cells) {
+                kitViewModel.getKit().cells = cells;
+                kitViewModel.setArrayAdapter(
+                        new CellAdapter(getContext(), R.layout.cell_item,kitViewModel.getKit().cells));
+                cellListView.setAdapter(kitViewModel.getArrayAdapter());
+            }
+        });
         /*
         Если изменяем набор, а не создаем новый
         В зависимости от этого, кнопка выполняет разные действия с базой
@@ -74,35 +78,51 @@ public class KitFragment extends Fragment {
 
             changeKitBtn.setText(getResources().getString(R.string.update));
             kitNameEditText.setText(kitViewModel.getKit().kitName);
+
+            kitViewModel.uploadCells();//загрузка содержимого kit
             changeKitBtn.setOnClickListener(v->{
                 try {
                     kitViewModel.updateKit();
+
+                    Toast.makeText(getContext(),"Data edited successfully",Toast.LENGTH_LONG).show();
                 }
                 catch (Exception e){
                     Toast.makeText(getContext(),
                             "Can't edit Kit, please try again, may be something gone wrong",
                             Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(getContext(),"Data edit successfully",Toast.LENGTH_LONG).show();
+                //KitStorageViewModel kitStorageViewModel =
+                //        new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
+                //kitStorageViewModel.uploadKitListLive();
             });
         }
         else {
+            //Создаем новый набор и устанавливаем LiveData новый набор Cells из Kit
+            kitViewModel.setKit(new Kit());
+            kitViewModel.getCellList().setValue(kitViewModel.getKit().cells);
+
             changeKitBtn.setText(getResources().getString(R.string.save));
             changeKitBtn.setOnClickListener(v->{
                 try {
                     kitViewModel.saveKit();
+
+                    Toast.makeText(getContext(),"Data saved successfully",Toast.LENGTH_LONG).show();
                 }
                 catch (Exception e){
                     Toast.makeText(getContext(),
                             "Can't save Kit, please try again, may be something gone wrong",
                             Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(getContext(),"Data save successfully",Toast.LENGTH_LONG).show();
+                //KitStorageViewModel kitStorageViewModel =
+                //        new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
+                //kitStorageViewModel.uploadKitListLive();
+                //kitStorageViewModel.getKitListLive().getValue().add(kitViewModel.getKit());
+                //kitStorageViewModel.getKitAdapter().notifyDataSetChanged();
             });
         }
-        //событие отслеживает изменение EditText, в совю очередь изменяя LiveData,
-        // которая в своб очередь изменяет имя в kit
-        //Выглядит довольно бугорно
+        /*
+        После ввода имени пакета он сохраняется
+         */
         kitNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -114,16 +134,17 @@ public class KitFragment extends Fragment {
             }
         });
 
-        cellListView  = view.findViewById(R.id.cellListView);
-        kitViewModel.setArrayAdapter(
-                new CellAdapter(getContext(), R.layout.cell_item,kitViewModel.getKit().cells));
-        cellListView.setAdapter(kitViewModel.getArrayAdapter());
-
         addCellBtn.setOnClickListener(v->{
             FragmentManager fragmentManager = getChildFragmentManager();
             CellDialogFragment cellDialogFragment = CellDialogFragment.newInstance();
             cellDialogFragment.show(fragmentManager,"fragment_add_cell");
         });
 
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }
