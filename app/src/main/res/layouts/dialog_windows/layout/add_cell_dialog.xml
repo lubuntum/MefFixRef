@@ -28,6 +28,15 @@
             app:bootstrapSize="lg"
             app:bootstrapBrand="success"
             app:roundedCorners="true"/>
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/removeCellBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Remove"
+            app:bootstrapBrand="danger"
+            app:roundedCorners="true"
+            app:bootstrapSize="lg"/>
     </LinearLayout>
 
 

@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,7 +29,6 @@ import java.util.List;
 
 import database.entities.Cell;
 import database.entities.Kit;
-
 
 public class KitFragment extends Fragment {
     ListView cellListView;
@@ -80,6 +80,7 @@ public class KitFragment extends Fragment {
             kitNameEditText.setText(kitViewModel.getKit().kitName);
 
             kitViewModel.uploadCells();//загрузка содержимого kit
+            /*
             changeKitBtn.setOnClickListener(v->{
                 try {
                     kitViewModel.updateKit();
@@ -95,6 +96,7 @@ public class KitFragment extends Fragment {
                 //        new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
                 //kitStorageViewModel.uploadKitListLive();
             });
+             */
         }
         else {
             //Создаем новый набор и устанавливаем LiveData новый набор Cells из Kit
@@ -102,24 +104,19 @@ public class KitFragment extends Fragment {
             kitViewModel.getCellList().setValue(kitViewModel.getKit().cells);
 
             changeKitBtn.setText(getResources().getString(R.string.save));
-            changeKitBtn.setOnClickListener(v->{
-                try {
-                    kitViewModel.saveKit();
-
-                    Toast.makeText(getContext(),"Data saved successfully",Toast.LENGTH_LONG).show();
-                }
-                catch (Exception e){
-                    Toast.makeText(getContext(),
-                            "Can't save Kit, please try again, may be something gone wrong",
-                            Toast.LENGTH_LONG).show();
-                }
-                //KitStorageViewModel kitStorageViewModel =
-                //        new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
-                //kitStorageViewModel.uploadKitListLive();
-                //kitStorageViewModel.getKitListLive().getValue().add(kitViewModel.getKit());
-                //kitStorageViewModel.getKitAdapter().notifyDataSetChanged();
-            });
         }
+        changeKitBtn.setOnClickListener(v->{
+            try {
+                kitViewModel.saveKit();
+
+                Toast.makeText(getContext(),"Data saved successfully",Toast.LENGTH_LONG).show();
+            }
+            catch (Exception e){
+                Toast.makeText(getContext(),
+                        "Can't save Kit, please try again, may be something gone wrong",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
         /*
         После ввода имени пакета он сохраняется
          */
@@ -134,9 +131,18 @@ public class KitFragment extends Fragment {
             }
         });
 
+        cellListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CellDialogFragment cellDialogFragment = CellDialogFragment.newInstance(i);
+                cellDialogFragment.show(getChildFragmentManager(),"fragment_edit_cell");
+                return false;
+            }
+        });
+
         addCellBtn.setOnClickListener(v->{
             FragmentManager fragmentManager = getChildFragmentManager();
-            CellDialogFragment cellDialogFragment = CellDialogFragment.newInstance();
+            CellDialogFragment cellDialogFragment = new CellDialogFragment();
             cellDialogFragment.show(fragmentManager,"fragment_add_cell");
         });
 
