@@ -10,13 +10,15 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_kit" />
+    <string name="menu_kit">Storage</string>
+
     <string name="my_data">My Data</string>
     <string name="frequently_used">Frequently used</string>
 
     <string name="main_menu_item_1">Start</string>
     <string name="main_menu_item_2">Add new kit</string>
     <string name="main_menu_item_3">Search kits</string>
+
     <string name="kit_name">Kit name</string>
     <string name="add_kit">Add kit</string>
     <string name="cell_name">Cell name</string>
@@ -32,4 +34,11 @@
     <string name="total">Total :</string>
     <string name="last_use">Last use :</string>
     <string name="update">Update</string>
+    <string name="remove_kit_btn">Remove</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="remove_kit_with_all_cells">Remove Kit with Cells?</string>
+
+    <string name="toast_success_kit_remove">Kit successfully removed </string>
+    <string name="toast_fail_kit_remove">Some problem occurrence try again</string>
+    <string name="toast_reload_app">Some going wrong, please reload application</string>
 </resources>

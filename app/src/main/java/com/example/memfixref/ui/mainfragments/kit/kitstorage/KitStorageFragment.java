@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.memfixref.ChangeKitActivity;
 import com.example.memfixref.R;
+import com.example.memfixref.ui.dialog.KitDialogFragment;
 import com.example.memfixref.ui.mainfragments.kit.kitlist.KitAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -75,6 +76,14 @@ public class KitStorageFragment extends Fragment {
                 intent.putExtra("kit",kit);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 getActivity().startActivity(intent);
+            }
+        });
+        kitList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                KitDialogFragment kitDialogFragment = KitDialogFragment.newInstance(i);
+                kitDialogFragment.show(getChildFragmentManager(),"remove_kit_" + i);
+                return false;
             }
         });
     }

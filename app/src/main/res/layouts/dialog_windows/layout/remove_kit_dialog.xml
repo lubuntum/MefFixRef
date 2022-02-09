@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_kit_with_all_cells"
+        android:textSize="20sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/removeKitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_kit_btn"
+            app:roundedCorners="true"
+            app:bootstrapBrand="danger"
+            app:bootstrapSize="lg"/>
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/cancel_btn"
+            app:roundedCorners="true"
+            app:bootstrapBrand="info"
+            app:bootstrapSize="lg"/>
+    </LinearLayout>
+
+</LinearLayout>

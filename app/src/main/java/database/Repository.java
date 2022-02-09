@@ -87,6 +87,15 @@ public class Repository {
     public Kit getKit(String kitName){
         return kitDao.getKitByName(kitName);
     }
+    public void removeKit(Kit kit){
+        Runnable removeKitRnb = new Runnable() {
+            @Override
+            public void run() {
+                    kitDao.deleteKit(kit);
+            }
+        };
+        diskIOExecutor.execute(removeKitRnb);
+    }
     public void getAllKits(MutableLiveData<List<Kit>> kitList){
 
         Runnable runnable = new Runnable() {

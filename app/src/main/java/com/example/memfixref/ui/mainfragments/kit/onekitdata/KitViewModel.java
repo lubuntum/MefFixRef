@@ -6,16 +6,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.example.memfixref.R;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import database.Repository;
 import database.entities.Cell;
 import database.entities.Kit;
+import dateformat.DateFormat;
 
 public class KitViewModel extends AndroidViewModel {
     //private List<Cell> cellList;
@@ -52,7 +53,19 @@ public class KitViewModel extends AndroidViewModel {
     }
 
     public void saveKit(){
-        repo.insertKitWithCells(kit);
+        try {
+            if (kit != null) {
+                DateFormat dateFormat = new DateFormat();
+                kit.creationDate = dateFormat.getCurrentDateWithFormat();
+
+                repo.insertKitWithCells(kit);
+            }
+        }
+        catch (Exception e){
+            Toast.makeText(getApplication(),
+                    getApplication().getResources().
+                            getString(R.string.toast_reload_app),Toast.LENGTH_LONG).show();
+        }
     }
     //Если изменяем уже сущ Kit, то необходимо подгрузить все его Cell
     public void loadKitData(){
