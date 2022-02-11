@@ -29,16 +29,21 @@
     <string name="user_name">User name</string>
     <string name="some_inspiration_quote">Some inspiration quote</string>
     <string name="save">Save</string>
-    <string name="kit_storage">Kit storage</string>
+    <string name="menu_kit_storage">Kit storage</string>
     <string name="kit_package_name">Kit Package Name</string>
     <string name="total">Total :</string>
     <string name="last_use">Last use :</string>
     <string name="update">Update</string>
     <string name="remove_kit_btn">Remove</string>
     <string name="cancel_btn">Cancel</string>
-    <string name="remove_kit_with_all_cells">Remove Kit with Cells?</string>
+    <string name="remove_kit_with_cells_format">Remove %s with Cells?</string>
 
     <string name="toast_success_kit_remove">Kit successfully removed </string>
-    <string name="toast_fail_kit_remove">Some problem occurrence try again</string>
+    <string name="toast_fail_kit_remove">Some problem occurrence with kit try again</string>
     <string name="toast_reload_app">Some going wrong, please reload application</string>
+    <string name="toast_empty_fields">Some required fields are empty</string>
+    <string name="menu_settings">Settings</string>
+    <string name="app_theme">Theme</string>
+    <string name="app_settings_text_view">App preferences</string>
+    <string name="settings_theme_hint">Change color of your app</string>
 </resources>
