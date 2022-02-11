@@ -106,16 +106,21 @@ public class KitFragment extends Fragment {
             changeKitBtn.setText(getResources().getString(R.string.save));
         }
         changeKitBtn.setOnClickListener(v->{
-            try {
-                kitViewModel.saveKit();
-
-                Toast.makeText(getContext(),"Data saved successfully",Toast.LENGTH_LONG).show();
-            }
-            catch (Exception e){
+            if (kitViewModel.getKit().kitName.equals(""))
                 Toast.makeText(getContext(),
-                        "Can't save Kit, please try again, may be something gone wrong",
+                        getResources().getString(R.string.toast_empty_fields),
                         Toast.LENGTH_LONG).show();
-            }
+            else
+                try {
+                    kitViewModel.saveKit();
+
+                    Toast.makeText(getContext(),"Data saved successfully",Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e){
+                    Toast.makeText(getContext(),
+                            "Can't save Kit, please try again, may be something gone wrong",
+                            Toast.LENGTH_LONG).show();
+                }
         });
         /*
         После ввода имени пакета он сохраняется

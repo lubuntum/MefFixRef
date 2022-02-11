@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -73,7 +74,15 @@ public class CellDialogFragment extends DialogFragment {
         removeCellBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    kitViewModel.removeCell(cell);
+                }
+                catch (Exception e){
+                    Toast.makeText(getContext(),
+                            getContext().getResources().getString(R.string.toast_reload_app),
+                            Toast.LENGTH_LONG).show();
+                }
+                dismiss();
             }
         });
     }

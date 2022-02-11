@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,14 +16,14 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.kit.kitstorage.KitStorageViewModel;
 
-import java.util.zip.Inflater;
-
 import database.entities.Kit;
 
 public class KitDialogFragment extends DialogFragment {
     BootstrapButton removeKitBtn;
     BootstrapButton cancelBtn;
+    TextView removeKitTextView;
     int kitIndex;
+    Kit kit;
     public static KitDialogFragment newInstance(int kitIndex) {
 
         Bundle args = new Bundle();
@@ -38,18 +38,29 @@ public class KitDialogFragment extends DialogFragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (getArguments()!= null && getArguments().containsKey("kitIndex")){
-            kitIndex = getArguments().getInt("kitIndex");
-        }
+        KitStorageViewModel kitStorageViewModel;
+        kitStorageViewModel =
+                new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
         removeKitBtn = view.findViewById(R.id.removeKitBtn);
         cancelBtn = view.findViewById(R.id.cancelBtn);
+        removeKitTextView = view.findViewById(R.id.removeKitTextView);
+        try {
+            kitIndex = getArguments().getInt("kitIndex");
+            kit = kitStorageViewModel.getKitListLive().getValue().get(kitIndex);//Получаем нужный Kit
+            removeKitTextView.setText(String.format(getContext().getResources().getString(R.string.remove_kit_with_cells_format),kit.kitName));
+        }
+        catch (Exception e){
+            Toast.makeText(getContext(),
+                    getContext().getResources().getString(R.string.toast_fail_kit_remove),
+                    Toast.LENGTH_LONG).show();
+            dismiss();
+        }
+
+
         removeKitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    KitStorageViewModel kitStorageViewModel =
-                            new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
-                    Kit kit = kitStorageViewModel.getKitListLive().getValue().get(kitIndex);//Получаем нужный Kit
                     kitStorageViewModel.removeKit(kit);
                     Toast.makeText(getContext(),
                             getResources().getString(R.string.toast_success_kit_remove),
@@ -57,7 +68,7 @@ public class KitDialogFragment extends DialogFragment {
                 }
                 catch (Exception e){
                     Toast.makeText(getContext(),
-                            getResources().getString(R.string.toast_fail_kit_remove) ,
+                            getResources().getString(R.string.toast_reload_app) ,
                             Toast.LENGTH_LONG).show();
                 }
                 dismiss();

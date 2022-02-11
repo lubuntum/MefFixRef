@@ -51,5 +51,4 @@ public abstract class CellDao {
     @Delete
     public abstract void deleteCell(Cell cell);
 
-
 }

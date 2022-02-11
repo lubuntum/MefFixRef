@@ -51,7 +51,15 @@ public class KitViewModel extends AndroidViewModel {
     public void uploadCells(){
         repo.getAllCellsByKit(kit, cellList);
     }
-
+    public void removeCell(Cell cell){
+        if (kit.cells.contains(cell)) {
+            repo.removeCell(cell);
+            kit.cells.remove(cell);
+            if (arrayAdapter != null) {
+                arrayAdapter.notifyDataSetChanged();
+            }
+        }
+    }
     public void saveKit(){
         try {
             if (kit != null) {
@@ -67,10 +75,7 @@ public class KitViewModel extends AndroidViewModel {
                             getString(R.string.toast_reload_app),Toast.LENGTH_LONG).show();
         }
     }
-    //Если изменяем уже сущ Kit, то необходимо подгрузить все его Cell
-    public void loadKitData(){
 
-    }
     public void updateKit(){
         repo.updateKitWithCells(kit);
     }

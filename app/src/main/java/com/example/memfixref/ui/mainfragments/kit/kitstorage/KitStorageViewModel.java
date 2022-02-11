@@ -40,17 +40,10 @@ public class KitStorageViewModel extends AndroidViewModel {
     }
     public void removeKit(Kit kit){
         if(kitListLive.getValue().contains(kit)){
-            try {
-                repo.removeKit(kit);
-                if (kitAdapter != null) {
-                    kitAdapter.remove(kit);
-                    kitAdapter.notifyDataSetChanged();
-                }
-            }
-            catch (Exception e){
-                Toast.makeText(getApplication(),
-                        getApplication().getResources().getString(R.string.toast_reload_app),
-                        Toast.LENGTH_LONG).show();
+            repo.removeKit(kit);
+            if (kitAdapter != null) {
+                kitAdapter.remove(kit);
+                kitAdapter.notifyDataSetChanged();
             }
         }
     }
