@@ -46,4 +46,8 @@
     <string name="app_theme">Theme</string>
     <string name="app_settings_text_view">App preferences</string>
     <string name="settings_theme_hint">Change color of your app</string>
+    <string name="settings_allow_statistics">Allow statistics</string>
+    <string name="settings_collect_data_hint">Collect data from all sessions</string>
+    <string name="change_language_btn">Language</string>
+    <string name="english_language_text_view">English</string>
 </resources>
