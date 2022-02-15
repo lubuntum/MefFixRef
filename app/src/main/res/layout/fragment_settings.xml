@@ -2,33 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp">
-    <TextView
-        android:id="@+id/appSettingsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_settings_text_view"
-        android:textSize="20sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-    <LinearLayout
-        android:id="@+id/themeAndStatisticsContainer"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/appSettingsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/appSettingsTextView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="15dp">
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+        <TextView
+            android:id="@+id/appSettingsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_settings_text_view"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
         <LinearLayout
             android:id="@+id/themeContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_marginTop="16dp"
+            android:weightSum="10"
+            app:layout_constraintTop_toBottomOf="@id/appSettingsTextView">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,16 +52,20 @@
                 android:layout_weight="1"/>
         </LinearLayout>
         <View
+            android:id="@+id/appSettingsFirstSep"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/bootstrap_gray_lighter"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/themeContainer"/>
         <LinearLayout
+            android:id="@+id/statisticContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:weightSum="10"
+            app:layout_constraintTop_toBottomOf="@id/appSettingsFirstSep">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,26 +87,117 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+
+
     
     <View
-        android:id="@+id/themeAndStatisticSeparateLine"
+        android:id="@+id/appSettingsSecondSep"
         android:layout_width="match_parent"
         android:layout_height="11dp"
         android:background="@color/bootstrap_gray_lighter"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/themeAndStatisticsContainer"
+        app:layout_constraintTop_toBottomOf="@id/appSettingsContainer"
         app:layout_constraintLeft_toLeftOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileSettingsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appSettingsSecondSep"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+        <TextView
+            android:id="@+id/profileSettingsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_settings_text_view"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        <LinearLayout
+            android:id="@+id/userNameContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/profileSettingsTextView"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text= "@string/user_name"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_name"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:id="@+id/profileSettingsFirstSep"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bootstrap_gray_lighter"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/userNameContainer"/>
+        <LinearLayout
+            android:id="@+id/userQuoteContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/profileSettingsFirstSep"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <LinearLayout
+                android:id="@+id/quoteContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_user_quote"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/what_inspiration_for_you_hint"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/profileSettingsSecondSep"
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        android:background="@color/bootstrap_gray_lighter"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/profileSettingsContainer"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
     <LinearLayout
+        android:id="@+id/currentLanguageContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/themeAndStatisticSeparateLine"
+        app:layout_constraintTop_toBottomOf="@id/profileSettingsSecondSep"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp">
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="16dp">
         <LinearLayout
-            android:id="@+id/currentLanguageContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -123,6 +218,6 @@
                 android:textColor="@color/bootstrap_brand_info"/>
         </LinearLayout>
     </LinearLayout>
-        
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
