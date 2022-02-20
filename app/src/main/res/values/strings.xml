@@ -54,4 +54,11 @@
     <string name="what_inspiration_for_you_hint">What inspiration for you?</string>
     <string name="profile_settings_text_view">Profile</string>
     <string name="settings_user_quote">User quote</string>
+
+    <string name="session_by_key">Session by key</string>
+    <string name="session_by_value">Session by value</string>
+    <string name="session_by_image">Session by image</string>
+    <string name="session_container_name_text_view">Sessions</string>
+    <string name="choose_kit">Choose kit</string>
+    <string name="kit">Kit</string>
 </resources>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/sessionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/session_container_name_text_view"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/bootstrap_brand_info"/>
+
+        <LinearLayout
+            android:id="@+id/sessionByKeyContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_key_2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/session_by_key"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/thin_gray_line"/>
+
+        <LinearLayout
+            android:id="@+id/sessionByValueContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_data"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/session_by_value"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <include layout="@layout/thin_gray_line"  />
+
+        <LinearLayout
+            android:id="@+id/sessionByImageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/session_by_image"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/bold_gray_line"
+        android:id="@+id/sessionContainerBottomSep"
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        app:layout_constraintTop_toBottomOf="@id/sessionContainer"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintTop_toBottomOf="@id/sessionContainerBottomSep"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <TextView
+            android:id="@+id/kitNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/bootstrap_brand_info"
+            android:text="@string/kit"/>
+        <LinearLayout
+            android:id="@+id/chooseKitContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_menu_kit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_kit"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <include layout="@layout/thin_gray_line"/>
+        <ListView
+            android:id="@+id/currentKit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
