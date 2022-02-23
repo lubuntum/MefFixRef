@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.memfixref.ChangeKitActivity;
 import com.example.memfixref.MainActivity;
 import com.example.memfixref.R;
+import com.example.memfixref.SessionActivity;
 import com.example.memfixref.ui.optionslist.OptionsListAdapter;
 
 public class HomeFragment extends Fragment {
@@ -43,6 +44,9 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
                     Toast.makeText(getContext(),"Game",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), SessionActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    getActivity().startActivity(intent);
                 }
                 else if (position == 1){
                     Intent intent = new Intent(getContext(), ChangeKitActivity.class);

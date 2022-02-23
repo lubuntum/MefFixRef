@@ -20,6 +20,7 @@ public class HomeViewModel extends AndroidViewModel {
         mainMenuInit(app);
     }
 
+    //старый формат, теперь контейнеры!!
     private void mainMenuInit(Context context){
         if (mainMenuItems == null) {
             mainMenuItems = new LinkedList<>();

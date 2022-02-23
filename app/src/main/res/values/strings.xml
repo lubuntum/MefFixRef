@@ -61,4 +61,7 @@
     <string name="session_container_name_text_view">Sessions</string>
     <string name="choose_kit">Choose kit</string>
     <string name="kit">Kit</string>
+    <string name="key">Key</string>
+    <string name="prompt">Prompt</string>
+    <string name="next">Next</string>
 </resources>
