@@ -115,6 +115,7 @@ public class Repository {
         };
         diskIOExecutor.execute(runnable);
     }
+
     public void removeCell(Cell cell){
         Runnable removeCellRnd = new Runnable() {
             @Override
@@ -124,6 +125,7 @@ public class Repository {
         };
         diskIOExecutor.execute(removeCellRnd);
     }
+
     /**
     public void insertCell (List<Cell> cells){
         new InsertCellsAsyncTask(cellDao).execute(cells);

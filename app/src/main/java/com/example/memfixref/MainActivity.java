@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);//Nav потому что может сам взаимозаменять фрагменты
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);//добавляет кнопку для боковой панели с именем фрагмента
         NavigationUI.setupWithNavController(navigationView, navController);//связь элементов на боковой панели с заменяемыми фрагментами (одинаковый id item и нужного fragment)
-
     }
 
     @Override
