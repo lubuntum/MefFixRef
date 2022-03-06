@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
 import com.example.memfixref.ui.mainfragments.session.selectkit.SessionSelectKitFragment;
+import com.example.memfixref.ui.mainfragments.session.sessionbykey.SessionByKeyFragment;
 
 import java.util.List;
 
@@ -53,12 +54,21 @@ public class SessionPrepareFragment extends Fragment {
 
         sessionByKeyBtn.setOnClickListener((View container)->{
             //Тут так же создать Session сущность для статистики если разрешено
-            Toast.makeText(getContext(), "By key", Toast.LENGTH_SHORT).show();
-            FragmentManager fragmentManager = getParentFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_session_fragment,
-                    SessionByKeyFragment.newInstance(),"session_by_key").
-                    addToBackStack(null).
-                    commit();
+            if (sessionViewModel.getPickedKit().getValue() == null){
+                Toast.makeText(getContext(),
+                        getResources().getString(R.string.empty_kit),
+                        Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(getContext(), "By key", Toast.LENGTH_SHORT).show();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                fragmentManager.beginTransaction().
+                        setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
+                        replace(R.id.main_session_fragment,
+                                SessionByKeyFragment.newInstance(), "session_by_key").
+                        addToBackStack(null).
+                        commit();
+            }
 
         });
         sessionByValueBtn.setOnClickListener((View container)->{
@@ -70,7 +80,9 @@ public class SessionPrepareFragment extends Fragment {
 
         chooseKitBtn.setOnClickListener((View container)->{
             FragmentManager fragmentManager = getParentFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_session_fragment,
+            fragmentManager.beginTransaction().
+                    setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
+                    replace(R.id.main_session_fragment,
                     SessionSelectKitFragment.getInstance(),"session_select_kit").
                     addToBackStack(null)
                     .commit();
