@@ -16,6 +16,7 @@ public class Session {
     public long kitId;
     @ColumnInfo(name = "use_date")
     public String useDate;
+    //лучше следать total,mistakes,right, а success вообще убрать потому что не нам определять рамки успеха...
     @ColumnInfo(name = "is_succeed")
     public boolean isSucceed;//если ratio ниже установленног значения то не успешно(в настройках)
     @ColumnInfo(name = "mistakes_ratio")

@@ -56,6 +56,7 @@
     <string name="settings_user_quote">User quote</string>
 
     <string name="session_by_key">Session by key</string>
+    <string name="empty_kit">Please first select kit</string>
     <string name="session_by_value">Session by value</string>
     <string name="session_by_image">Session by image</string>
     <string name="session_container_name_text_view">Sessions</string>
