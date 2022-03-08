@@ -16,7 +16,7 @@ import java.util.List;
 import database.Repository;
 import database.entities.Cell;
 import database.entities.Kit;
-import dateformat.DateFormat;
+import services.DateFormat;
 
 public class KitViewModel extends AndroidViewModel {
     //private List<Cell> cellList;

@@ -6,10 +6,12 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "session",
         foreignKeys = @ForeignKey(entity = Kit.class, parentColumns = "id",childColumns = "kit_id"),
 indices = {@Index(value = {"kit_id"})})
-public class Session {
+public class Session implements Serializable {
     @PrimaryKey
     public long id;
     @ColumnInfo(name = "kit_id")
