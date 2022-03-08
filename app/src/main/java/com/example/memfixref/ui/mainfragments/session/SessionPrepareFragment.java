@@ -92,6 +92,7 @@ public class SessionPrepareFragment extends Fragment {
             @Override
             public void onChanged(List<Cell> cells) {
                 sessionViewModel.setCellAdapter(new CellAdapter(getContext(),R.layout.cell_item,cells));
+                sessionViewModel.getPickedKit().getValue().cells = cells;//Solid Kit
                 listView.setAdapter(sessionViewModel.getCellAdapter());
             }
         };

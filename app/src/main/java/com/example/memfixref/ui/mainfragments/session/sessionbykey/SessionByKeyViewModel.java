@@ -6,15 +6,22 @@ import androidx.lifecycle.ViewModel;
 import com.example.memfixref.ui.mainfragments.session.SessionPrepareViewModel;
 
 import database.entities.Kit;
+import database.entities.Session;
+import services.MushIndexes;
 
 public class SessionByKeyViewModel extends ViewModel {
-    MutableLiveData<Integer> currentCellIndex;
-    Kit kit;
-    int[] cellIndexes ;
+    public Kit kit;
+    public int[] cellIndexes ;
+    private Session session;
 
     public SessionByKeyViewModel(Kit kit){
-        currentCellIndex = new MutableLiveData<>();
         this.kit = kit;
-        cellIndexes = new int[kit.cells.size()];
+        MushIndexes mushIndexes = new MushIndexes();
+        cellIndexes = mushIndexes.getMushIndexes(kit.cells);
+        session = new Session();
+    }
+
+    public Session getSession() {
+        return session;
     }
 }

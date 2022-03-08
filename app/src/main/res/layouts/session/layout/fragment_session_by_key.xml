@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:bootstrapBrand="success"
-            app:bootstrapProgress="20" />
+            app:bootstrapProgress="0" />
 
 
 
