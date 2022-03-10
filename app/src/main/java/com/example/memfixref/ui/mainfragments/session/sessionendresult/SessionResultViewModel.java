@@ -14,6 +14,7 @@ public class SessionResultViewModel extends AndroidViewModel {
     public SessionResultViewModel(@NonNull Application application,Session session) {
         super(application);
         this.repo = Repository.getInstance(application);
+        this.session = session;
     }
 
     public Session getSession() {
