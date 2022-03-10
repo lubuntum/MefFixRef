@@ -74,10 +74,10 @@ public class SessionByKeyFragment extends Fragment {
                         else{
                             progressBar.post(()->{
                                 if(progressBar.getProgress() < 100)
-                                    progressBar.setProgress(progressBar.getProgress()+1);
+                                    progressBar.setProgress(progressBar.getProgress()+10);
                             });
                         }
-                        android.os.SystemClock.sleep(125);
+                        android.os.SystemClock.sleep(500);
                     }
 
                 }
@@ -86,10 +86,14 @@ public class SessionByKeyFragment extends Fragment {
                 //и далее к ней нельзя будет обратиться поскольку ее не будет, тут все изолировано
                 // ведь это единичная игровая сессия
                 FragmentManager fragmentManager = getParentFragmentManager();
+
+                //getParentFragmentManager().beginTransaction().remove(getCurrentFragment()).commit();
                 fragmentManager.beginTransaction().
+                        setReorderingAllowed(true).
                         setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
                         replace(R.id.main_session_fragment,
                                 SessionResultFragment.newInstance(sessionByKeyViewModel.getSession()),"session_result").
+                        addToBackStack(null).
                         commit();
 
                 //закончить данную сессию и показать результаты в SessionResultViewMode
@@ -98,7 +102,22 @@ public class SessionByKeyFragment extends Fragment {
         Thread progressBarThread = new Thread(runnable);
         progressBarThread.start();
 
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+    public Fragment getCurrentFragment(){
+        return this;
     }
 }

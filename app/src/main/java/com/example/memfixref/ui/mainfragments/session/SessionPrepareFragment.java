@@ -37,6 +37,7 @@ public class SessionPrepareFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         sessionViewModel = new ViewModelProvider(getActivity()).get(SessionPrepareViewModel.class);
         return inflater.inflate(R.layout.fragment_session_prepare,container,false);
     }
@@ -62,12 +63,14 @@ public class SessionPrepareFragment extends Fragment {
             else {
                 Toast.makeText(getContext(), "By key", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction().
+
+                fragmentManager.beginTransaction().setReorderingAllowed(true).
                         setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
                         replace(R.id.main_session_fragment,
-                                SessionByKeyFragment.newInstance(), "session_by_key").
-                        addToBackStack(null).
+                                SessionByKeyFragment.newInstance(),"session_prepare_fragment").
+                        addToBackStack("session_prepare_trans").
                         commit();
+
             }
 
         });
@@ -84,8 +87,8 @@ public class SessionPrepareFragment extends Fragment {
                     setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
                     replace(R.id.main_session_fragment,
                     SessionSelectKitFragment.getInstance(),"session_select_kit").
-                    addToBackStack(null)
-                    .commit();
+                    addToBackStack(null).
+                    commit();
         });
 
         Observer<List<Cell>> cellListObserver = new Observer<List<Cell>>() {

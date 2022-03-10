@@ -19,7 +19,17 @@ public class SessionActivity extends AppCompatActivity {
         SessionPrepareFragment sessionPrepareFragment = SessionPrepareFragment.getInstance();
         fragmentManager.beginTransaction()
                 .add(R.id.main_session_fragment,
-                sessionPrepareFragment,
-                "session_prepare_fragment").commit();
+                sessionPrepareFragment).
+                commit();
     }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        if(getSupportFragmentManager().findFragmentByTag("session_prepare_fragment") != null){
+            getSupportFragmentManager().popBackStackImmediate("session_prepare_trans",
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
+    }
+
 }
