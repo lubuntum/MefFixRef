@@ -36,7 +36,7 @@ public class SessionResultFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(getArguments() != null && getArguments().containsKey("session")){
-            Session session = (Session)getArguments().getParcelable("session");
+            Session session = (Session)getArguments().getSerializable("session");
             //sessionResultViewModel = new ViewModelProvider(this).get(SessionResultViewModel.class);
             sessionResultViewModel = new ViewModelProvider(this, new SessionResultViewModelFactory(
                     getActivity().getApplication(),session)).
@@ -50,7 +50,14 @@ public class SessionResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView resultTextView = view.findViewById(R.id.resultTextView);
-        resultTextView.setTextColor(getResources().getColor(R.color.bootstrap_brand_success));
+        TextView kitNameTextView;
+        TextView promptTextView;
+        TextView totalTextView;
+        TextView incorrectTextView;
+        TextView correctTextView;
+        TextView averageResultTextView;
+
+
         BootstrapButton repeatBtn = view.findViewById(R.id.repeatBtn);
         BootstrapButton backBtn = view.findViewById(R.id.backBtn);
 

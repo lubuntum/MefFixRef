@@ -25,31 +25,37 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/resultTextView">
         <TextView
+            android:id="@+id/kitNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/session_end_kit_theme"
             android:textSize="25sp"/>
         <TextView
+            android:id="@+id/promptUseTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/session_end_prompt_use"
             android:textSize="25sp"/>
         <TextView
+            android:id="@+id/totalTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/session_end_total"
             android:textSize="25sp"/>
         <TextView
+            android:id="@+id/incorrectTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/session_end_mistakes"
             android:textSize="25sp"/>
         <TextView
+            android:id="@+id/correctTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/session_end_right"
             android:textSize="25sp"/>
         <TextView
+            android:id="@+id/averageResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/session_end_average_result"

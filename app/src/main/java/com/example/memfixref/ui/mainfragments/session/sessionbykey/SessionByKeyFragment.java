@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,13 @@ import database.entities.Cell;
 
 public class SessionByKeyFragment extends Fragment {
     SessionByKeyViewModel sessionByKeyViewModel;
+
+    EditText keyEditText;
+    TextView valueTextView;
+
+    BootstrapButton promptBtn;
+    BootstrapButton nextSlideBtn;
+    BootstrapProgressBar progressBar;
     public static SessionByKeyFragment newInstance() {
         Bundle args = new Bundle();
         SessionByKeyFragment fragment = new SessionByKeyFragment();
@@ -47,37 +55,66 @@ public class SessionByKeyFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView valueTextView = view.findViewById(R.id.valueTextView);
-        EditText keyEditText = view.findViewById(R.id.keyEditText);
+        valueTextView = view.findViewById(R.id.valueTextView);
+        keyEditText = view.findViewById(R.id.keyEditText);
 
-        BootstrapButton promptBtn = view.findViewById(R.id.promptBtn);
-        BootstrapButton nextSlideBtn = view.findViewById(R.id.nextSlideBtn);
-        BootstrapProgressBar progressBar = view.findViewById(R.id.progressBarView);
+        promptBtn = view.findViewById(R.id.promptBtn);
+        nextSlideBtn = view.findViewById(R.id.nextSlideBtn);
+        progressBar = view.findViewById(R.id.progressBarView);
 
+        promptBtn.setOnClickListener((View view1)->{
+            String word = keyEditText.getText() + sessionByKeyViewModel.getPrompt();
+            keyEditText.setText(word);
+        });
+        nextSlideBtn.setOnClickListener((View view1)->{
+            nextSlide();
+        });
+
+        progressBarProcessing();
+
+    }
+    private void nextSlide(){
+        if (sessionByKeyViewModel.getCurrentCell().key.
+                equals(keyEditText.getText().toString())) {
+            sessionByKeyViewModel.getSession().correct++;
+            sessionByKeyViewModel.setSessionIsRunning(false);
+            progressBar.setProgress(0);
+            keyEditText.setText("");
+        }
+        else {
+            sessionByKeyViewModel.getSession().incorrect++;
+            Toast.makeText(getContext(),
+                    getResources().getString(R.string.session_wrong_key),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void progressBarProcessing(){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
 
                 for (int currentIndex: sessionByKeyViewModel.cellIndexes) {
-                    boolean sessionIsRunning = true;
+                    sessionByKeyViewModel.setSessionIsRunning (true);
+                    sessionByKeyViewModel.setCurrentCellByIndex(currentIndex);
                     valueTextView.post(()->{
                         valueTextView.setText(
-                                sessionByKeyViewModel.kit.cells.get(currentIndex).value);
+                                sessionByKeyViewModel.getCurrentCell().value);
                     });
-                    while (sessionIsRunning){
+                    while (sessionByKeyViewModel.isSessionIsRunning()){
                         if(progressBar.getProgress() >=100){//next step
                             progressBar.post(()->{
                                 progressBar.setProgress(0);
                             });
-                        sessionIsRunning = false;
+                            sessionByKeyViewModel.setSessionIsRunning(false);
                         }
                         else{
                             progressBar.post(()->{
                                 if(progressBar.getProgress() < 100)
-                                    progressBar.setProgress(progressBar.getProgress()+10);
+                                    progressBar.setProgress(progressBar.getProgress()+1);
                             });
                         }
-                        android.os.SystemClock.sleep(500);
+                        android.os.SystemClock.sleep(100);
                     }
 
                 }
@@ -101,7 +138,6 @@ public class SessionByKeyFragment extends Fragment {
         };
         Thread progressBarThread = new Thread(runnable);
         progressBarThread.start();
-
     }
     @Override
     public void onStop() {

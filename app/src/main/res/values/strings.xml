@@ -75,5 +75,6 @@
     <string name="session_end_average_result">Average result :</string>
     <string name="session_end_repeat">Repeat</string>
     <string name="session_end_back">Back</string>
+    <string name="session_wrong_key">Incorrect key</string>
 
 </resources>
