@@ -2,8 +2,11 @@ package database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import database.Dao.CellDao;
 import database.Dao.KitDao;
@@ -13,7 +16,7 @@ import database.entities.Kit;
 import database.entities.Session;
 
 
-@androidx.room.Database(entities = {Kit.class, Cell.class, Session.class},version = 1)
+@androidx.room.Database(entities = {Kit.class, Cell.class, Session.class},version = 2)
 public abstract class Database extends RoomDatabase {
     private static final String DATABASE_NAME = "AppDatabase";
     public abstract KitDao kitDao();
@@ -21,11 +24,26 @@ public abstract class Database extends RoomDatabase {
     public abstract SessionDao sessionDao();
     public static volatile Database INSTANCE = null;
 
+    public static final Migration MIGRATION_1_2 = new Migration(1,2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE session " +
+                    "ADD COLUMN incorrect INTEGER DEFAULT 0 NOT NULL;");
+            database.execSQL("ALTER TABLE session " +
+                    "ADD COLUMN correct INTEGER DEFAULT 0 NOT NULL;");
+            database.execSQL("ALTER TABLE session " +
+                    "ADD COLUMN prompt INTEGER DEFAULT 0 NOT NULL;");
+            database.execSQL("ALTER TABLE session " +
+                    "ADD COLUMN total_time INTEGER DEFAULT 0 NOT NULL;");
+        }
+    };
+
     public static Database getInstance(Context context){
         if(INSTANCE == null){
             synchronized (Database.class){
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context,Database.class,DATABASE_NAME)
+                            .addMigrations(MIGRATION_1_2)
                             .build();
                 }
             }
