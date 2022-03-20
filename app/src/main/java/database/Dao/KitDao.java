@@ -23,6 +23,9 @@ public interface KitDao {
     @Query("SELECT * FROM kit WHERE kit_name LIKE :kitName")
     Kit getKitByName(String kitName);
 
+    @Query("SELECT * FROM kit WHERE id LIKE :kitId")
+    Kit getKitById(long kitId);
+
     @Delete
     void deleteKit(Kit kit);
 
