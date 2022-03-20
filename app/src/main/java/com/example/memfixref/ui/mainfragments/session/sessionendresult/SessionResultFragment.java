@@ -1,5 +1,7 @@
 package com.example.memfixref.ui.mainfragments.session.sessionendresult;
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -19,6 +22,7 @@ import com.example.memfixref.ui.mainfragments.session.sessionbykey.SessionByKeyF
 
 import org.w3c.dom.Text;
 
+import database.entities.Kit;
 import database.entities.Session;
 
 public class SessionResultFragment extends Fragment {
@@ -50,12 +54,29 @@ public class SessionResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView resultTextView = view.findViewById(R.id.resultTextView);
-        TextView kitNameTextView;
-        TextView promptTextView;
-        TextView totalTextView;
-        TextView incorrectTextView;
-        TextView correctTextView;
-        TextView averageResultTextView;
+        TextView kitNameTextView = view.findViewById(R.id.kitNameTextView);
+        TextView promptTextView = view.findViewById(R.id.promptUseTextView);
+        TextView totalTextView = view.findViewById(R.id.totalTextView);
+        TextView incorrectTextView = view.findViewById(R.id.incorrectTextView);
+        TextView correctTextView = view.findViewById(R.id.correctTextView);
+        TextView averageResultTextView = view.findViewById(R.id.averageResultTextView);
+
+        String kitNameStr = getResources().getString(R.string.session_end_kit_theme) +
+                sessionResultViewModel.getKitName();
+        String promptStr = getResources().getString(R.string.session_end_prompt_use) +
+                sessionResultViewModel.getSessionPrompt();
+        String incorrectStr = getResources().getString(R.string.session_end_mistakes) +
+                sessionResultViewModel.getIncorrect();
+        String correctStr = getResources().getString(R.string.session_end_right) +
+                sessionResultViewModel.getCorrect();
+
+        if (sessionResultViewModel.getSession().prompt == 0)
+            resultTextView.setTextColor(getResources().getColor(R.color.bootstrap_brand_success));
+        kitNameTextView.setText(kitNameStr);
+        promptTextView.setText(promptStr);
+        //totalTextView.setText(String.valueOf(sessionResultViewModel.getSession().));
+        incorrectTextView.setText(incorrectStr);
+        correctTextView.setText(correctStr);
 
 
         BootstrapButton repeatBtn = view.findViewById(R.id.repeatBtn);
