@@ -1,8 +1,11 @@
 package database.entities;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -13,7 +16,7 @@ import java.io.Serializable;
 indices = {@Index(value = {"kit_id"})})
 public class Session implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long id;
     @ColumnInfo(name = "kit_id")
     public long kitId;
@@ -34,4 +37,14 @@ public class Session implements Serializable {
     public boolean isSucceed;//если ratio ниже установленног значения то не успешно(в настройках)
     @ColumnInfo(name = "mistakes_ratio")
     public float mistake_ratio;//отношение правильных и ошибочных Cell
+    @Ignore
+    public MutableLiveData<Kit> kit;
+
+    public MutableLiveData<Kit> getKit() {
+        return kit;
+    }
+
+    public void setKit(MutableLiveData<Kit> kit) {
+        this.kit = kit;
+    }
 }
