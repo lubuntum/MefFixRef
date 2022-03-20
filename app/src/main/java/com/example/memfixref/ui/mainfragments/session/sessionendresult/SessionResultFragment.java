@@ -22,6 +22,9 @@ import com.example.memfixref.ui.mainfragments.session.sessionbykey.SessionByKeyF
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+import java.util.List;
+
 import database.entities.Kit;
 import database.entities.Session;
 
@@ -78,6 +81,28 @@ public class SessionResultFragment extends Fragment {
         incorrectTextView.setText(incorrectStr);
         correctTextView.setText(correctStr);
 
+        //Для подсчета среднего значения по успеваемости
+        Observer<List<Session>> sessionsObserver = new Observer<List<Session>>() {
+            @Override
+            public void onChanged(List<Session> sessions) {
+                int correct = 0;
+                int general = 0;
+                for (Session session: sessions) {
+                    correct += session.correct;
+                    general += session.correct + session.incorrect;
+                }
+                if (general != 0){
+                    DecimalFormat format = new DecimalFormat("###.##");
+                    String averageResult = format.format((double)correct/general);
+                    averageResultTextView.setText(averageResult);
+
+                }
+            }
+        };
+
+        //закрепление наблюдателей
+        sessionResultViewModel.getSessionList().
+                observe(getViewLifecycleOwner(),sessionsObserver);
 
         BootstrapButton repeatBtn = view.findViewById(R.id.repeatBtn);
         BootstrapButton backBtn = view.findViewById(R.id.backBtn);

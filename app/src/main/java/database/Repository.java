@@ -143,6 +143,15 @@ public class Repository {
         };
         diskIOExecutor.execute(runnable);
     }
+    public void getAllSessionByKitId(long kitId, MutableLiveData<List<Session>> sessionList){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                sessionList.postValue(sessionDao.getAllSessionsByKitId(kitId));
+            }
+        };
+        diskIOExecutor.execute(runnable);
+    }
 
     /**
     public void insertCell (List<Cell> cells){
