@@ -29,7 +29,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows', 'src\\main\\res\\layouts\\change_kit', 'src\\main\\res\\layouts\\kit_list', 'src\\main\\res\\layouts\\progress', 'src\\main\\res\\layouts\\session', 'src\\main\\res\\layouts\\ui_handmade_view'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows', 'src\\main\\res\\layouts\\change_kit', 'src\\main\\res\\layouts\\kit_list', 'src\\main\\res\\layouts\\progress', 'src\\main\\res\\layouts\\session', 'src\\main\\res\\layouts\\ui_handmade_view', 'src\\main\\res\\layouts\\plots'
             }
         }
     }
@@ -52,6 +52,8 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
