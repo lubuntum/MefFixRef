@@ -24,6 +24,7 @@ import database.Dao.KitDao;
 import database.Dao.SessionDao;
 import database.entities.Cell;
 import database.entities.Kit;
+import database.entities.Session;
 
 public class Repository {
     private Database appDatabase;
@@ -84,9 +85,7 @@ public class Repository {
         };
         diskIOExecutor.execute(runnable);
     }
-    public Kit getKit(String kitName){
-        return kitDao.getKitByName(kitName);
-    }
+
     public void removeKit(Kit kit){
         Runnable removeKitRnb = new Runnable() {
             @Override
@@ -95,6 +94,15 @@ public class Repository {
             }
         };
         diskIOExecutor.execute(removeKitRnb);
+    }
+    public void getKitById(long kitId, MutableLiveData<Kit> kit){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                kit.postValue(kitDao.getKitById(kitId));
+            }
+        };
+        diskIOExecutor.execute(runnable);
     }
     public void getAllKits(MutableLiveData<List<Kit>> kitList){
 
@@ -124,6 +132,16 @@ public class Repository {
             }
         };
         diskIOExecutor.execute(removeCellRnd);
+    }
+
+    public void insertSession(Session session){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                sessionDao.insertSession(session);
+            }
+        };
+        diskIOExecutor.execute(runnable);
     }
 
     /**
