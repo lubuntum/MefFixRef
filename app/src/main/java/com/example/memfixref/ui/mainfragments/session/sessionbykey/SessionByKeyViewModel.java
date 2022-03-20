@@ -8,6 +8,7 @@ import com.example.memfixref.ui.mainfragments.session.SessionPrepareViewModel;
 import database.entities.Cell;
 import database.entities.Kit;
 import database.entities.Session;
+import services.DateFormat;
 import services.MushIndexes;
 import services.PromptHelper;
 
@@ -24,7 +25,14 @@ public class SessionByKeyViewModel extends ViewModel {
         this.kit = kit;
         MushIndexes mushIndexes = new MushIndexes();
         cellIndexes = mushIndexes.getMushIndexes(kit.cells);
+
+
         session = new Session();
+        session.kitId = kit.id;
+        session.setKit(new MutableLiveData<>(kit));
+        DateFormat dateFormat = new DateFormat();
+        session.useDate = dateFormat.getCurrentDateWithFormat();
+
         helper = new PromptHelper();
     }
 

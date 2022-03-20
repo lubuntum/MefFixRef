@@ -102,7 +102,7 @@ public class SessionByKeyFragment extends Fragment {
                                 sessionByKeyViewModel.getCurrentCell().value);
                     });
                     while (sessionByKeyViewModel.isSessionIsRunning()){
-                        if(progressBar.getProgress() >=100){//next step
+                        if(progressBar.getProgress() >= 100){//next step
                             progressBar.post(()->{
                                 progressBar.setProgress(0);
                             });
