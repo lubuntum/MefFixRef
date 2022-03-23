@@ -1,5 +1,6 @@
 package database.entities;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -40,7 +41,14 @@ public class Kit implements Serializable {
     public float Rating;
     @ColumnInfo(name = "creation_date")
     public String creationDate;
+    //Старый формат используется в onekitdata.KitViewModel
+    //Из за того что вначале использовал просто список без Mutable придется оставить
     @Ignore
     public List<Cell> cells;
+    @Ignore
+    public MutableLiveData<List<Session>> sessionList;
+    //Новый формат удобнее, лучше и по SOLID
+    //@Ignore
+    //public MutableLiveData<List<Cell>> cellsList;
 
 }
