@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/plots/layout/fragment_session_success_plot.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/plots/layout/session_success_plot.xml" value="0.2604166666666667" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/activity_session.xml" value="0.1816123188405797" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_by_key.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_end_result.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_end_result.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_prepare.xml" value="0.13949275362318841" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_select_kit.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/ui_handmade_view/layout/bold_gray_line.xml" value="0.1707193515704154" />
