@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Objects;
 
 import database.Repository;
+import database.entities.Kit;
 import database.entities.Session;
 
 public class SessionResultViewModel extends AndroidViewModel {
     private Session session;
+    private Kit kit;
     private MutableLiveData<List<Session>> sessionList;
     private Repository repo;
     public SessionResultViewModel(@NonNull Application application,Session session) {
@@ -24,6 +26,7 @@ public class SessionResultViewModel extends AndroidViewModel {
         repo.insertSession(session);
 
         this.session = session;
+        this.kit = session.kit.getValue();
 
         this.sessionList = new MutableLiveData<>();
         loadAllSession();
@@ -31,6 +34,7 @@ public class SessionResultViewModel extends AndroidViewModel {
         //repo.getKitById(session.kitId,session.kit);
     }
 
+    public Kit getKit() { return kit; }
     public Session getSession() {
         return session;
     }
