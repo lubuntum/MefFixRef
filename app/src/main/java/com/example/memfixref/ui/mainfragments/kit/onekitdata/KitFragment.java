@@ -23,7 +23,9 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
 import com.example.memfixref.ui.mainfragments.kit.kitstorage.KitStorageViewModel;
+import com.example.memfixref.ui.mainfragments.kit.network.UploadKitFragment;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -80,23 +82,7 @@ public class KitFragment extends Fragment {
             kitNameEditText.setText(kitViewModel.getKit().kitName);
 
             kitViewModel.uploadCells();//загрузка содержимого kit
-            /*
-            changeKitBtn.setOnClickListener(v->{
-                try {
-                    kitViewModel.updateKit();
 
-                    Toast.makeText(getContext(),"Data edited successfully",Toast.LENGTH_LONG).show();
-                }
-                catch (Exception e){
-                    Toast.makeText(getContext(),
-                            "Can't edit Kit, please try again, may be something gone wrong",
-                            Toast.LENGTH_LONG).show();
-                }
-                //KitStorageViewModel kitStorageViewModel =
-                //        new ViewModelProvider(getActivity()).get(KitStorageViewModel.class);
-                //kitStorageViewModel.uploadKitListLive();
-            });
-             */
         }
         else {
             //Создаем новый набор и устанавливаем LiveData новый набор Cells из Kit
@@ -150,9 +136,23 @@ public class KitFragment extends Fragment {
             CellDialogFragment cellDialogFragment = new CellDialogFragment();
             cellDialogFragment.show(fragmentManager,"fragment_add_cell");
         });
-
+        floatBtnInit(view, savedInstanceState);
     }
 
+
+    public void floatBtnInit(View view, Bundle saveBundleInstance){
+        FloatingActionButton uploadKitBtn = view.findViewById(R.id.uploadKitBtn);
+        FloatingActionButton showStatisticsBtn = view.findViewById(R.id.showKitStatisticsBtn);
+        uploadKitBtn.setOnClickListener((View v)->{
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.changeKitMainFragment,
+                            UploadKitFragment.newInstance(kitViewModel.getKit()),
+                            "upload_kit_fragment")
+                    .addToBackStack("upload_kit")
+                    .commit();
+        });
+    }
 
     @Override
     public void onStop() {

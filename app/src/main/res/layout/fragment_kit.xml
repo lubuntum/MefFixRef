@@ -48,5 +48,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/kitInfoContainer"
         app:layout_constraintLeft_toLeftOf="parent"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/uploadKitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_upload_kit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/showKitStatisticsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_statistics"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/uploadKitBtn"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

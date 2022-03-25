@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/kitInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding = "15dp">
+        <TextView
+            android:id="@+id/kitNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/kit_name"
+            android:textSize="15sp"
+            android:textColor="@color/bootstrap_brand_info"
+            />
+        <TextView
+            android:id="@+id/authorTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/author"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/cellCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cell_count"
+            android:textSize="15sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/userAgreementBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="User agreement"
+                app:bootstrapSize="md"
+                app:bootstrapBrand="info"
+                app:roundedCorners="true"/>
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="upload"
+                app:bootstrapSize="md"
+                app:bootstrapBrand="success"
+                app:roundedCorners="true"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/userAgreementCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_weight="2"/>
+            <TextView
+                android:id="@+id/userAgreementText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:textColor="@color/bootstrap_gray_light"
+                android:text="@string/user_agreement"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:id="@+id/kitTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/bootstrap_gray_light"
+            android:hint="@string/input_tags_for_kit_hint"
+            android:maxLength="75"
+            android:inputType="text" />
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/bootstrap_gray_light"
+            android:hint="@string/kit_description_hint"
+            android:maxLength="255"
+            android:inputType="text|textMultiLine"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/cellListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/kitInfoContainer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/uploadKitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_upload_kit"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editKitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_kit"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toLeftOf="@id/uploadKitBtn"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
