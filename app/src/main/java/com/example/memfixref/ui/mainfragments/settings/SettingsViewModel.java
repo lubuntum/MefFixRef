@@ -16,6 +16,9 @@ public class SettingsViewModel extends AndroidViewModel {
 
     public static final String STATISTICS = "StatisticsKey";
 
+    public static final String USERNAME = "Username";
+    public static final String QUOTE = "Userquote";
+
     private SharedPreferences settingsPreferences;
     private SharedPreferences.Editor editor;
     public SettingsViewModel(Application app){
@@ -41,4 +44,11 @@ public class SettingsViewModel extends AndroidViewModel {
         return settingsPreferences.getBoolean(STATISTICS,true);
     }
 
+    public SharedPreferences getSettingsPreferences() {
+        return settingsPreferences;
+    }
+
+    public SharedPreferences.Editor getEditor() {
+        return editor;
+    }
 }

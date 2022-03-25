@@ -124,6 +124,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintTop_toBottomOf="@id/profileSettingsTextView"
             app:layout_constraintLeft_toLeftOf="parent">
             <LinearLayout
@@ -154,6 +155,7 @@
             android:id="@+id/userQuoteContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/profileSettingsFirstSep"
             app:layout_constraintLeft_toLeftOf="parent">

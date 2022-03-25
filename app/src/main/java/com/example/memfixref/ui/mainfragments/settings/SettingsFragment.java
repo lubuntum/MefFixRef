@@ -1,19 +1,21 @@
 package com.example.memfixref.ui.mainfragments.settings;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.memfixref.R;
+import com.example.memfixref.ui.dialog.ChangeUsernameDialogFragment;
 
 public class SettingsFragment extends Fragment {
     private SettingsViewModel settingsViewModel;
@@ -53,6 +55,18 @@ public class SettingsFragment extends Fragment {
                 settingsViewModel.setStatistics(isAllow);
                 //Log.d("USE_STATISTICS",String.valueOf(settingsViewModel.isStatisticsAllowed()));
             }
+        });
+        LinearLayout userNameBtn = view.findViewById(R.id.userNameContainer);
+        LinearLayout userQuoteBtn = view.findViewById(R.id.userQuoteContainer);
+        userNameBtn.setOnLongClickListener((View v)->{
+            FragmentManager fragmentManager = getChildFragmentManager();
+            ChangeUsernameDialogFragment usernameDialogFragment = ChangeUsernameDialogFragment.newInstance();
+            usernameDialogFragment.show(fragmentManager,"username_dialog");
+            return false;
+        });
+        userQuoteBtn.setOnLongClickListener((View v)->{
+
+            return false;
         });
     }
 }
