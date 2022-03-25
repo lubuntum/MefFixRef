@@ -3,8 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_kit.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_kit_storage.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/nav_header_main.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/change_kit/layout/cell_item.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/change_kit/layout/change_kit_activity.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/add_cell_dialog.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/change_username_dialog.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/change_userquote_dialog.xml" value="0.6036184210526315" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/remove_kit_dialog.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/kit_list/layout/kit_item.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/network/layout/submit_kit_fragment.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/options_list/layout/options_list_item.xml" value="0.12952898550724637" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/plots/layout/fragment_session_success_plot.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/plots/layout/session_success_plot.xml" value="0.2604166666666667" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/progress/layout/app_progress_bar.xml" value="0.12952898550724637" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/activity_session.xml" value="0.1816123188405797" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_by_key.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_end_result.xml" value="0.1" />
@@ -12,6 +29,8 @@
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/session/layout/fragment_session_select_kit.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/ui_handmade_view/layout/bold_gray_line.xml" value="0.1707193515704154" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/ui_handmade_view/layout/thin_gray_line.xml" value="0.1707193515704154" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/menu/activity_main_drawer.xml" value="0.16870748299319727" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/menu/main.xml" value="0.11481481481481481" />
       </map>
     </option>
   </component>
