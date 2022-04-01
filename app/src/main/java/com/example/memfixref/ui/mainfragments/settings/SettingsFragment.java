@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.ChangeUsernameDialogFragment;
+import com.example.memfixref.ui.dialog.ChangeUserquoteDialogFragment;
 
 public class SettingsFragment extends Fragment {
     private SettingsViewModel settingsViewModel;
@@ -58,14 +59,15 @@ public class SettingsFragment extends Fragment {
         });
         LinearLayout userNameBtn = view.findViewById(R.id.userNameContainer);
         LinearLayout userQuoteBtn = view.findViewById(R.id.userQuoteContainer);
+        FragmentManager fragmentManager = getChildFragmentManager();
         userNameBtn.setOnLongClickListener((View v)->{
-            FragmentManager fragmentManager = getChildFragmentManager();
             ChangeUsernameDialogFragment usernameDialogFragment = ChangeUsernameDialogFragment.newInstance();
             usernameDialogFragment.show(fragmentManager,"username_dialog");
             return false;
         });
         userQuoteBtn.setOnLongClickListener((View v)->{
-
+            ChangeUserquoteDialogFragment userquoteDialogFragment = ChangeUserquoteDialogFragment.newInstance();
+            userquoteDialogFragment.show(fragmentManager,"userquote_dialog");
             return false;
         });
     }

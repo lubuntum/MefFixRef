@@ -16,38 +16,34 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.settings.SettingsViewModel;
 
-public class ChangeUsernameDialogFragment extends DialogFragment {
+public class ChangeUserquoteDialogFragment extends DialogFragment {
     private SettingsViewModel settingsViewModel;
-    public static ChangeUsernameDialogFragment newInstance() {
 
+    public static ChangeUserquoteDialogFragment newInstance() {
+        
         Bundle args = new Bundle();
-
-        ChangeUsernameDialogFragment fragment = new ChangeUsernameDialogFragment();
+        
+        ChangeUserquoteDialogFragment fragment = new ChangeUserquoteDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         settingsViewModel = new ViewModelProvider(getActivity()).get(SettingsViewModel.class);
-        return inflater.inflate(R.layout.change_username_dialog,container,false);
+        return inflater.inflate(R.layout.change_userquote_dialog,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         BootstrapButton confirmBtn = view.findViewById(R.id.confirmBtn);
-        EditText usernameEditText = view.findViewById(R.id.userNameEditText);
+        EditText usernameEditText = view.findViewById(R.id.userQuoteEditText);
         confirmBtn.setOnClickListener((View v)->{
-            if (usernameEditText.getText().toString().length() >= 5){
-                String username = usernameEditText.getText().toString();
-                settingsViewModel.getEditor().putString(SettingsViewModel.USERNAME,username);
-                settingsViewModel.getEditor().apply();
-                Toast.makeText(getContext(),getResources().getString(R.string.toast_success_save_name),Toast.LENGTH_SHORT).show();
-            }
-            else
-                Toast.makeText(getContext(),getResources().getString(R.string.toast_fail_save_name),Toast.LENGTH_SHORT).show();
+            String quote = usernameEditText.getText().toString();
+            settingsViewModel.getEditor().putString(SettingsViewModel.QUOTE,quote);
+            settingsViewModel.getEditor().apply();
+            Toast.makeText(getContext(),getResources().getString(R.string.toast_success_save_quote),Toast.LENGTH_SHORT).show();
         });
     }
 }

@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         TextView userQuote = navHeader.findViewById(R.id.userQuote);
 
         userName.setText(settingsPreferences.getString(SettingsViewModel.USERNAME,"User"));
+        userQuote.setText(settingsPreferences.getString(SettingsViewModel.QUOTE,"Quote"));
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
