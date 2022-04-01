@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
+import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
 
 import java.util.LinkedList;
 import java.util.List;

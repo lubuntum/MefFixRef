@@ -1,7 +1,5 @@
-package com.example.memfixref.ui.mainfragments.session.sessionendresult;
+package com.example.memfixref.ui.mainfragments.session.endresult;
 
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.plots.successsessionplot.SessionSuccessPlotFragment;
-import com.example.memfixref.ui.mainfragments.session.SessionPrepareFragment;
-import com.example.memfixref.ui.mainfragments.session.sessionbykey.SessionByKeyFragment;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-import database.entities.Kit;
 import database.entities.Session;
 
 public class SessionResultFragment extends Fragment {

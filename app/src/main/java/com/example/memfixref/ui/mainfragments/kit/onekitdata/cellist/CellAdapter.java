@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents;
+package com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist;
 
 import android.content.Context;
 import android.view.LayoutInflater;

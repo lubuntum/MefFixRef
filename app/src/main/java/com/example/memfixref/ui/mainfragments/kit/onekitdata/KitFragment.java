@@ -16,15 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
-import com.example.memfixref.ui.mainfragments.kit.kitstorage.KitStorageViewModel;
 import com.example.memfixref.ui.mainfragments.kit.network.UploadKitFragment;
-import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
+import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

@@ -1,6 +1,4 @@
-package com.example.memfixref.ui.mainfragments.session.sessionbykey;
-
-import android.app.Application;
+package com.example.memfixref.ui.mainfragments.session.bykey;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

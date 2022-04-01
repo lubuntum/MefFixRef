@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.mainfragments.session.sessionendresult;
+package com.example.memfixref.ui.mainfragments.session.endresult;
 
 import android.app.Application;
 
@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import database.Repository;
 import database.entities.Session;
 
 public class SessionResultViewModelFactory implements ViewModelProvider.Factory {

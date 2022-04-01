@@ -1,9 +1,7 @@
-package com.example.memfixref.ui.mainfragments.session.sessionbykey;
+package com.example.memfixref.ui.mainfragments.session.bykey;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.memfixref.ui.mainfragments.session.SessionPrepareViewModel;
 
 import database.entities.Cell;
 import database.entities.Kit;

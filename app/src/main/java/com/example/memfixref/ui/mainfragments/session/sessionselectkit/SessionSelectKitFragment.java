@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.mainfragments.session.selectkit;
+package com.example.memfixref.ui.mainfragments.session.sessionselectkit;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

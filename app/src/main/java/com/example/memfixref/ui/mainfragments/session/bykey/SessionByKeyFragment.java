@@ -1,13 +1,10 @@
-package com.example.memfixref.ui.mainfragments.session.sessionbykey;
+package com.example.memfixref.ui.mainfragments.session.bykey;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +18,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.session.SessionPrepareViewModel;
-import com.example.memfixref.ui.mainfragments.session.sessionendresult.SessionResultFragment;
-
-import database.entities.Cell;
+import com.example.memfixref.ui.mainfragments.session.endresult.SessionResultFragment;
 
 public class SessionByKeyFragment extends Fragment {
     SessionByKeyViewModel sessionByKeyViewModel;
