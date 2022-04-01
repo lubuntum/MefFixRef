@@ -67,7 +67,7 @@
         <include layout="@layout/thin_gray_line"  />
 
         <LinearLayout
-            android:id="@+id/sessionByImageContainer"
+            android:id="@+id/sessionByRelativeListsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/session_by_image"
+                android:text="@string/relative_lists"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"/>
         </LinearLayout>

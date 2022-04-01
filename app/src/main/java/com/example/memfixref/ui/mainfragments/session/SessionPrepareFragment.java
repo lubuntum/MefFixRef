@@ -17,9 +17,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.memfixref.R;
-import com.example.memfixref.ui.mainfragments.kit.onekitdata.CellComponents.CellAdapter;
-import com.example.memfixref.ui.mainfragments.session.selectkit.SessionSelectKitFragment;
-import com.example.memfixref.ui.mainfragments.session.sessionbykey.SessionByKeyFragment;
+import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
+import com.example.memfixref.ui.mainfragments.session.relativelists.SessionRelativeListsFragment;
+import com.example.memfixref.ui.mainfragments.session.sessionselectkit.SessionSelectKitFragment;
+import com.example.memfixref.ui.mainfragments.session.bykey.SessionByKeyFragment;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class SessionPrepareFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayout sessionByKeyBtn = view.findViewById(R.id.sessionByKeyContainer);
         LinearLayout sessionByValueBtn = view.findViewById(R.id.sessionByValueContainer);
-        LinearLayout sessionByImageBtn = view.findViewById(R.id.sessionByImageContainer);
+        LinearLayout sessionByRelativeListsBtn = view.findViewById(R.id.sessionByRelativeListsContainer);
         LinearLayout chooseKitBtn = view.findViewById(R.id.chooseKitContainer);
 
         TextView kitNameTextView = view.findViewById(R.id.kitNameTextView);
@@ -60,6 +61,7 @@ public class SessionPrepareFragment extends Fragment {
                         getResources().getString(R.string.empty_kit),
                         Toast.LENGTH_SHORT).show();
             }
+            //Kit передается внутри фрагмента используя текущую ViewModel зависимый фрагмент исправить
             else {
                 Toast.makeText(getContext(), "By key", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getParentFragmentManager();
@@ -77,8 +79,25 @@ public class SessionPrepareFragment extends Fragment {
         sessionByValueBtn.setOnClickListener((View container)->{
 
         });
-        sessionByImageBtn.setOnClickListener((View container)->{
 
+
+        sessionByRelativeListsBtn.setOnClickListener((View container)->{
+            if (sessionViewModel.getPickedKit().getValue() == null){
+                Toast.makeText(getContext(),
+                        getResources().getString(R.string.empty_kit),
+                        Toast.LENGTH_SHORT).show();
+            }
+            //kit передается с newInstance, независимый фрагмент новая версия
+            else {
+                FragmentManager fragmentManager = getParentFragmentManager();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        .replace(R.id.main_session_fragment,
+                                SessionRelativeListsFragment.newInstance(sessionViewModel.getPickedKit().getValue()),
+                                "session_relative_lists_fragment")
+                        .addToBackStack("session_prepare_trans")
+                        .commit();
+            }
         });
 
         chooseKitBtn.setOnClickListener((View container)->{

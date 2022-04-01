@@ -43,6 +43,9 @@
     <string name="toast_fail_kit_remove">Some problem occurrence with kit try again</string>
     <string name="toast_reload_app">Some going wrong, please reload application</string>
     <string name="toast_empty_fields">Some required fields are empty</string>
+    <string name="toast_success_save_name">"Username changed successfully"</string>
+    <string name="toast_fail_save_name">"Too less name length"</string>
+    <string name="toast_success_save_quote">"Your inspiration committed"</string>
 
     <string name="menu_settings">Settings</string>
     <string name="app_theme">Theme</string>
@@ -83,6 +86,8 @@
     <string name="user_agreement">I read and accept user agreement. Thereby i agree to the processing of my data</string>
     <string name="input_tags_for_kit_hint">Input tags for kit</string>
     <string name="kit_description_hint">Kit description</string>
+    <string name="your_quote">Your quote</string>
+    <string name="relative_lists">Relative lists</string>
 
 
 </resources>
