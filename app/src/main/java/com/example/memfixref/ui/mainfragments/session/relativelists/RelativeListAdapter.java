@@ -38,6 +38,7 @@ public class RelativeListAdapter extends ArrayAdapter<Cell> {
         this.resource = resource;
     }
 
+    //именно здесь важно что бы каждый новый прокручиваемый эл. списка был новым, уникальным
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -18,6 +18,9 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     private Kit kit;
     private RelativeListAdapter adapterByValue;
     private RelativeListAdapter adapterByKey;
+    private Cell pickedCellFromListByKey;
+    private Cell pickedCellFromListByValue;
+
     public SessionRelativeListsViewModel(@NonNull Application application, Kit kit) {
         super(application);
         this.kit = kit;
@@ -47,5 +50,21 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
 
     public RelativeListAdapter getAdapterByValue() {
         return adapterByValue;
+    }
+
+    public Cell getPickedCellFromListByKey() {
+        return pickedCellFromListByKey;
+    }
+
+    public void setPickedCellFromListByKey(Cell pickedCellFromListByKey) {
+        this.pickedCellFromListByKey = pickedCellFromListByKey;
+    }
+
+    public Cell getPickedCellFromListByValue() {
+        return pickedCellFromListByValue;
+    }
+
+    public void setPickedCellFromListByValue(Cell pickedCellFromListByValue) {
+        this.pickedCellFromListByValue = pickedCellFromListByValue;
     }
 }
