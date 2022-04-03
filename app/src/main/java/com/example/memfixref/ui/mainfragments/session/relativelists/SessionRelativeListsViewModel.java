@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.memfixref.R;
 
@@ -12,6 +13,8 @@ import java.util.List;
 
 import database.entities.Cell;
 import database.entities.Kit;
+import database.entities.Session;
+import services.DateFormat;
 import services.MushIndexes;
 
 public class SessionRelativeListsViewModel extends AndroidViewModel {
@@ -21,9 +24,17 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     private Cell pickedCellFromListByKey;
     private Cell pickedCellFromListByValue;
 
+    private Session session;
+
     public SessionRelativeListsViewModel(@NonNull Application application, Kit kit) {
         super(application);
         this.kit = kit;
+        session = new Session();
+        session.kitId = kit.id;
+        session.setKit(new MutableLiveData<>(kit));
+        DateFormat dateFormat = new DateFormat();
+        session.useDate = dateFormat.getCurrentDateWithFormat();
+
         MushIndexes mushIndexes = new MushIndexes();
         //Два массива с перемешенными индексами для списков
         int [] mushIndexesByKey = mushIndexes.getMushIndexes(kit.cells);
@@ -42,6 +53,10 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
 
     public Kit getKit() {
         return kit;
+    }
+
+    public Session getSession() {
+        return session;
     }
 
     public RelativeListAdapter getAdapterByKey() {
@@ -66,5 +81,17 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
 
     public void setPickedCellFromListByValue(Cell pickedCellFromListByValue) {
         this.pickedCellFromListByValue = pickedCellFromListByValue;
+    }
+    public boolean checkPickedCells(){
+        if (pickedCellFromListByKey != null && pickedCellFromListByValue != null){
+            return pickedCellFromListByKey.equals(pickedCellFromListByValue);
+        }
+        return false;
+    }
+    public void removePickedCells(){
+        adapterByKey.remove(pickedCellFromListByKey);
+        adapterByValue.remove(pickedCellFromListByValue);
+        pickedCellFromListByKey = null;
+        pickedCellFromListByValue = null;
     }
 }

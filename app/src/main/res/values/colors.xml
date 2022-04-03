@@ -11,4 +11,5 @@
     <color name="info">#5BC0DE</color>
     <color name="danger">#D9534F</color>
     <color name="faded">#f7f7f7</color>
+    <color name="green_light">	#90EE90 </color>
 </resources>

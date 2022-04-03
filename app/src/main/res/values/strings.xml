@@ -88,6 +88,7 @@
     <string name="kit_description_hint">Kit description</string>
     <string name="your_quote">Your quote</string>
     <string name="relative_lists">Relative lists</string>
+    <string name="give_up">Give up</string>
 
 
 </resources>
