@@ -24,6 +24,8 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     private Cell pickedCellFromListByKey;
     private Cell pickedCellFromListByValue;
 
+    public Boolean SessionRunning = true;
+
     private Session session;
 
     public SessionRelativeListsViewModel(@NonNull Application application, Kit kit) {
@@ -88,10 +90,19 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
         }
         return false;
     }
+    //Удалить значения из адаптера
     public void removePickedCells(){
         adapterByKey.remove(pickedCellFromListByKey);
         adapterByValue.remove(pickedCellFromListByValue);
         pickedCellFromListByKey = null;
         pickedCellFromListByValue = null;
+    }
+    //Сбросить значения
+    public void resetPickedCells(){
+        pickedCellFromListByKey = null;
+        pickedCellFromListByValue = null;
+    }
+    public void setSessionRunning(boolean param){
+        this.SessionRunning = param;
     }
 }
