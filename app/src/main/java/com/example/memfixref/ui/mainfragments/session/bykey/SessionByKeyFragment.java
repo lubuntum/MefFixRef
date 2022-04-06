@@ -72,7 +72,7 @@ public class SessionByKeyFragment extends Fragment {
         if (sessionByKeyViewModel.getCurrentCell().key.
                 equals(keyEditText.getText().toString())) {
             sessionByKeyViewModel.getSession().correct++;
-            sessionByKeyViewModel.setSessionIsRunning(false);
+            sessionByKeyViewModel.setSessionRunning(false);
             progressBar.setProgress(0);
             keyEditText.setText("");
         }
@@ -90,18 +90,18 @@ public class SessionByKeyFragment extends Fragment {
             public void run() {
 
                 for (int currentIndex: sessionByKeyViewModel.cellIndexes) {
-                    sessionByKeyViewModel.setSessionIsRunning (true);
+                    sessionByKeyViewModel.setSessionRunning(true);
                     sessionByKeyViewModel.setCurrentCellByIndex(currentIndex);
                     valueTextView.post(()->{
                         valueTextView.setText(
                                 sessionByKeyViewModel.getCurrentCell().value);
                     });
-                    while (sessionByKeyViewModel.isSessionIsRunning()){
+                    while (sessionByKeyViewModel.isSessionRunning){
                         if(progressBar.getProgress() >= 100){//next step
                             progressBar.post(()->{
                                 progressBar.setProgress(0);
                             });
-                            sessionByKeyViewModel.setSessionIsRunning(false);
+                            sessionByKeyViewModel.setSessionRunning(false);
                         }
                         else{
                             progressBar.post(()->{

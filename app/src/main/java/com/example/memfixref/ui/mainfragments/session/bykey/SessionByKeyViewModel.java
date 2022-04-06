@@ -16,7 +16,7 @@ public class SessionByKeyViewModel extends ViewModel {
     private Cell currentCell;
 
     private PromptHelper helper;
-    private boolean sessionIsRunning = true;
+    public boolean isSessionRunning = true;
     private Session session;
 
     public SessionByKeyViewModel(Kit kit){
@@ -47,12 +47,10 @@ public class SessionByKeyViewModel extends ViewModel {
         helper.updateWord(this.currentCell.key);
     }
 
-    public void setSessionIsRunning(boolean param){
-        this.sessionIsRunning = param;
+    public void setSessionRunning(boolean param){
+        this.isSessionRunning = param;
     }
-    public boolean isSessionIsRunning(){
-        return this.sessionIsRunning;
-    }
+
 
     public String getPrompt(){
         session.prompt++;
