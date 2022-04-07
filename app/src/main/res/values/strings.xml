@@ -59,6 +59,10 @@
     <string name="what_inspiration_for_you_hint">What inspiration for you?</string>
     <string name="profile_settings_text_view">Profile</string>
     <string name="settings_user_quote">User quote</string>
+    <string name="session">Session</string>
+    <string name="session_by_key_or_value">By key or value</string>
+    <string name="prefer_time_d">Prefer time %d sec</string>
+    <string name="random_list">Random list</string>
 
     <string name="session_by_key">Session by key</string>
     <string name="empty_kit">Please first select kit</string>
@@ -90,6 +94,7 @@
     <string name="your_quote">Your quote</string>
     <string name="relative_lists">Relative lists</string>
     <string name="give_up">Give up</string>
+
 
 
 </resources>

@@ -12,11 +12,11 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp">
         <TextView
+            style="@style/settings_text"
             android:id="@+id/appSettingsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_settings_text_view"
-            android:textSize="20sp"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:weightSum="10"
             app:layout_constraintTop_toBottomOf="@id/appSettingsTextView">
             <LinearLayout
@@ -35,11 +35,12 @@
                 android:orientation="vertical"
                 android:layout_weight="9">
                 <TextView
+                    style="@style/settings_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_theme"
-                    android:textSize="20sp" />
+                    android:text="@string/app_theme" />
                 <TextView
+                    android:paddingBottom="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_theme_hint"/>
@@ -51,13 +52,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
         </LinearLayout>
-        <View
+        <include layout="@layout/thin_gray_line"
             android:id="@+id/appSettingsFirstSep"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/bootstrap_gray_lighter"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toBottomOf="@id/themeContainer"/>
         <LinearLayout
             android:id="@+id/statisticContainer"
@@ -72,10 +70,10 @@
                 android:orientation="vertical"
                 android:layout_weight="9">
                 <TextView
+                    style="@style/settings_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/settings_allow_statistics"
-                    android:textSize="20sp"/>
+                    android:text="@string/settings_allow_statistics" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,11 +90,10 @@
 
 
     
-    <View
+    <include layout="@layout/bold_gray_line"
         android:id="@+id/appSettingsSecondSep"
         android:layout_width="match_parent"
         android:layout_height="11dp"
-        android:background="@color/bootstrap_gray_lighter"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/appSettingsContainer"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -109,11 +106,11 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp">
         <TextView
+            style="@style/settings_text"
             android:id="@+id/profileSettingsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_settings_text_view"
-            android:textSize="20sp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -123,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="12dp"
             android:background="?android:attr/selectableItemBackground"
             app:layout_constraintTop_toBottomOf="@id/profileSettingsTextView"
             app:layout_constraintLeft_toLeftOf="parent">
@@ -132,24 +129,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    style="@style/settings_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text= "@string/user_name"
-                    android:textSize="20sp"/>
+                    android:text= "@string/user_name" />
                 <TextView
+                    android:paddingBottom="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"/>
             </LinearLayout>
 
         </LinearLayout>
-        <View
+        <include layout="@layout/thin_gray_line"
             android:id="@+id/profileSettingsFirstSep"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/bootstrap_gray_lighter"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+
             app:layout_constraintTop_toBottomOf="@id/userNameContainer"/>
         <LinearLayout
             android:id="@+id/userQuoteContainer"
@@ -166,10 +162,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    style="@style/settings_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/settings_user_quote"
-                    android:textSize="20sp"/>
+                    android:text="@string/settings_user_quote" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -180,21 +176,120 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
+    <include layout="@layout/bold_gray_line"
         android:id="@+id/profileSettingsSecondSep"
         android:layout_width="match_parent"
         android:layout_height="11dp"
-        android:background="@color/bootstrap_gray_lighter"
+
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/profileSettingsContainer"
         app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sessionSettingsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintTop_toBottomOf="@id/profileSettingsSecondSep"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <TextView
+            style="@style/settings_text"
+            android:id="@+id/sessionSettingsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/session"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <LinearLayout
+            android:id="@+id/sessionTimeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/sessionSettingsTextView"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <TextView
+                style="@style/settings_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/session_by_key_or_value" />
+            <TextView
+                android:paddingBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prefer_time_d"/>
+
+        </LinearLayout>
+        <include layout="@layout/thin_gray_line"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/sessionTimeContainer"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <LinearLayout
+            android:id="@+id/sessionTimeRelativeListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/sessionTimeContainer"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <TextView
+                style="@style/settings_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/relative_lists" />
+            <TextView
+                android:paddingBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prefer_time_d"/>
+
+        </LinearLayout>
+        <include layout="@layout/thin_gray_line"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/sessionTimeRelativeListContainer"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <LinearLayout
+            android:id="@+id/randomListsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/sessionTimeRelativeListContainer"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <TextView
+                style="@style/settings_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/random_list" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prefer_time_d"/>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/bold_gray_line"
+        android:id="@+id/sessionSettingsFirstSep"
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/sessionSettingsContainer"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
 
     <LinearLayout
         android:id="@+id/currentLanguageContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/profileSettingsSecondSep"
+        app:layout_constraintTop_toBottomOf="@id/sessionSettingsFirstSep"
         app:layout_constraintLeft_toLeftOf="parent"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
@@ -207,11 +302,11 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
             <TextView
+                style="@style/settings_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_language_btn"
-                android:layout_weight="11"
-                android:textSize="20sp"/>
+                android:layout_weight="11" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,6 +315,7 @@
                 android:textColor="@color/bootstrap_brand_info"/>
         </LinearLayout>
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
