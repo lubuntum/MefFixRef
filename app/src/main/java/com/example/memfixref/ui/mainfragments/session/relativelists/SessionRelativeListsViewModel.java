@@ -18,6 +18,7 @@ import services.DateFormat;
 import services.MushIndexes;
 
 public class SessionRelativeListsViewModel extends AndroidViewModel {
+    public static final String SESSION_TYPE_RELATIVE_LISTS = "relative_lists";
     private Kit kit;
     private RelativeListAdapter adapterByValue;
     private RelativeListAdapter adapterByKey;
@@ -33,6 +34,7 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
         this.kit = kit;
         session = new Session();
         session.kitId = kit.id;
+        session.sessionType = SESSION_TYPE_RELATIVE_LISTS;
         session.setKit(new MutableLiveData<>(kit));
         DateFormat dateFormat = new DateFormat();
         session.useDate = dateFormat.getCurrentDateWithFormat();

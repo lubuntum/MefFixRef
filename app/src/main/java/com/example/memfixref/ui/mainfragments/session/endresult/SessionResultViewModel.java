@@ -52,7 +52,7 @@ public class SessionResultViewModel extends AndroidViewModel {
     public MutableLiveData<List<Session>> getSessionList(){return sessionList;}
 
     public void loadAllSession(){
-        repo.getAllSessionByKitId(session.kitId,sessionList);
+        repo.getAllSessionBySessionTypeByKitId(session.kitId,session.sessionType,sessionList);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.memfixref.ui.mainfragments.plots.successsessionplot;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import database.Repository;
-import database.entities.Cell;
 import database.entities.Kit;
 import database.entities.Session;
 
@@ -28,28 +28,44 @@ import database.entities.Session;
 public class SessionSuccessPlotViewModel extends AndroidViewModel {
     private Repository repo;
     private Kit kit;
+    private String sessionType;//Какие именно сессии покаказать на графике
     private List<DataEntry> barChartData;
-    public SessionSuccessPlotViewModel(@NonNull Application application, Kit kit) {
+    public SessionSuccessPlotViewModel(@NonNull Application application, Kit kit,String sessionType) {
         super(application);
         this.repo = Repository.getInstance(application);
         this.kit = kit;
+        this.sessionType = sessionType;
         if (this.kit.sessionList == null)
             this.kit.sessionList = new MutableLiveData<>();
         barChartData = new LinkedList<>();
         //если входящий kit без прогруженных session
-        repo.getAllSessionByKitId(kit.id,kit.sessionList);
+        repo.getAllSessionBySessionTypeByKitId(kit.id,sessionType,kit.sessionList);
 
 
     }
+    //Перебор всех сессий и сортировка их содержимого по датам сессий
     public void sessionParse(){
-        for (Session session: kit.sessionList.getValue()) {
-            barChartData.add(new charBarDataEntry(session.useDate,session.correct,-session.incorrect));
-        }
-    }
-    private class charBarDataEntry extends ValueDataEntry {
+            for (Session session : kit.sessionList.getValue()) {
+                boolean isContain = false;
+                for (DataEntry barChart : barChartData) {
+                    if (barChart.getValue("x").equals(session.useDate)) {
+                        barChart.setValue("value", Integer.parseInt(barChart.getValue("value").toString()) + session.correct);
+                        barChart.setValue("value2", (Integer.parseInt(barChart.getValue("value2").toString())) - session.incorrect);
+                        isContain = true;
+                    }
+                }
+                if (!isContain) {
+                    barChartData.add(new CharBarDataEntry(session.useDate,
+                            session.correct, -session.incorrect));
+                }
+            }
 
-        public charBarDataEntry(String x, Number value, Number value2) {
-            super(x, value);
+        //CharBarDataEntry charBarDataEntry = new CharBarDataEntry("01/01/21",1,2);
+
+    }
+    private static class CharBarDataEntry extends ValueDataEntry {
+        public CharBarDataEntry(String useDate, Number value, Number value2) {
+            super(useDate, value);
             setValue("value2",value2);
         }
     }

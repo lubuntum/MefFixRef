@@ -11,6 +11,8 @@ import services.MushIndexes;
 import services.PromptHelper;
 
 public class SessionByKeyViewModel extends ViewModel {
+    public static final String SESSION_TYPE_KEY = "key";
+    public static final String SESSION_TYPE_VALUE = "value";
     public Kit kit;
     public int[] cellIndexes;
     private Cell currentCell;
@@ -27,6 +29,7 @@ public class SessionByKeyViewModel extends ViewModel {
 
         session = new Session();
         session.kitId = kit.id;
+        session.sessionType = SESSION_TYPE_KEY;
         session.setKit(new MutableLiveData<>(kit));
         DateFormat dateFormat = new DateFormat();
         session.useDate = dateFormat.getCurrentDateWithFormat();

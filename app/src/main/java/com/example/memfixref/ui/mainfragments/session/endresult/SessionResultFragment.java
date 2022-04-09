@@ -87,8 +87,9 @@ public class SessionResultFragment extends Fragment {
                 }
                 if (general != 0){
                     DecimalFormat format = new DecimalFormat("###.##");
-                    String averageResult = format.format((double)correct/general);
-                    averageResultTextView.setText(averageResult);
+                    String averageResultStr = getResources().getString(R.string.session_end_average_result) +
+                            format.format((double)correct/general);
+                    averageResultTextView.setText(averageResultStr);
 
                 }
             }
@@ -114,7 +115,9 @@ public class SessionResultFragment extends Fragment {
 
         getParentFragmentManager().beginTransaction()
                 .add(R.id.FragmentSessionSuccessPlot,
-                        SessionSuccessPlotFragment.newInstance(sessionResultViewModel.getKit()),
+                        SessionSuccessPlotFragment.newInstance(
+                                sessionResultViewModel.getKit()
+                                ,sessionResultViewModel.getSession().sessionType),
                         "session_plot").
                 commit();
 

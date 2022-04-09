@@ -26,6 +26,7 @@ import com.anychart.enums.ScaleStackMode;
 import com.anychart.enums.TooltipDisplayMode;
 import com.anychart.enums.TooltipPositionMode;
 import com.example.memfixref.R;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.List;
 
@@ -35,10 +36,11 @@ import database.entities.Session;
 public class SessionSuccessPlotFragment extends Fragment {
     private SessionSuccessPlotViewModel sessionSuccessPlotViewModel;
 
-    public static SessionSuccessPlotFragment newInstance(Kit kit) {
+    public static SessionSuccessPlotFragment newInstance(Kit kit, String sessionType) {
 
         Bundle args = new Bundle();
         args.putSerializable("kit",kit);
+        args.putString("session_type",sessionType);
         SessionSuccessPlotFragment fragment = new SessionSuccessPlotFragment();
         fragment.setArguments(args);
         return fragment;
@@ -46,10 +48,11 @@ public class SessionSuccessPlotFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (getArguments()!= null && getArguments().containsKey("kit")){
+        if (getArguments()!= null && getArguments().containsKey("kit") && getArguments().containsKey("session_type")){
             Kit kit = (Kit)getArguments().getSerializable("kit");
+            String sessionType = getArguments().getString("session_type");
             sessionSuccessPlotViewModel = new ViewModelProvider(
-                    this,new SessionSuccessPlotViewModelFactory(getActivity().getApplication(),kit)).
+                    this,new SessionSuccessPlotViewModelFactory(getActivity().getApplication(),kit,sessionType)).
                     get(SessionSuccessPlotViewModel.class);
         }
 
@@ -60,66 +63,76 @@ public class SessionSuccessPlotFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AnyChartView anyChartView = view.findViewById(R.id.sessionSuccessPlot);
+        CircularProgressIndicator progressIndicator = view.findViewById(R.id.circleProgressBar);
         Observer<List<Session>> sessionListObserver = new Observer<List<Session>>() {
             @Override
             public void onChanged(List<Session> sessions) {
-                sessionSuccessPlotViewModel.sessionParse();
-                Cartesian barChart = AnyChart.bar();
-                barChart.animation(true);
-                barChart.padding(10d,20d,5d,20d);
-                barChart.yScale().stackMode(ScaleStackMode.VALUE);
+                Runnable loadPlotRnb = new Runnable() {
+                    @Override
+                    public void run() {
+                        sessionSuccessPlotViewModel.sessionParse();
+                        Cartesian barChart = AnyChart.bar();
+                        barChart.animation(true);
+                        barChart.padding(10d,20d,5d,20d);
+                        barChart.yScale().stackMode(ScaleStackMode.VALUE);
 
-                barChart.yAxis(0).labels().format(
-                        "function(){\n" +
-                                "return Math.abs(this.value).toLocaleString();\n" +
-                                "}");
-                barChart.yAxis(0d).title("mistakes ratio");
-                barChart.xAxis(0d).overlapMode(LabelsOverlapMode.ALLOW_OVERLAP);
+                        barChart.yAxis(0).labels().format(
+                                "function(){\n" +
+                                        "return Math.abs(this.value).toLocaleString();\n" +
+                                        "}");
+                        barChart.yAxis(0d).title("mistakes ratio");
+                        barChart.xAxis(0d).overlapMode(LabelsOverlapMode.ALLOW_OVERLAP);
 
-                Linear xAxis1 = barChart.xAxis(1d);
-                xAxis1.enabled(true);
-                xAxis1.orientation(Orientation.RIGHT);
-                xAxis1.overlapMode(LabelsOverlapMode.ALLOW_OVERLAP);
+                        Linear xAxis1 = barChart.xAxis(1d);
+                        xAxis1.enabled(true);
+                        xAxis1.orientation(Orientation.RIGHT);
+                        xAxis1.overlapMode(LabelsOverlapMode.ALLOW_OVERLAP);
 
-                barChart.title("Kit general progress");
+                        barChart.title("Kit general progress");
 
-                barChart.interactivity().hoverMode(HoverMode.BY_X);
+                        barChart.interactivity().hoverMode(HoverMode.BY_X);
 
-                barChart.tooltip()
-                        .title(false)
-                        .separator(true)
-                        .displayMode(TooltipDisplayMode.SEPARATED)
-                        .positionMode(TooltipPositionMode.POINT)
-                        .useHtml(true)
-                        .fontSize(12d)
-                        .format(
-                                "function() {\n" +
-                                        "      return '<span style=\"color: #D9D9D9\">$</span>' + Math.abs(this.value).toLocaleString();\n" +
-                                        "    }");
+                        barChart.tooltip()
+                                .title(false)
+                                .separator(true)
+                                .displayMode(TooltipDisplayMode.SEPARATED)
+                                .positionMode(TooltipPositionMode.POINT)
+                                .useHtml(true)
+                                .fontSize(12d)
+                                .format(
+                                        "function() {\n" +
+                                                "      return '<span style=\"color: #D9D9D9\">$</span>' + Math.abs(this.value).toLocaleString();\n" +
+                                                "    }");
 
-                Set set = Set.instantiate();
-                set.data(sessionSuccessPlotViewModel.getBarChartData());
-                Mapping series1Data = set.mapAs("{x: 'x',value:'value'}");
-                Mapping series2Data = set.mapAs("{x: 'x',value:'value2'}");
+                        Set set = Set.instantiate();
+                        set.data(sessionSuccessPlotViewModel.getBarChartData());
+                        Mapping series1Data = set.mapAs("{x: 'x',value:'value'}");
+                        Mapping series2Data = set.mapAs("{x: 'x',value:'value2'}");
 
-                Bar series1 = barChart.bar(series1Data);
-                series1.name("Correct");
-                series1.tooltip()
-                        .position("right")
-                        .anchor(Anchor.LEFT_CENTER);
-                Bar series2 = barChart.bar(series2Data);
-                series2.name("Incorrect");
-                series2.tooltip()
-                        .position("left")
-                        .anchor(Anchor.RIGHT_CENTER);
-                barChart.legend().enabled(true);
-                barChart.legend().inverted(true);
-                barChart.legend().fontSize(13d);
-                barChart.legend().padding(0d, 0d, 20d, 0d);
-                anyChartView.setChart(barChart);
+                        Bar series1 = barChart.bar(series1Data);
+                        series1.name("Correct");
+                        series1.tooltip()
+                                .position("right")
+                                .anchor(Anchor.LEFT_CENTER);
+                        Bar series2 = barChart.bar(series2Data);
+                        series2.name("Incorrect");
+                        series2.tooltip()
+                                .position("left")
+                                .anchor(Anchor.RIGHT_CENTER);
+                        barChart.legend().enabled(true);
+                        barChart.legend().inverted(true);
+                        barChart.legend().fontSize(13d);
+                        barChart.legend().padding(0d, 0d, 20d, 0d);
 
+                        progressIndicator.post(() -> progressIndicator.setVisibility(View.INVISIBLE));
+                        anyChartView.post(() -> {
+                            anyChartView.setChart(barChart);
+                            anyChartView.setVisibility(View.VISIBLE);
+                        });
+                    }
+                };
+                new Thread(loadPlotRnb).start();
             }
-
         };
         sessionSuccessPlotViewModel.getKit().
                 sessionList.observe(getViewLifecycleOwner(),sessionListObserver);

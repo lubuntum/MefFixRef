@@ -12,7 +12,8 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity(tableName = "session",
-        foreignKeys = @ForeignKey(entity = Kit.class, parentColumns = "id",childColumns = "kit_id"),
+        foreignKeys = @ForeignKey(entity = Kit.class, parentColumns = "id",childColumns = "kit_id",
+        onDelete = ForeignKey.CASCADE,onUpdate = ForeignKey.CASCADE),
 indices = {@Index(value = {"kit_id"})})
 public class Session implements Serializable {
 
@@ -32,6 +33,8 @@ public class Session implements Serializable {
     public int prompt;
     @ColumnInfo(name = "total_time")
     public int totalTime;
+    @ColumnInfo(name = "session_type")
+    public String sessionType;
     //redundant
     @ColumnInfo(name = "is_succeed")
     public boolean isSucceed;//если ratio ниже установленног значения то не успешно(в настройках)
