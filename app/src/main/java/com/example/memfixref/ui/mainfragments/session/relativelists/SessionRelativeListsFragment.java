@@ -16,10 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.example.memfixref.R;
+import com.example.memfixref.ui.mainfragments.session.endresult.SessionResultFragment;
 
 import database.entities.Kit;
 
@@ -206,7 +208,13 @@ public class SessionRelativeListsFragment extends Fragment {
                 while (relativeListsViewModel.SessionRunning){
                     if (progressBar.getProgress() >= 100){
                         progressBar.post(()->{
-
+                            FragmentManager fragmentManager = getParentFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                                    .replace(R.id.main_session_fragment,
+                                            SessionResultFragment.newInstance(relativeListsViewModel.getSession()),"session_result")
+                                    .addToBackStack(null)
+                                    .commit();
                         });
                         relativeListsViewModel.setSessionRunning(false);
                     }
