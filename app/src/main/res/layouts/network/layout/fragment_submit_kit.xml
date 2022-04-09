@@ -18,6 +18,7 @@
         android:orientation="vertical"
         android:padding = "15dp">
         <TextView
+            style="@style/app_text"
             android:id="@+id/kitNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,12 +27,14 @@
             android:textColor="@color/bootstrap_brand_info"
             />
         <TextView
+            style="@style/app_text"
             android:id="@+id/authorTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/author"
             android:textSize="15sp"/>
         <TextView
+            style="@style/app_text"
             android:id="@+id/cellCountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
+                android:textSize="15dp"
                 android:textColor="@color/bootstrap_gray_light"
                 android:text="@string/user_agreement"
                 />

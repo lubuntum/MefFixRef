@@ -3,6 +3,5 @@
     <style name="settings_text">
         <item name="android:textSize"> 18sp </item>
         <item name="android:textColor"> @color/black </item>
-
     </style>
 </resources>

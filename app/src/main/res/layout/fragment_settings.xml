@@ -86,9 +86,6 @@
                 android:layout_weight="1"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
     
     <include layout="@layout/bold_gray_line"
         android:id="@+id/appSettingsSecondSep"
@@ -315,7 +312,5 @@
                 android:textColor="@color/bootstrap_brand_info"/>
         </LinearLayout>
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

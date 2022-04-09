@@ -11,6 +11,7 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text"
             android:id="@+id/kitNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,19 +26,23 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text"
             android:id="@+id/lastUsageDateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/last_use"
             android:layout_marginStart="5dp"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textColor="@color/bootstrap_gray_light"/>
         <TextView
+            style="@style/app_text"
             android:id="@+id/totalUsageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/total"
             android:layout_marginStart="5dp"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textColor="@color/bootstrap_gray_light"/>
 
     </LinearLayout>
 

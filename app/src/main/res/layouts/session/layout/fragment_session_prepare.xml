@@ -14,6 +14,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
         <TextView
+            style="@style/app_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/session_container_name_text_view"
@@ -34,11 +35,12 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_key_2"/>
             <TextView
+                style="@style/app_text"
+                android:paddingTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/session_by_key"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"/>
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
 
@@ -58,11 +60,12 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_data"/>
             <TextView
+                style="@style/app_text"
+                android:paddingTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/session_by_value"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"/>
+                android:layout_marginStart="10dp" />
         </LinearLayout>
         <include layout="@layout/thin_gray_line"  />
 
@@ -80,11 +83,12 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_image"/>
             <TextView
+                style="@style/app_text"
+                android:paddingTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/relative_lists"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"/>
+                android:layout_marginStart="10dp" />
         </LinearLayout>
     </LinearLayout>
     <include layout="@layout/bold_gray_line"
@@ -102,6 +106,7 @@
         app:layout_constraintTop_toBottomOf="@id/sessionContainerBottomSep"
         app:layout_constraintLeft_toLeftOf="parent">
         <TextView
+            style="@style/app_text"
             android:id="@+id/kitNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,11 +126,12 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_menu_kit"/>
             <TextView
+                style="@style/app_text"
+                android:paddingTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/choose_kit"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"/>
+                android:layout_marginStart="10dp" />
         </LinearLayout>
         <include layout="@layout/thin_gray_line"/>
         <ListView

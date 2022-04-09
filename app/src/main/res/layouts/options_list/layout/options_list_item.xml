@@ -22,7 +22,8 @@
             android:contentDescription="icon for item"
             android:src="@drawable/ic_start" />
         <TextView
-            style="@style/textDefault"
+            android:paddingTop="3dp"
+            style="@style/app_text"
             android:id="@+id/itemText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
