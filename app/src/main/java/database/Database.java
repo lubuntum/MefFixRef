@@ -24,20 +24,24 @@ public abstract class Database extends RoomDatabase {
     public abstract SessionDao sessionDao();
     public static volatile Database INSTANCE = null;
 
-    /*
+/*
     public static final Migration MIGRATION_1_2 = new Migration(1,2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE session " +
-                    "ADD COLUMN incorrect INTEGER DEFAULT 0 NOT NULL;");
+                    "ADD COLUMN session_type TEXT;");
+            /*
             database.execSQL("ALTER TABLE session " +
                     "ADD COLUMN correct INTEGER DEFAULT 0 NOT NULL;");
             database.execSQL("ALTER TABLE session " +
                     "ADD COLUMN prompt INTEGER DEFAULT 0 NOT NULL;");
             database.execSQL("ALTER TABLE session " +
                     "ADD COLUMN total_time INTEGER DEFAULT 0 NOT NULL;");
+
+
         }
     };
+    /*
     public static final Migration MIGRATION_2_3 = new Migration(2,3) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
