@@ -94,7 +94,7 @@ public class SessionPrepareFragment extends Fragment {
                         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.main_session_fragment,
                                 SessionRelativeListsFragment.newInstance(sessionViewModel.getPickedKit().getValue()),
-                                "session_relative_lists_fragment")
+                                "session_prepare_fragment")
                         .addToBackStack("session_prepare_trans")
                         .commit();
             }
