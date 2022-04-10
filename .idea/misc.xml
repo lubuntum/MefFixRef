@@ -10,14 +10,15 @@
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_kit.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_kit_storage.xml" value="0.1" />
-        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layout/nav_header_main.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/change_kit/layout/cell_item.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/change_kit/layout/change_kit_activity.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/add_cell_dialog.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/change_username_dialog.xml" value="0.33" />
-        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/change_userquote_dialog.xml" value="0.1" />
-        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/remove_kit_dialog.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/change_userquote_dialog.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/remove_kit_dialog.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/dialog_windows/layout/set_session_time_dialog.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/kit_list/layout/kit_item.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/network/layout/fragment_submit_kit.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MemfixRef/app/src/main/res/layouts/network/layout/net_kit_search_fragment.xml" value="0.25" />

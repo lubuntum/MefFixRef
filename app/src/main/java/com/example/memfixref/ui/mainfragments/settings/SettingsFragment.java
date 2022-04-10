@@ -7,16 +7,19 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.ChangeUsernameDialogFragment;
 import com.example.memfixref.ui.dialog.ChangeUserquoteDialogFragment;
+import com.example.memfixref.ui.dialog.SessionTimeDialogFragment;
 
 public class SettingsFragment extends Fragment {
     private SettingsViewModel settingsViewModel;
@@ -70,5 +73,49 @@ public class SettingsFragment extends Fragment {
             userquoteDialogFragment.show(fragmentManager,"userquote_dialog");
             return false;
         });
+        LinearLayout keyValueSessionBtn = view.findViewById(R.id.sessionTimeKeyValueContainer);
+        LinearLayout relativeListsSessionBtn = view.findViewById(R.id.sessionTimeRelativeListContainer);
+        LinearLayout randomListsSessionBtn = view.findViewById(R.id.randomListsContainer);
+        keyValueSessionBtn.setOnLongClickListener((View v)->{
+            SessionTimeDialogFragment sessionTimeDialogFragment = SessionTimeDialogFragment
+                    .newInstance(SettingsViewModel.KEY_VALUE_SESSION_TIME);
+            sessionTimeDialogFragment.show(fragmentManager,"key_value_session_time_dialog");
+            return false;
+        });
+        relativeListsSessionBtn.setOnLongClickListener((View v)->{
+            SessionTimeDialogFragment sessionTimeDialogFragment = SessionTimeDialogFragment
+                    .newInstance(SettingsViewModel.RELATIVE_LISTS_SESSION_TIME);
+            sessionTimeDialogFragment.show(fragmentManager,"relative_lists_session_time_dialog");
+            return false;
+        });
+        randomListsSessionBtn.setOnLongClickListener((View v)->{
+            SessionTimeDialogFragment sessionTimeDialogFragment = SessionTimeDialogFragment
+                    .newInstance(SettingsViewModel.RANDOM_LISTS_SESSION_TIME);
+            sessionTimeDialogFragment.show(fragmentManager,"random_lists_session_time_dialog");
+            return false;
+        });
+        initSessionTimeHints(view,savedInstanceState);
+        //Для диначимеского обновления времени в подсказках
+        Observer<Boolean> updateHintsUI = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                initSessionTimeHints(view,savedInstanceState);
+            }
+        };
+        settingsViewModel.getUpdateHintsLiveData().observe(getViewLifecycleOwner(),updateHintsUI);
+    }
+    public void initSessionTimeHints(View view, Bundle savedInstanceState){
+        TextView keyValueTimeHint = view.findViewById(R.id.keyValueTimeHint);
+        TextView relativeListsTimeHint = view.findViewById(R.id.relativeListsTimeHint);
+        TextView randomListsTimeHint = view.findViewById(R.id.randomListTimeHint);
+
+        String keyValueTimeStr = settingsViewModel.getSettingsPreferences().getString(SettingsViewModel.KEY_VALUE_SESSION_TIME,"15");
+        keyValueTimeHint.setText(String.format(getResources().getString(R.string.prefer_time_s),keyValueTimeStr));
+
+        String relativeListsTimeStr = settingsViewModel.getSettingsPreferences().getString(SettingsViewModel.RELATIVE_LISTS_SESSION_TIME,"60");
+        relativeListsTimeHint.setText(String.format(getResources().getString(R.string.prefer_time_s),relativeListsTimeStr));
+
+        String randomListsTimeStr = settingsViewModel.getSettingsPreferences().getString(SettingsViewModel.RANDOM_LISTS_SESSION_TIME,"60");
+        randomListsTimeHint.setText(String.format(getResources().getString(R.string.prefer_time_s),randomListsTimeStr));
     }
 }

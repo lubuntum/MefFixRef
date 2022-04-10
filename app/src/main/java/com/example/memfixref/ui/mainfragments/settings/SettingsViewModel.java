@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends AndroidViewModel {
@@ -19,13 +20,20 @@ public class SettingsViewModel extends AndroidViewModel {
     public static final String USERNAME = "Username";
     public static final String QUOTE = "Userquote";
 
+    public static final String KEY_VALUE_SESSION_TIME = "Key_value_session_time";
+    public static final String RELATIVE_LISTS_SESSION_TIME = "Relative_lists_session_time";
+    public static final String RANDOM_LISTS_SESSION_TIME = "Random_lists_session_time";
+
     private SharedPreferences settingsPreferences;
     private SharedPreferences.Editor editor;
+
+    private MutableLiveData<Boolean> updateHintsLiveData;
     public SettingsViewModel(Application app){
         super(app);
         settingsPreferences = getApplication().getSharedPreferences(
                 SETTINGS_STORAGE, Context.MODE_PRIVATE);
         editor = settingsPreferences.edit();
+        updateHintsLiveData = new MutableLiveData<>();
     }
     public void setTheme(String theme){
         editor.putString(THEME,theme);
@@ -50,5 +58,13 @@ public class SettingsViewModel extends AndroidViewModel {
 
     public SharedPreferences.Editor getEditor() {
         return editor;
+    }
+
+    public MutableLiveData<Boolean> getUpdateHintsLiveData() {
+        return updateHintsLiveData;
+    }
+
+    public void setUpdateHintsLiveData(MutableLiveData<Boolean> updateHintsLiveData) {
+        this.updateHintsLiveData = updateHintsLiveData;
     }
 }

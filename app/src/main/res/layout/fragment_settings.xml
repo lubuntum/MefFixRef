@@ -200,7 +200,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <LinearLayout
-            android:id="@+id/sessionTimeContainer"
+            android:id="@+id/sessionTimeKeyValueContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
@@ -214,16 +214,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/session_by_key_or_value" />
             <TextView
+                android:id="@+id/keyValueTimeHint"
                 android:paddingBottom="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/prefer_time_d"/>
+                android:text="@string/prefer_time_s"/>
 
         </LinearLayout>
         <include layout="@layout/thin_gray_line"
             android:layout_height="1dp"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/sessionTimeContainer"
+            app:layout_constraintTop_toBottomOf="@id/sessionTimeKeyValueContainer"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <LinearLayout
             android:id="@+id/sessionTimeRelativeListContainer"
@@ -231,7 +232,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/sessionTimeContainer"
+            app:layout_constraintTop_toBottomOf="@id/sessionTimeKeyValueContainer"
             app:layout_constraintLeft_toLeftOf="parent">
             <TextView
                 style="@style/settings_text"
@@ -239,10 +240,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/relative_lists" />
             <TextView
+                android:id="@+id/relativeListsTimeHint"
                 android:paddingBottom="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/prefer_time_d"/>
+                android:text="@string/prefer_time_s"/>
 
         </LinearLayout>
         <include layout="@layout/thin_gray_line"
@@ -264,9 +266,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/random_list" />
             <TextView
+                android:id="@+id/randomListTimeHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/prefer_time_d"/>
+                android:text="@string/prefer_time_s"/>
 
         </LinearLayout>
 
