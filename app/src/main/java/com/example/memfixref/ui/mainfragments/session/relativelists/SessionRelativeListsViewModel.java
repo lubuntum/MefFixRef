@@ -1,12 +1,15 @@
 package com.example.memfixref.ui.mainfragments.session.relativelists;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.memfixref.R;
+import com.example.memfixref.ui.mainfragments.settings.SettingsViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +31,7 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     public Boolean SessionRunning = true;
 
     private Session session;
+    private int progressBarDelay;
 
     public SessionRelativeListsViewModel(@NonNull Application application, Kit kit) {
         super(application);
@@ -38,6 +42,11 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
         session.setKit(new MutableLiveData<>(kit));
         DateFormat dateFormat = new DateFormat();
         session.useDate = dateFormat.getCurrentDateWithFormat();
+
+        SharedPreferences sharedPreferences = application.getSharedPreferences(
+                SettingsViewModel.SETTINGS_STORAGE, Context.MODE_PRIVATE);
+        progressBarDelay = Integer.parseInt(
+                sharedPreferences.getString(SettingsViewModel.RELATIVE_LISTS_SESSION_TIME,"15")) * 10;
 
         MushIndexes mushIndexes = new MushIndexes();
         //Два массива с перемешенными индексами для списков
@@ -106,5 +115,9 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     }
     public void setSessionRunning(boolean param){
         this.SessionRunning = param;
+    }
+
+    public int getProgressBarDelay() {
+        return progressBarDelay;
     }
 }

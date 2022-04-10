@@ -223,7 +223,7 @@ public class SessionRelativeListsFragment extends Fragment {
                             progressBar.setProgress(progressBar.getProgress() + 1);
                         });
                     }
-                    android.os.SystemClock.sleep(100);
+                    android.os.SystemClock.sleep(relativeListsViewModel.getProgressBarDelay());
                 }
             }
         };

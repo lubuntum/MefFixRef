@@ -1,5 +1,6 @@
 package com.example.memfixref.ui.mainfragments.session.bykey;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.session.SessionPrepareViewModel;
 import com.example.memfixref.ui.mainfragments.session.endresult.SessionResultFragment;
+import com.example.memfixref.ui.mainfragments.settings.SettingsViewModel;
 
 public class SessionByKeyFragment extends Fragment {
     SessionByKeyViewModel sessionByKeyViewModel;
@@ -42,7 +44,7 @@ public class SessionByKeyFragment extends Fragment {
         //берем выбранный kit из viewModel и передаем его текущей сессионной viewModel как входящий парам.
         SessionPrepareViewModel sessionPrepareViewModel = new ViewModelProvider(getActivity()).get(SessionPrepareViewModel.class);
         sessionByKeyViewModel = new ViewModelProvider(this,
-                new SessionByKeyViewModelFactory(sessionPrepareViewModel.getPickedKit().getValue())).
+                new SessionByKeyViewModelFactory(getActivity().getApplication(),sessionPrepareViewModel.getPickedKit().getValue())).
                 get(SessionByKeyViewModel.class);
         return inflater.inflate(R.layout.fragment_session_by_key,container,false);
     }
@@ -85,6 +87,7 @@ public class SessionByKeyFragment extends Fragment {
     }
 
     private void progressBarProcessing(){
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -106,10 +109,10 @@ public class SessionByKeyFragment extends Fragment {
                         else{
                             progressBar.post(()->{
                                 if(progressBar.getProgress() < 100)
-                                    progressBar.setProgress(progressBar.getProgress()+1);
+                                    progressBar.setProgress(progressBar.getProgress() + 1);
                             });
                         }
-                        android.os.SystemClock.sleep(100);
+                        android.os.SystemClock.sleep(sessionByKeyViewModel.getProgressBarDelay());
                     }
 
                 }
