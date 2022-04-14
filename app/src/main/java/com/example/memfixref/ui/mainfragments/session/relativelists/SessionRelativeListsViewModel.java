@@ -28,7 +28,7 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     private Cell pickedCellFromListByKey;
     private Cell pickedCellFromListByValue;
 
-    public Boolean SessionRunning = true;
+    public Boolean SessionRunning;
 
     private Session session;
     private int progressBarDelay;
@@ -48,20 +48,7 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
         progressBarDelay = Integer.parseInt(
                 sharedPreferences.getString(SettingsViewModel.RELATIVE_LISTS_SESSION_TIME,"15")) * 10;
 
-        MushIndexes mushIndexes = new MushIndexes();
-        //Два массива с перемешенными индексами для списков
-        int [] mushIndexesByKey = mushIndexes.getMushIndexes(kit.cells);
-        List<Cell> cellListByKey = new LinkedList<>();
-
-        int [] mushIndexesByValue = mushIndexes.getMushIndexes(kit.cells);
-        List<Cell> cellListByValue = new LinkedList<>();
-        for(int i = 0; i < kit.cells.size();i++){
-            cellListByKey.add(kit.cells.get(mushIndexesByKey[i]));
-            cellListByValue.add(kit.cells.get(mushIndexesByValue[i]));
-        }
-        adapterByKey = new RelativeListAdapter(application, R.layout.relative_list_item,cellListByKey,false);
-        adapterByValue = new RelativeListAdapter(application,R.layout.relative_list_item,cellListByValue,true);
-
+        SessionRunning = true;
     }
 
     public Kit getKit() {
@@ -100,6 +87,21 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
             return pickedCellFromListByKey.equals(pickedCellFromListByValue);
         }
         return false;
+    }
+    public void adaptersInit(){
+        MushIndexes mushIndexes = new MushIndexes();
+        //Два массива с перемешенными индексами для списков
+        int [] mushIndexesByKey = mushIndexes.getMushIndexes(kit.cells);
+        List<Cell> cellListByKey = new LinkedList<>();
+
+        int [] mushIndexesByValue = mushIndexes.getMushIndexes(kit.cells);
+        List<Cell> cellListByValue = new LinkedList<>();
+        for(int i = 0; i < kit.cells.size();i++){
+            cellListByKey.add(kit.cells.get(mushIndexesByKey[i]));
+            cellListByValue.add(kit.cells.get(mushIndexesByValue[i]));
+        }
+        adapterByKey = new RelativeListAdapter(getApplication(), R.layout.relative_list_item,cellListByKey,false);
+        adapterByValue = new RelativeListAdapter(getApplication(),R.layout.relative_list_item,cellListByValue,true);
     }
     //Удалить значения из адаптера
     public void removePickedCells(){

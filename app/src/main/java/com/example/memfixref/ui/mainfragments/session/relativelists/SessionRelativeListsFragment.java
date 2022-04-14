@@ -111,6 +111,7 @@ public class SessionRelativeListsFragment extends Fragment {
                     new ViewModelProvider(this,
                             new SessionRelativeListsViewModelFactory(getActivity().getApplication(),kit))
                             .get(SessionRelativeListsViewModel.class);
+            relativeListsViewModel.adaptersInit();
         }
 
         return inflater.inflate(R.layout.fragment_relative_lists_session,container,false);
@@ -123,6 +124,7 @@ public class SessionRelativeListsFragment extends Fragment {
         keyListView = view.findViewById(R.id.keyListView);
         valueListView = view.findViewById(R.id.valueListView);
         progressBar = view.findViewById(R.id.progressBarView);
+        progressBar.setProgress(0);
 
         keyListView.setAdapter(relativeListsViewModel.getAdapterByKey());
         valueListView.setAdapter(relativeListsViewModel.getAdapterByValue());
@@ -205,16 +207,11 @@ public class SessionRelativeListsFragment extends Fragment {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                relativeListsViewModel.setSessionRunning(true);
                 while (relativeListsViewModel.SessionRunning){
                     if (progressBar.getProgress() >= 100){
                         progressBar.post(()->{
-                            FragmentManager fragmentManager = getParentFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                                    .replace(R.id.main_session_fragment,
-                                            SessionResultFragment.newInstance(relativeListsViewModel.getSession()),"session_result")
-                                    .addToBackStack(null)
-                                    .commit();
+                            progressBar.setProgress(0);
                         });
                         relativeListsViewModel.setSessionRunning(false);
                     }
@@ -225,6 +222,14 @@ public class SessionRelativeListsFragment extends Fragment {
                     }
                     android.os.SystemClock.sleep(relativeListsViewModel.getProgressBarDelay());
                 }
+                FragmentManager fragmentManager = getParentFragmentManager();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        .replace(R.id.main_session_fragment,
+                                SessionResultFragment.newInstance(relativeListsViewModel.getSession()),"session_result")
+                        .addToBackStack(null)
+                        .commit();
+
             }
         };
         Thread thread = new Thread(runnable);
