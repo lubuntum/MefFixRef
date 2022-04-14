@@ -36,12 +36,6 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     public SessionRelativeListsViewModel(@NonNull Application application, Kit kit) {
         super(application);
         this.kit = kit;
-        session = new Session();
-        session.kitId = kit.id;
-        session.sessionType = SESSION_TYPE_RELATIVE_LISTS;
-        session.setKit(new MutableLiveData<>(kit));
-        DateFormat dateFormat = new DateFormat();
-        session.useDate = dateFormat.getCurrentDateWithFormat();
 
         SharedPreferences sharedPreferences = application.getSharedPreferences(
                 SettingsViewModel.SETTINGS_STORAGE, Context.MODE_PRIVATE);
@@ -121,5 +115,10 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
 
     public int getProgressBarDelay() {
         return progressBarDelay;
+    }
+
+    public void createSession(){
+        session = Session.createSession(SESSION_TYPE_RELATIVE_LISTS,kit.id);
+        session.setKit(new MutableLiveData<>(kit));
     }
 }

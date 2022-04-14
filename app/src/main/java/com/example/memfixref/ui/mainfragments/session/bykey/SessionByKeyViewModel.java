@@ -45,12 +45,6 @@ public class SessionByKeyViewModel extends AndroidViewModel {
         progressBarDelay = Integer.parseInt(
                 sharedPreferences.getString(SettingsViewModel.KEY_VALUE_SESSION_TIME,"15"))*10;
 
-        session = new Session();
-        session.kitId = kit.id;
-        session.sessionType = SESSION_TYPE_KEY;
-        session.setKit(new MutableLiveData<>(kit));
-        DateFormat dateFormat = new DateFormat();
-        session.useDate = dateFormat.getCurrentDateWithFormat();
 
         helper = new PromptHelper();
     }
@@ -80,5 +74,10 @@ public class SessionByKeyViewModel extends AndroidViewModel {
 
     public int getProgressBarDelay() {
         return progressBarDelay;
+    }
+    public void createSession(){
+        session = Session.createSession(SESSION_TYPE_KEY,kit.id);
+        session.setKit(new MutableLiveData<>(kit));
+
     }
 }

@@ -23,7 +23,7 @@ public class SessionResultViewModel extends AndroidViewModel {
         this.repo = Repository.getInstance(application);
         repo.insertSession(session);
 
-        this.session = session;
+        this.session = session;//remove
         this.kit = session.kit.getValue();
 
         this.sessionList = new MutableLiveData<>();

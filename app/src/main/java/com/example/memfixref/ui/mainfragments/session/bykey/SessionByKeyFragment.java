@@ -46,6 +46,7 @@ public class SessionByKeyFragment extends Fragment {
         sessionByKeyViewModel = new ViewModelProvider(this,
                 new SessionByKeyViewModelFactory(getActivity().getApplication(),sessionPrepareViewModel.getPickedKit().getValue())).
                 get(SessionByKeyViewModel.class);
+        sessionByKeyViewModel.createSession();
         return inflater.inflate(R.layout.fragment_session_by_key,container,false);
     }
 

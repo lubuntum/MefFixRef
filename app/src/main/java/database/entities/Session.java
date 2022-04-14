@@ -11,6 +11,8 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+import services.DateFormat;
+
 @Entity(tableName = "session",
         foreignKeys = @ForeignKey(entity = Kit.class, parentColumns = "id",childColumns = "kit_id",
         onDelete = ForeignKey.CASCADE,onUpdate = ForeignKey.CASCADE),
@@ -43,6 +45,15 @@ public class Session implements Serializable {
     @Ignore
     public MutableLiveData<Kit> kit;
 
+    public static Session createSession(String sessionType,long kitId){
+        Session session = new Session();
+        session.kitId = kitId;
+        session.sessionType = sessionType;
+        DateFormat dateFormat = new DateFormat();
+        session.useDate = dateFormat.getCurrentDateWithFormat();
+        return session;
+    }
+
     public MutableLiveData<Kit> getKit() {
         return kit;
     }
@@ -50,4 +61,5 @@ public class Session implements Serializable {
     public void setKit(MutableLiveData<Kit> kit) {
         this.kit = kit;
     }
+
 }

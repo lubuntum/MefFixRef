@@ -111,6 +111,7 @@ public class SessionRelativeListsFragment extends Fragment {
                     new ViewModelProvider(this,
                             new SessionRelativeListsViewModelFactory(getActivity().getApplication(),kit))
                             .get(SessionRelativeListsViewModel.class);
+            relativeListsViewModel.createSession();
             relativeListsViewModel.adaptersInit();
         }
 
