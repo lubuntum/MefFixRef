@@ -48,6 +48,7 @@
     <string name="toast_success_save_quote">"Your inspiration committed"</string>
     <string name="toast_wrong_picked_cells">Wrong relative</string>
     <string name="toast_success_set_session_time">Session time change successfully</string>
+    <string name="toast_no_picked_elements">Please pick something first</string>
 
     <string name="menu_settings">Settings</string>
     <string name="app_theme">Theme</string>
@@ -94,7 +95,7 @@
     <string name="kit_description_hint">Kit description</string>
     <string name="your_quote">Your quote</string>
     <string name="relative_lists">Relative lists</string>
-    <string name="give_up">Give up</string>
+    <string name="terminate">Terminate</string>
 
 
 </resources>

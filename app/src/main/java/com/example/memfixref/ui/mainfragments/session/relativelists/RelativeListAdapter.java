@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,5 +49,16 @@ public class RelativeListAdapter extends ArrayAdapter<Cell> {
             itemTextView.setText(cellList.get(position).getValue());
         else itemTextView.setText(cellList.get(position).getKey());
         return view;
+    }
+    public View getViewByPosition(int pos, ListView listView){
+        final int fistListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = fistListItemPosition + listView.getChildCount() - 1;
+        if (pos < fistListItemPosition || pos > lastListItemPosition){
+            return listView.getAdapter().getView(pos,null,listView);
+        }
+        else {
+            final int childIndex = pos - fistListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
     }
 }

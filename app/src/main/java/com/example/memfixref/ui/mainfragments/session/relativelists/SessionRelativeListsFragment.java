@@ -19,10 +19,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.session.endresult.SessionResultFragment;
 
+import database.entities.Cell;
 import database.entities.Kit;
 
 public class SessionRelativeListsFragment extends Fragment {
@@ -43,6 +45,9 @@ public class SessionRelativeListsFragment extends Fragment {
     private AdapterView.OnItemClickListener valueListViewListener;
     private View pickedViewByKey;
     private View pickedViewByValue;
+
+    private BootstrapButton endSessionBtn;
+    private BootstrapButton promptBtn;
 
     private BootstrapProgressBar progressBar;
 
@@ -124,6 +129,10 @@ public class SessionRelativeListsFragment extends Fragment {
 
         keyListView = view.findViewById(R.id.keyListView);
         valueListView = view.findViewById(R.id.valueListView);
+
+        endSessionBtn = view.findViewById(R.id.terminateBtn);
+        promptBtn = view.findViewById(R.id.hintBtn);
+
         progressBar = view.findViewById(R.id.progressBarView);
         progressBar.setProgress(0);
 
@@ -168,6 +177,7 @@ public class SessionRelativeListsFragment extends Fragment {
         keyListView.setOnItemClickListener(keyListViewListener);
         valueListView.setOnItemClickListener(valueListViewListener);
         progressBarProcessing();
+        sessionBtnInit();
     }
     private void drawPickedViews(View view, View pickedView){
         GradientDrawable gd = new GradientDrawable();
@@ -235,5 +245,32 @@ public class SessionRelativeListsFragment extends Fragment {
         };
         Thread thread = new Thread(runnable);
         thread.start();
+    }
+    private void sessionBtnInit(){
+        endSessionBtn.setOnClickListener((View v)->{
+            progressBar.setProgress(100);
+        });
+        promptBtn.setOnClickListener((View v)->{
+            Cell currentPickedCell = null;
+            if (relativeListsViewModel.getPickedCellFromListByKey() != null)
+                currentPickedCell = relativeListsViewModel.getPickedCellFromListByKey();
+            else if (relativeListsViewModel.getPickedCellFromListByValue() != null)
+                currentPickedCell = relativeListsViewModel.getPickedCellFromListByValue();
+
+            if (currentPickedCell != null){
+                relativeListsViewModel.getSession().prompt++;
+                for(int i = 0; i < relativeListsViewModel.getAdapterByKey().getCount();i++){
+                    if (currentPickedCell.equals(relativeListsViewModel.getAdapterByKey().getItem(i))){
+                        View tempView = relativeListsViewModel.getAdapterByKey().getViewByPosition(i,keyListView);
+                        tempView.setBackgroundColor(getResources().getColor(R.color.bootstrap_brand_info));
+                    }
+                    if (currentPickedCell.equals(relativeListsViewModel.getAdapterByValue().getItem(i))){
+                        View tempView = relativeListsViewModel.getAdapterByValue().getViewByPosition(i,valueListView);
+                        tempView.setBackgroundColor(getResources().getColor(R.color.bootstrap_brand_info));
+                    }
+                }
+            }
+            else Toast.makeText(getContext(),getResources().getString(R.string.toast_no_picked_elements),Toast.LENGTH_SHORT).show();
+        });
     }
 }
