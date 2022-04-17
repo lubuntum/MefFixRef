@@ -35,10 +35,9 @@ public class SessionSuccessPlotViewModel extends AndroidViewModel {
         this.repo = Repository.getInstance(application);
         this.kit = kit;
         this.sessionType = sessionType;
-        if (this.kit.sessionList == null)
-            this.kit.sessionList = new MutableLiveData<>();
+
+        this.kit.sessionList = new MutableLiveData<>();
         barChartData = new LinkedList<>();
-        //если входящий kit без прогруженных session
         repo.getAllSessionBySessionTypeByKitId(kit.id,sessionType,kit.sessionList);
 
 
