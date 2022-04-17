@@ -100,6 +100,9 @@ public class SessionByKeyFragment extends Fragment {
                         valueTextView.setText(
                                 sessionByKeyViewModel.getCurrentCell().value);
                     });
+                    keyEditText.post(()->{
+                       keyEditText.setText("");
+                    });
                     while (sessionByKeyViewModel.isSessionRunning){
                         if(progressBar.getProgress() >= 100){//next step
                             progressBar.post(()->{
@@ -121,6 +124,7 @@ public class SessionByKeyFragment extends Fragment {
                 //не передаю через viewmodel потому что текущая viewmodel сущ. в рамках данного фрагмента
                 //и далее к ней нельзя будет обратиться поскольку ее не будет, тут все изолировано
                 // ведь это единичная игровая сессия
+
                 FragmentManager fragmentManager = getParentFragmentManager();
 
                 //getParentFragmentManager().beginTransaction().remove(getCurrentFragment()).commit();
