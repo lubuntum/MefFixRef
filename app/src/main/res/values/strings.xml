@@ -96,6 +96,7 @@
     <string name="your_quote">Your quote</string>
     <string name="relative_lists">Relative lists</string>
     <string name="terminate">Terminate</string>
+    <string name="session_by_key_value"><![CDATA[Session by key & value]]></string>
 
 
 </resources>
