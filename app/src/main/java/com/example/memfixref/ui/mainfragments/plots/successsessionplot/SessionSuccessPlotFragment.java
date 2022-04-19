@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.anychart.APIlib;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.charts.Cartesian;
@@ -62,7 +63,10 @@ public class SessionSuccessPlotFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         AnyChartView anyChartView = view.findViewById(R.id.sessionSuccessPlot);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
+
         CircularProgressIndicator progressIndicator = view.findViewById(R.id.circleProgressBar);
         Observer<List<Session>> sessionListObserver = new Observer<List<Session>>() {
             @Override
@@ -137,4 +141,5 @@ public class SessionSuccessPlotFragment extends Fragment {
         sessionSuccessPlotViewModel.getKit().
                 sessionList.observe(getViewLifecycleOwner(),sessionListObserver);
     }
+
 }

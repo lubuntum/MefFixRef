@@ -23,6 +23,7 @@ import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
 import com.example.memfixref.ui.mainfragments.kit.network.UploadKitFragment;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
+import com.example.memfixref.ui.mainfragments.plots.totalstats.TotalStatsByKit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -80,6 +81,8 @@ public class KitFragment extends Fragment {
             kitNameEditText.setText(kitViewModel.getKit().kitName);
 
             kitViewModel.uploadCells();//загрузка содержимого kit
+            //работа с плавающими кнопками только при работе с УЖЕ созданными kit
+            floatBtnInit(view, savedInstanceState);
 
         }
         else {
@@ -134,20 +137,28 @@ public class KitFragment extends Fragment {
             CellDialogFragment cellDialogFragment = new CellDialogFragment();
             cellDialogFragment.show(fragmentManager,"fragment_add_cell");
         });
-        floatBtnInit(view, savedInstanceState);
+
     }
 
 
     public void floatBtnInit(View view, Bundle saveBundleInstance){
         FloatingActionButton uploadKitBtn = view.findViewById(R.id.uploadKitBtn);
-        FloatingActionButton showStatisticsBtn = view.findViewById(R.id.showKitStatisticsBtn);
+        FloatingActionButton showStatisticsBtn = view.findViewById(R.id.showKitStatBtn);
+        FragmentManager fragmentManager = getParentFragmentManager();
         uploadKitBtn.setOnClickListener((View v)->{
-            FragmentManager fragmentManager = getParentFragmentManager();
+
             fragmentManager.beginTransaction()
                     .replace(R.id.changeKitMainFragment,
                             UploadKitFragment.newInstance(kitViewModel.getKit()),
                             "upload_kit_fragment")
                     .addToBackStack("upload_kit")
+                    .commit();
+        });
+        showStatisticsBtn.setOnClickListener((View v)->{
+            fragmentManager.beginTransaction().replace(R.id.changeKitMainFragment,
+                    TotalStatsByKit.newInstance(kitViewModel.getKit()),
+                    "total_stats_by_kit_fragment")
+                    .addToBackStack("total_stats")
                     .commit();
         });
     }
