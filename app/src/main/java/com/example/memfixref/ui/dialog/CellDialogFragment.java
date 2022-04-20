@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
@@ -23,6 +25,7 @@ public class CellDialogFragment extends DialogFragment {
     private EditText cellValueEditText;
     private BootstrapButton confirmBtn;
     private BootstrapButton removeCellBtn;
+    private ImageButton addImageBtn;
 
     private Cell cell;
 
@@ -47,6 +50,7 @@ public class CellDialogFragment extends DialogFragment {
         cellValueEditText = view.findViewById(R.id.cellValue);
         confirmBtn = view.findViewById(R.id.confirmBtn);
         removeCellBtn = view.findViewById(R.id.removeCellBtn);
+        addImageBtn = view.findViewById(R.id.addImageBtn);
 
         if (getArguments() != null && getArguments().containsKey("index")){
             int index = getArguments().getInt("index");
@@ -54,6 +58,10 @@ public class CellDialogFragment extends DialogFragment {
             cellKeyEditText.setText(cell.getKey());
             cellValueEditText.setText(cell.getValue());
         }
+
+        addImageBtn.setOnClickListener((View v)->{
+            Toast.makeText(getContext(),"Show Gallery",Toast.LENGTH_SHORT).show();
+        });
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override

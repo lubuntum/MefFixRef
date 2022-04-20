@@ -45,14 +45,16 @@
         android:layout_height="1dp"
         layout="@layout/thin_gray_line"
         android:layout_marginTop="10dp"/>
-    <ImageButton
-        android:id="@+id/addImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:src="@drawable/ic_add_image"
-        android:background="?android:attr/selectableItemBackground"/>
+
+        <ImageButton
+            android:id="@+id/addImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_add_image" />
+
+
 
 
 
