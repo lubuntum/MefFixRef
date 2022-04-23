@@ -1,5 +1,8 @@
 package com.example.memfixref.ui.dialog;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -26,6 +35,7 @@ public class CellDialogFragment extends DialogFragment {
     private BootstrapButton confirmBtn;
     private BootstrapButton removeCellBtn;
     private ImageButton addImageBtn;
+    private ActivityResultLauncher<Intent> loadImageResultLauncher;
 
     private Cell cell;
 
@@ -36,6 +46,21 @@ public class CellDialogFragment extends DialogFragment {
         CellDialogFragment fragment = new CellDialogFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        //Обработка выбора изображения
+        loadImageResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        Toast.makeText(getContext(),"Image saved",Toast.LENGTH_SHORT).show();
+                        // конвертнуть изображение и сохранить его + путь в базу + отобразить в списке
+                    }
+                }
+        );
     }
 
     @Override
@@ -61,6 +86,11 @@ public class CellDialogFragment extends DialogFragment {
 
         addImageBtn.setOnClickListener((View v)->{
             Toast.makeText(getContext(),"Show Gallery",Toast.LENGTH_SHORT).show();
+            //Вызвать галеррею
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            loadImageResultLauncher.launch(intent);
         });
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {

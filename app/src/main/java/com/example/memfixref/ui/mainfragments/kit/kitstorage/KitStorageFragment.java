@@ -74,7 +74,7 @@ public class KitStorageFragment extends Fragment {
                 Kit kit = kitStorageViewModel.getKitListLive().getValue().get(i);//Получаем кликнутый обьект
                 Intent intent = new Intent(getContext(),ChangeKitActivity.class);
                 intent.putExtra("kit",kit);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 getActivity().startActivity(intent);
             }
         });
