@@ -49,6 +49,8 @@
     <string name="toast_wrong_picked_cells">Wrong relative</string>
     <string name="toast_success_set_session_time">Session time change successfully</string>
     <string name="toast_no_picked_elements">Please pick something first</string>
+    <string name="toast_cant_find_image">Can\'t find image, problems occurred</string>
+    <string name="toast_success_image_import">Image import success</string>
 
     <string name="menu_settings">Settings</string>
     <string name="app_theme">Theme</string>

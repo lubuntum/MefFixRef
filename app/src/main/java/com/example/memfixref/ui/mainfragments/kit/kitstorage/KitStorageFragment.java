@@ -41,7 +41,6 @@ public class KitStorageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ChangeKitActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 getActivity().startActivity(intent);
             }
         });

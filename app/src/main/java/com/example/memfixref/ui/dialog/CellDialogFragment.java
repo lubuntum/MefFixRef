@@ -3,21 +3,20 @@ package com.example.memfixref.ui.dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,7 +26,10 @@ import com.example.memfixref.ui.mainfragments.kit.onekitdata.KitViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
+
 import database.entities.Cell;
+import services.BitmapScaler;
 
 public class CellDialogFragment extends DialogFragment {
     private EditText cellKeyEditText;
@@ -56,7 +58,20 @@ public class CellDialogFragment extends DialogFragment {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if(result.getResultCode() == Activity.RESULT_OK){
-                        Toast.makeText(getContext(),"Image saved",Toast.LENGTH_SHORT).show();
+                        try {
+                            Uri imageUri = result.getData().getData();
+                            Bitmap image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+                            Bitmap scaleImage = BitmapScaler.scaleToFitWidth(image,250);
+
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            scaleImage.compress(Bitmap.CompressFormat.PNG,100,stream);
+                            byte[] imageByteArray = stream.toByteArray();
+                            cell.image = imageByteArray;
+                            Toast.makeText(context, getResources().getString(R.string.toast_success_image_import), Toast.LENGTH_SHORT).show();
+                        }
+                        catch (Exception e){
+                            Toast.makeText(context, getResources().getString(R.string.toast_cant_find_image), Toast.LENGTH_SHORT).show();
+                        }
                         // конвертнуть изображение и сохранить его + путь в базу + отобразить в списке
                     }
                 }
@@ -77,11 +92,17 @@ public class CellDialogFragment extends DialogFragment {
         removeCellBtn = view.findViewById(R.id.removeCellBtn);
         addImageBtn = view.findViewById(R.id.addImageBtn);
 
+        //Если редактируется уже существующая
         if (getArguments() != null && getArguments().containsKey("index")){
             int index = getArguments().getInt("index");
             cell = kitViewModel.getKit().cells.get(index);
             cellKeyEditText.setText(cell.getKey());
             cellValueEditText.setText(cell.getValue());
+        }
+        else {
+            //Если создается новая запись
+            cell = new Cell("key","value");
+            kitViewModel.getKit().cells.add(cell);
         }
 
         addImageBtn.setOnClickListener((View v)->{
@@ -96,15 +117,10 @@ public class CellDialogFragment extends DialogFragment {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cell == null) {
-                    kitViewModel.getKit().cells.add(new Cell(cellKeyEditText.getText().toString(),
-                            cellValueEditText.getText().toString()));//мб обновить адаптер нужно
-                }
-                //если редактируем текущий
-                else {
-                    cell.key = cellKeyEditText.getText().toString();
-                    cell.value = cellValueEditText.getText().toString();
-                }
+
+                cell.key = cellKeyEditText.getText().toString();
+                cell.value = cellValueEditText.getText().toString();
+
                 kitViewModel.getArrayAdapter().notifyDataSetChanged();
                 dismiss();
             }

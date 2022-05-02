@@ -1,6 +1,7 @@
 package com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +32,19 @@ public class CellAdapter extends ArrayAdapter<Cell> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if (convertView == null){
-            convertView = inflater.inflate(layout,parent,false);
-        }
+
+        convertView = inflater.inflate(layout,parent,false);
+
 
         TextView textView = convertView.findViewById(R.id.cellItemTextView);// just text of the key value
         ImageView imageView = convertView.findViewById(R.id.cellItemImage);
         Cell cell = cellList.get(position);
-
         String itemText = cell.getKey();
+
         textView.setText(itemText);
+        if (cell.image != null){
+            imageView.setImageBitmap(BitmapFactory.decodeByteArray(cell.image, 0, cell.image.length));
+        }
 
         return convertView;
     }
