@@ -15,14 +15,22 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_image" />
 
-    <TextView
-        style="@style/app_text"
-        android:id="@+id/cellItemTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:text="Key"
-        android:textSize="20dp"/>
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <TextView
+            style="@style/app_text"
+            android:id="@+id/cellItemTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="Key"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
 
 </LinearLayout>
