@@ -82,7 +82,7 @@ public class KitStorageFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 KitDialogFragment kitDialogFragment = KitDialogFragment.newInstance(i);
                 kitDialogFragment.show(getChildFragmentManager(),"remove_kit_" + i);
-                return false;
+                return true;
             }
         });
     }
