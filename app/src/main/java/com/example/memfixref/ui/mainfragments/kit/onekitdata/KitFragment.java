@@ -1,5 +1,6 @@
 package com.example.memfixref.ui.mainfragments.kit.onekitdata;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,14 +27,15 @@ import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter
 import com.example.memfixref.ui.mainfragments.plots.totalstats.TotalStatsByKit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.List;
 
 import database.entities.Cell;
 import database.entities.Kit;
 
 public class KitFragment extends Fragment {
-    ListView cellListView;
-    KitViewModel kitViewModel;
+    private ListView cellListView;
+    private KitViewModel kitViewModel;
 
     public static KitFragment newInstance(Kit kit) {
         Bundle args = new Bundle();
@@ -126,9 +128,17 @@ public class KitFragment extends Fragment {
         cellListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(), "Play record", Toast.LENGTH_SHORT).show();
+                playRecord(i);
+                return true;
+            }
+        });
+
+        cellListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CellDialogFragment cellDialogFragment = CellDialogFragment.newInstance(i);
                 cellDialogFragment.show(getChildFragmentManager(),"fragment_edit_cell");
-                return false;
             }
         });
 
@@ -161,6 +171,19 @@ public class KitFragment extends Fragment {
                     .addToBackStack("total_stats")
                     .commit();
         });
+    }
+    public void playRecord(int cellIndex){
+        String path = kitViewModel.getCellList().getValue().get(cellIndex).recordPath;
+        if (path != null){
+            MediaPlayer mPlayer = new MediaPlayer();
+            try {
+                mPlayer.setDataSource(path);
+                mPlayer.prepare();
+                mPlayer.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
