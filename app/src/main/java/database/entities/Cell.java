@@ -31,8 +31,11 @@ public class Cell implements Serializable {
     public int correct;
     @ColumnInfo
     public int incorrect;
+
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public byte[] image;
+    @ColumnInfo(name = "record_path")
+    public String recordPath;
 
     public String getKey() {
         return key;

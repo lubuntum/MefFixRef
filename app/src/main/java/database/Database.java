@@ -16,7 +16,7 @@ import database.entities.Kit;
 import database.entities.Session;
 
 
-@androidx.room.Database(entities = {Kit.class, Cell.class, Session.class},version = 1)
+@androidx.room.Database(entities = {Kit.class, Cell.class, Session.class},version = 2)
 public abstract class Database extends RoomDatabase {
     private static final String DATABASE_NAME = "AppDatabase";
     public abstract KitDao kitDao();
@@ -37,8 +37,6 @@ public abstract class Database extends RoomDatabase {
                     "ADD COLUMN prompt INTEGER DEFAULT 0 NOT NULL;");
             database.execSQL("ALTER TABLE session " +
                     "ADD COLUMN total_time INTEGER DEFAULT 0 NOT NULL;");
-
-
         }
     };
     /*
@@ -54,14 +52,22 @@ public abstract class Database extends RoomDatabase {
         }
     };
      */
+    public static final Migration MIGRATION_1_2 = new Migration(1,2) {
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase database) {
+        //database.beginTransaction();
+        database.execSQL("ALTER TABLE cell " +
+                "ADD COLUMN record_path TEXT;");
 
-
+        //database.endTransaction();
+    }
+};
     public static Database getInstance(Context context){
         if(INSTANCE == null){
             synchronized (Database.class){
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context,Database.class,DATABASE_NAME)
-                            //.addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_1_2)
                             .build();
                 }
             }
