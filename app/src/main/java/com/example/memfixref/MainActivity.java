@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.memfixref.ui.autorisation.AuthorisationFragment;
 import com.example.memfixref.ui.mainfragments.settings.SettingsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,new String[]{RECORD_AUDIO, WRITE_EXTERNAL_STORAGE},REQUEST_AUDIO_PERMISSION_CODE);
         }
+
         //установка "шапки"
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         settingsPreferences = getSharedPreferences(
                 SettingsViewModel.SETTINGS_STORAGE,
                 Context.MODE_PRIVATE);
+
+        //вставить проверка есть ли ник (он будет уникальным)
+        if (settingsPreferences.getString(SettingsViewModel.USERNAME,"").equals("")) {
+            AuthorisationFragment authorisation = AuthorisationFragment.getInstance();
+            //authorisation.setCancelable(false);
+            authorisation.show(getSupportFragmentManager(), "authorisation_dialog");
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);//основой контейнер
         NavigationView navigationView = findViewById(R.id.nav_view);//боковая панель
