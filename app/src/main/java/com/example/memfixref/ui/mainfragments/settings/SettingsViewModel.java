@@ -19,6 +19,9 @@ public class SettingsViewModel extends AndroidViewModel {
 
     public static final String USERNAME = "Username";
     public static final String QUOTE = "Userquote";
+    public static final String EMAIL = "UserEmail";
+
+    public static final String FAVORITE_TAGS = "Tags";
 
     public static final String KEY_VALUE_SESSION_TIME = "Key_value_session_time";
     public static final String RELATIVE_LISTS_SESSION_TIME = "Relative_lists_session_time";
