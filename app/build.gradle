@@ -29,7 +29,13 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list', 'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows', 'src\\main\\res\\layouts\\change_kit', 'src\\main\\res\\layouts\\kit_list', 'src\\main\\res\\layouts\\progress', 'src\\main\\res\\layouts\\session', 'src\\main\\res\\layouts\\ui_handmade_view', 'src\\main\\res\\layouts\\plots', 'src\\main\\res\\layouts\\network'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\options_list',
+                        'src\\main\\res\\layouts\\options_list', 'src\\main\\res\\layouts\\dialog_windows',
+                        'src\\main\\res\\layouts\\change_kit', 'src\\main\\res\\layouts\\kit_list',
+                        'src\\main\\res\\layouts\\progress', 'src\\main\\res\\layouts\\session',
+                        'src\\main\\res\\layouts\\ui_handmade_view', 'src\\main\\res\\layouts\\plots',
+                        'src\\main\\res\\layouts\\network', 'src\\main\\res\\layouts\\autorisation\\layout',
+                        'src\\main\\res\\layouts\\autorisation', 'src\\main\\res\\layouts\\authorisation'
             }
         }
     }
