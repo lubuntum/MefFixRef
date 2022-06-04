@@ -16,8 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.anychart.core.annotations.Line;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
+import com.example.memfixref.ui.mainfragments.session.imagebyvalue.ImageByValueFragment;
 import com.example.memfixref.ui.mainfragments.session.relativelists.SessionRelativeListsFragment;
 import com.example.memfixref.ui.mainfragments.session.sessionselectkit.SessionSelectKitFragment;
 import com.example.memfixref.ui.mainfragments.session.bykey.SessionByKeyFragment;
@@ -49,31 +51,48 @@ public class SessionPrepareFragment extends Fragment {
         LinearLayout sessionByKeyBtn = view.findViewById(R.id.sessionByKeyContainer);
         LinearLayout sessionByValueBtn = view.findViewById(R.id.sessionByValueContainer);
         LinearLayout sessionByRelativeListsBtn = view.findViewById(R.id.sessionByRelativeListsContainer);
+        LinearLayout sessionByImageValueBtn = view.findViewById(R.id.sessionImageByValue);
+
         LinearLayout chooseKitBtn = view.findViewById(R.id.chooseKitContainer);
 
         TextView kitNameTextView = view.findViewById(R.id.kitNameTextView);
         ListView listView = view.findViewById(R.id.currentCellsListView);
 
+        sessionByImageValueBtn.setOnClickListener((View container)->{
+            if (!isKitEmpty()) {
+                if (sessionViewModel.getPickedKit().getValue().isCellsWithImage()) {
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction().setReorderingAllowed(true).
+                            setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
+                            replace(R.id.main_session_fragment,
+                                    ImageByValueFragment.newInstance(
+                                            sessionViewModel.getPickedKit().getValue()),"session_prepare_fragment").
+                            addToBackStack("session_prepare_trans").
+                            commit();
+
+                }
+                else Toast.makeText(getContext(),
+                        getResources().getString(R.string.toast_empty_image),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
         sessionByKeyBtn.setOnClickListener((View container)->{
             //Тут так же создать Session сущность для статистики если разрешено
-            if (sessionViewModel.getPickedKit().getValue() == null){
-                Toast.makeText(getContext(),
-                        getResources().getString(R.string.empty_kit),
-                        Toast.LENGTH_SHORT).show();
-            }
+
             //Kit передается внутри фрагмента используя текущую ViewModel зависимый фрагмент исправить
-            else {
+            if (!isKitEmpty()) {
                 Toast.makeText(getContext(), "By key", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getParentFragmentManager();
 
                 fragmentManager.beginTransaction().setReorderingAllowed(true).
                         setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
                         replace(R.id.main_session_fragment,
-                                SessionByKeyFragment.newInstance(),"session_prepare_fragment").
+                                SessionByKeyFragment.newInstance(), "session_prepare_fragment").
                         addToBackStack("session_prepare_trans").
                         commit();
-
             }
+
+
 
         });
         sessionByValueBtn.setOnClickListener((View container)->{
@@ -82,13 +101,9 @@ public class SessionPrepareFragment extends Fragment {
 
 
         sessionByRelativeListsBtn.setOnClickListener((View container)->{
-            if (sessionViewModel.getPickedKit().getValue() == null){
-                Toast.makeText(getContext(),
-                        getResources().getString(R.string.empty_kit),
-                        Toast.LENGTH_SHORT).show();
-            }
+
             //kit передается с newInstance, независимый фрагмент новая версия
-            else {
+            if (!isKitEmpty()) {
                 FragmentManager fragmentManager = getParentFragmentManager();
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
@@ -98,6 +113,7 @@ public class SessionPrepareFragment extends Fragment {
                         .addToBackStack("session_prepare_trans")
                         .commit();
             }
+
         });
 
         chooseKitBtn.setOnClickListener((View container)->{
@@ -126,5 +142,15 @@ public class SessionPrepareFragment extends Fragment {
         };
         sessionViewModel.getPickedKit().observe(getViewLifecycleOwner(),kitObserver);
         sessionViewModel.getCellList().observe(getViewLifecycleOwner(),cellListObserver);
+    }
+
+    public boolean isKitEmpty(){
+        if (sessionViewModel.getPickedKit().getValue() == null){
+            Toast.makeText(getContext(),
+                    getResources().getString(R.string.empty_kit),
+                    Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 }

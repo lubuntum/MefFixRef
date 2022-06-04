@@ -50,5 +50,13 @@ public class Kit implements Serializable {
     //Новый формат удобнее, лучше и по SOLID
     //@Ignore
     //public MutableLiveData<List<Cell>> cellsList;
+    public boolean isCellsWithImage(){
+        if(!cells.isEmpty()){
+            for (Cell cell: cells)
+                if (cell.image == null || cell.image.length == 0) return false;
+        }
+        else return false;
+        return true;
+    }
 
 }
