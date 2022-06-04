@@ -20,76 +20,107 @@
             android:text="@string/session_container_name_text_view"
             android:layout_marginTop="15dp"
             android:textColor="@color/bootstrap_brand_info"/>
-
-        <LinearLayout
-            android:id="@+id/sessionByKeyContainer"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="?android:attr/selectableItemBackground"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_key_2"/>
-            <TextView
-                style="@style/app_text"
-                android:paddingTop="3dp"
-                android:layout_width="wrap_content"
+            android:layout_height="175dp">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/session_by_key"
-                android:layout_marginStart="10dp" />
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/sessionByKeyContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_key_2"/>
+                    <TextView
+                        style="@style/app_text"
+                        android:paddingTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/session_by_key"
+                        android:layout_marginStart="10dp" />
 
-        <include layout="@layout/thin_gray_line"/>
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/sessionByValueContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="?android:attr/selectableItemBackground"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_data"/>
-            <TextView
-                style="@style/app_text"
-                android:paddingTop="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/session_by_value"
-                android:layout_marginStart="10dp" />
-        </LinearLayout>
-        <include layout="@layout/thin_gray_line"  />
+                <include layout="@layout/thin_gray_line"/>
 
-        <LinearLayout
-            android:id="@+id/sessionByRelativeListsContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="?android:attr/selectableItemBackground"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_image"/>
-            <TextView
-                style="@style/app_text"
-                android:paddingTop="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/relative_lists"
-                android:layout_marginStart="10dp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/sessionByValueContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_data"/>
+                    <TextView
+                        style="@style/app_text"
+                        android:paddingTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/session_by_value"
+                        android:layout_marginStart="10dp" />
+                </LinearLayout>
+                <include layout="@layout/thin_gray_line"  />
+
+                <LinearLayout
+                    android:id="@+id/sessionByRelativeListsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_list"/>
+                    <TextView
+                        style="@style/app_text"
+                        android:paddingTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/relative_lists"
+                        android:layout_marginStart="10dp" />
+                </LinearLayout>
+                <include layout="@layout/thin_gray_line"/>
+                <LinearLayout
+                    android:id="@+id/sessionImageByValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_image_filter"/>
+                    <TextView
+                        style="@style/app_text"
+                        android:paddingTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guess value by image"
+                        android:layout_marginStart="10dp" />
+                </LinearLayout>
+                <include layout="@layout/thin_gray_line"/>
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
     <include layout="@layout/bold_gray_line"
         android:id="@+id/sessionContainerBottomSep"

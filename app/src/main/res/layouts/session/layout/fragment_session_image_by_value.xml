@@ -15,6 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
+            android:id="@+id/cellImage"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:adjustViewBounds="true"
@@ -32,6 +33,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
+            android:id="@+id/cellTextView"
             style="@style/app_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -48,17 +50,19 @@
             android:gravity="center"
             android:layout_marginTop="5dp">
             <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/correctBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Correct"
+                android:text="@string/correct"
                 app:bootstrapBrand="success"
                 app:bootstrapSize="md"
                 app:roundedCorners="true"/>
             <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/wrongBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="Wrong"
+                android:text="@string/wrong"
                 app:bootstrapBrand="danger"
                 app:bootstrapSize="md"
                 app:roundedCorners="true"/>
