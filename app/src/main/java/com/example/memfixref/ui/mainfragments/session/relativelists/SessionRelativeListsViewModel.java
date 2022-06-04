@@ -85,10 +85,10 @@ public class SessionRelativeListsViewModel extends AndroidViewModel {
     public void adaptersInit(){
         MushIndexes mushIndexes = new MushIndexes();
         //Два массива с перемешенными индексами для списков
-        int [] mushIndexesByKey = mushIndexes.getMushIndexes(kit.cells);
+        int [] mushIndexesByKey = mushIndexes.getMushIndexes(kit.cells.size());
         List<Cell> cellListByKey = new LinkedList<>();
 
-        int [] mushIndexesByValue = mushIndexes.getMushIndexes(kit.cells);
+        int [] mushIndexesByValue = mushIndexes.getMushIndexes(kit.cells.size());
         List<Cell> cellListByValue = new LinkedList<>();
         for(int i = 0; i < kit.cells.size();i++){
             cellListByKey.add(kit.cells.get(mushIndexesByKey[i]));

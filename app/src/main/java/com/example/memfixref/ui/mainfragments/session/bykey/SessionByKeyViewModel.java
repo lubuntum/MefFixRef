@@ -37,7 +37,7 @@ public class SessionByKeyViewModel extends AndroidViewModel {
         super(app);
         this.kit = kit;
         MushIndexes mushIndexes = new MushIndexes();
-        cellIndexes = mushIndexes.getMushIndexes(kit.cells);
+        cellIndexes = mushIndexes.getMushIndexes(kit.cells.size());
 
         SharedPreferences sharedPreferences = app.getSharedPreferences(
                 SettingsViewModel.SETTINGS_STORAGE,
