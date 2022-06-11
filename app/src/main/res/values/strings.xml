@@ -112,6 +112,11 @@
     <string name="authorisation">Authorisation</string>
     <string name="correct">Correct</string>
     <string name="wrong">Wrong</string>
+    <string name="later">Later</string>
 
-
+    <string name="registration_failed">Some problem occurs, please try again</string>
+    <string name="registration_success">Account successfully registered</string>
+    <string name="registration_not_unique">Probably login or email doesn\'t unique</string>
+    <string name="registration_data_is_not_valid">Wrong format</string>
+    <string name="create_account_later">Create account later</string>
 </resources>
