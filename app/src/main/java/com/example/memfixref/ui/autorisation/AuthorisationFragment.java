@@ -16,11 +16,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.anychart.charts.Resource;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
+
+import database.entities.Message;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AuthorisationFragment extends DialogFragment {
     public static AuthorisationFragment getInstance(){
@@ -52,21 +58,59 @@ public class AuthorisationFragment extends DialogFragment {
         EditText userNameEditText = view.findViewById(R.id.nameEditText);
         EditText emailEditText = view.findViewById(R.id.emailEditText);
         BootstrapButton submitBtn = view.findViewById(R.id.authorisationBtn);
+        BootstrapButton laterBtn = view.findViewById(R.id.laterBtn);
         CheckBox userDataCheckBox = view.findViewById(R.id.userDataCheckBox);
 
         EditText tagsEditText = view.findViewById(R.id.tagsEditText);
         TextView tagsTextView = view.findViewById(R.id.tagsTextView);
         BootstrapButton undoBtn = view.findViewById(R.id.undoBtn);
 
+        laterBtn.setOnClickListener(view1->{
+            Toast.makeText(getContext(), getResources().getString(R.string.create_account_later), Toast.LENGTH_LONG).show();
+            dismiss();
+        });
+
         submitBtn.setOnClickListener(view1 -> {
-            authorisationViewModel.setName(userNameEditText.getText().toString());
-            authorisationViewModel.setEmail(emailEditText.getText().toString());
-            authorisationViewModel.setTags(tagsTextView.getText().toString());
-            authorisationViewModel.setDataUsagePermission(userDataCheckBox.isChecked());
-            Toast.makeText(getContext(), getResources().getString(R.string.toast_success_authorisation), Toast.LENGTH_SHORT).show();
+            if (authorisationViewModel.createUser(userNameEditText.getText().toString(), emailEditText.getText().toString())) {
+
+                authorisationViewModel.getApiServices().userRegistration(authorisationViewModel.getUser()).enqueue(new Callback<Message>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Message> call, Response<Message> response) {
+                        authorisationViewModel.getRegistrationLiveData()
+                                .postValue(response.body().message);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Message> call, Throwable t) {
+                        authorisationViewModel.getRegistrationLiveData()
+                                .postValue(getContext().getResources().getString(R.string.registration_failed));
+                    }
+                });
+            }
+            else Toast.makeText(getContext(), getResources().getString(R.string.registration_data_is_not_valid), Toast.LENGTH_SHORT).show();
+
         });
 
         tagsViewInit(tagsEditText,tagsTextView, undoBtn);
+
+        Observer<String> registrationObserver = new Observer<String>() {
+            @Override
+            public void onChanged(String info) {
+                if (info.equals("ok")){
+                    Toast.makeText(getContext(), getResources().getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+
+                    authorisationViewModel.setName(userNameEditText.getText().toString());
+                    authorisationViewModel.setEmail(emailEditText.getText().toString());
+                    authorisationViewModel.setTags(tagsTextView.getText().toString());
+                    authorisationViewModel.setDataUsagePermission(userDataCheckBox.isChecked());
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_success_authorisation), Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+                else Toast.makeText(getContext(), getResources().getString(R.string.registration_not_unique), Toast.LENGTH_LONG).show();
+            }
+        };
+        authorisationViewModel.getRegistrationLiveData().observe(getViewLifecycleOwner(),registrationObserver);
+
 
 
     }

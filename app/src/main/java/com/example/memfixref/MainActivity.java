@@ -55,11 +55,17 @@ public class MainActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
 
         //вставить проверка есть ли ник (он будет уникальным)
+        AuthorisationFragment authorisation = AuthorisationFragment.getInstance();
+        authorisation.setCancelable(false);
+        authorisation.show(getSupportFragmentManager(), "authorisation_dialog");
+        /*
         if (settingsPreferences.getString(SettingsViewModel.USERNAME,"").equals("")) {
             AuthorisationFragment authorisation = AuthorisationFragment.getInstance();
             //authorisation.setCancelable(false);
             authorisation.show(getSupportFragmentManager(), "authorisation_dialog");
         }
+
+         */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);//основой контейнер
         NavigationView navigationView = findViewById(R.id.nav_view);//боковая панель
