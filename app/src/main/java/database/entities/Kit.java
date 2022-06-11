@@ -7,6 +7,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class Kit implements Serializable {
     }
     @PrimaryKey(autoGenerate = true)
     public long id;
+    @SerializedName("kit_name")
     @ColumnInfo(name = "kit_name")
     public String kitName;
     @ColumnInfo(name = "last_use")
@@ -39,6 +42,7 @@ public class Kit implements Serializable {
     public float frequencyUse;//насколько часто используется данный покет
     @ColumnInfo(name = "rating")//data from server only
     public float Rating;
+    @SerializedName("creation_date")
     @ColumnInfo(name = "creation_date")
     public String creationDate;
     //Старый формат используется в onekitdata.KitViewModel

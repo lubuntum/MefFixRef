@@ -6,6 +6,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 @Entity(tableName = "cell",
@@ -21,8 +23,10 @@ public class Cell implements Serializable {
     public long id;
     @ColumnInfo(name = "kit_id")
     public long kitId;
+    @SerializedName("key")
     @ColumnInfo
     public String key;
+    @SerializedName("value")
     @ColumnInfo
     public String value;
     @ColumnInfo
