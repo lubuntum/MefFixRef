@@ -31,6 +31,11 @@ public class Kit implements Serializable {
         this.kitName = kitName;
         this.cells = cells;
     }
+    @Ignore
+    public Kit(String kitName, float rating){
+        this.kitName = kitName;
+        this.Rating = rating;
+    }
     @PrimaryKey(autoGenerate = true)
     public long id;
     @SerializedName("kit_name")
@@ -42,11 +47,15 @@ public class Kit implements Serializable {
     public float frequencyUse;//насколько часто используется данный покет
     @ColumnInfo(name = "rating")//data from server only
     public float Rating;
+    @SerializedName("description")
+    @Ignore
+    public String description;
     @SerializedName("creation_date")
     @ColumnInfo(name = "creation_date")
     public String creationDate;
     //Старый формат используется в onekitdata.KitViewModel
     //Из за того что вначале использовал просто список без Mutable придется оставить
+    @SerializedName("cells")
     @Ignore
     public List<Cell> cells;
     @Ignore
