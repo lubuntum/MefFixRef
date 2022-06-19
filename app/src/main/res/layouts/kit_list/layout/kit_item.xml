@@ -39,10 +39,11 @@
             android:id="@+id/totalUsageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/total"
+            android:text="@string/total_use"
             android:layout_marginStart="5dp"
             android:textSize="15sp"
             android:textColor="@color/bootstrap_gray_light"/>
+
 
     </LinearLayout>
 
