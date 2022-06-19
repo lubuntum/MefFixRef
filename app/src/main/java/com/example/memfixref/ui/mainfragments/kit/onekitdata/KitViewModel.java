@@ -44,8 +44,11 @@ public class KitViewModel extends AndroidViewModel {
 
     public void setKit(Kit kit) {
         this.kit = kit;
-        if(kit.cells == null)
+        if(kit.cells == null) {
             kit.cells = new LinkedList<>();
+            //uploadCells();
+        }
+        else cellList.setValue(kit.cells);
     }
 
     public void uploadCells(){
@@ -65,8 +68,12 @@ public class KitViewModel extends AndroidViewModel {
             if (kit != null) {
                 DateFormat dateFormat = new DateFormat();
                 kit.creationDate = dateFormat.getCurrentDateWithFormat();
+                if (kit.id != 0 ){
+                    repo.updateKitWithCells(kit);
+                }
+                else
+                    repo.insertKitWithCells(kit);
 
-                repo.insertKitWithCells(kit);
             }
         }
         catch (Exception e){

@@ -38,9 +38,9 @@ public abstract class CellDao {
         }
     }
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     public abstract int updateKit(Kit kit);//каскадное должно быть
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     public abstract void  updateCells(List<Cell> cells);
     @Transaction
     public void update(Kit kit,List<Cell> cells){
