@@ -1,4 +1,4 @@
-package com.example.memfixref.ui.mainfragments.kit.network;
+package com.example.memfixref.ui.mainfragments.kit.network.upload;
 
 import android.app.Application;
 
