@@ -138,7 +138,7 @@ public class AuthorisationFragment extends DialogFragment {
 
                 String tagsStr = tagsEditText.getText().toString();
                 if(tagsStr.matches("[A-Za-zА-яа-я]* ") && tagsStr.length() > 2){
-                    tagsStr = "#" + tagsStr.substring(0,1).toUpperCase() +
+                    tagsStr = tagsStr.substring(0,1).toUpperCase() +
                             tagsStr.substring(1,tagsStr.length()-1);
                     if (tagsTextView.getText().toString().length() == 0){
                         String finalTagsStr = tagsStr;
