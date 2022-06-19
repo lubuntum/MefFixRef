@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.memfixref.ChangeKitActivity;
@@ -23,6 +24,7 @@ import com.example.memfixref.NetworkSearchActivity;
 import com.example.memfixref.R;
 import com.example.memfixref.SessionActivity;
 import com.example.memfixref.ui.mainfragments.kit.kitlist.KitAdapter;
+import com.example.memfixref.ui.mainfragments.kit.network.kitlistbytags.KitListByTagsFragment;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
 import com.example.memfixref.ui.mainfragments.settings.SettingsViewModel;
 import com.example.memfixref.ui.optionslist.OptionsListAdapter;
@@ -95,7 +97,7 @@ public class HomeFragment extends Fragment {
 
     }
     public void preferencesListViewInit(View view, Bundle SavedInstanceState){
-        ListView kitByPreferencesListView = view.findViewById(R.id.preferencesListView);
+        //ListView kitByPreferencesListView = view.findViewById(R.id.preferencesListView);
         TextView frequentlyUsedTextView = view.findViewById(R.id.frequentlyUsedTextView);
         APIKitServices apiKitServices = WebRepository
                 .getRetrofitInstanceWithConverter(
@@ -116,10 +118,17 @@ public class HomeFragment extends Fragment {
                     mHandler.post(() -> {
                         List<Kit> kitsByFavoriteTag = response.body();
                         if (kitsByFavoriteTag != null && kitsByFavoriteTag.size() > 0) {
+                            /*
                             homeViewModel.setKitAdapter(new KitAdapter(getContext(), R.layout.kit_item, kitsByFavoriteTag));
                             kitByPreferencesListView.setAdapter(homeViewModel.getKitAdapter());
                             homeViewModel.getKitAdapter().notifyDataSetChanged();
+                             */
                             frequentlyUsedTextView.setText(frequentlyUsedTextView.getText().toString() + " " + tagsHash.get("0"));
+                            FragmentManager fragmentManager = getChildFragmentManager();
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.kitListByTagFragment, KitListByTagsFragment.newInstance(kitsByFavoriteTag),"KitListByTags")
+                                    .addToBackStack("KitListByTagsFragment").commit();
                         }
                         else
                             Toast.makeText(getContext(), String.format(getResources().getString(R.string.toast_cant_find_favorite_tags), tagsHash.get("0")), Toast.LENGTH_SHORT).show();

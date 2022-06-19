@@ -29,11 +29,13 @@
             app:bootstrapBrand="info" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/kitListView"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/kitListByTagFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchByTagContainer"/>
+        app:layout_constraintTop_toBottomOf="@id/searchByTagContainer"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

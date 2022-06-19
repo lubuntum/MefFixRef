@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -21,6 +22,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.ChangeKitActivity;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.mainfragments.kit.kitlist.KitAdapter;
+import com.example.memfixref.ui.mainfragments.kit.network.kitlistbytags.KitListByTagsFragment;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.Arrays;
@@ -52,56 +54,8 @@ public class KitSearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         BootstrapButton searchBtn = view.findViewById(R.id.searchBtn);
         EditText tagEditText = view.findViewById(R.id.findByTagEditText);
-        ListView kitListView = view.findViewById(R.id.kitListView);
-        kitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //ListView kitListView = view.findViewById(R.id.kitListView);
 
-                Kit kitFromAdapter = kitSearchViewModel.getKitAdapter().kitList.get(i);
-                //Если cell еще не прогружены
-                if (kitFromAdapter.cells == null) {
-                    APIKitServices apiKitServices = WebRepository
-                            .getRetrofitInstanceWithConverter(Kit.class, new KitDeserializer())
-                            .create(APIKitServices.class);
-                    Call<Kit> call = apiKitServices.getKitWithCellsByName(kitFromAdapter.kitName);
-                    call.enqueue(new Callback<Kit>() {
-                        @Override
-                        public void onResponse(Call<Kit> call, Response<Kit> response) {
-                            if (response.body() == null) {
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getContext(), getResources().getString(R.string.toast_network_cell), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                Kit kit = response.body();
-                                kitFromAdapter.cells = kit.cells;
-                                Intent intent = new Intent(getContext(), ChangeKitActivity.class);
-                                intent.putExtra("kit", kit);
-                                getActivity().startActivity(intent);
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Kit> call, Throwable t) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getContext(), getResources().getString(R.string.toast_network_trouble), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
-
-                }
-                else {
-                    Intent intent = new Intent(getContext(), ChangeKitActivity.class);
-                    intent.putExtra("kit", kitFromAdapter);
-                    getActivity().startActivity(intent);
-                }
-            }
-        });
         //Получаем все теги и делаем запрос
         searchBtn.setOnClickListener((View v)->{
             List<String> tags = Arrays.asList(tagEditText.getText().toString().split(" "));
@@ -146,9 +100,16 @@ public class KitSearchFragment extends Fragment {
         Observer<List<Kit>> kitListObserver = new Observer<List<Kit>>() {
             @Override
             public void onChanged(List<Kit> kits) {
+                /*
                 kitSearchViewModel.setKitAdapter(new KitAdapter(getContext(),R.layout.kit_item,kits));
                 kitListView.setAdapter(kitSearchViewModel.getKitAdapter());
                 kitSearchViewModel.getKitAdapter().notifyDataSetChanged();
+                 */
+                FragmentManager fragmentManager = getChildFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.kitListByTagFragment, KitListByTagsFragment.newInstance(kits),"KitListByTags")
+                        .addToBackStack("KitListByTagsFragment").commit();
             }
         };
         kitSearchViewModel.getKits().observe(getViewLifecycleOwner(),kitListObserver);
