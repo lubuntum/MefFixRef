@@ -48,6 +48,13 @@ public class SessionResultViewModel extends AndroidViewModel {
     public String getCorrect(){
         return String.valueOf(session.correct);
     }
+    public Double getAverageResultByNow(){
+        if (session.correct != 0)
+            return (double)session.correct/(double)(session.incorrect + session.correct);
+        return 0.0;
+    }
+
+
 
     public MutableLiveData<List<Session>> getSessionList(){return sessionList;}
 

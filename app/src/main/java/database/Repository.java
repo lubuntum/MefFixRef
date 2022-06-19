@@ -85,6 +85,15 @@ public class Repository {
         };
         diskIOExecutor.execute(runnable);
     }
+    public void updateKit(Kit kit){
+        Runnable updateKitRnb = new Runnable() {
+            @Override
+            public void run() {
+                kitDao.updateKit(kit);
+            }
+        };
+        diskIOExecutor.execute(updateKitRnb);
+    }
 
     public void removeKit(Kit kit){
         Runnable removeKitRnb = new Runnable() {

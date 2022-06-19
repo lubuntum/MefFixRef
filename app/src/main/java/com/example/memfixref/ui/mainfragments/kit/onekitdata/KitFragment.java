@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.memfixref.R;
 import com.example.memfixref.ui.dialog.CellDialogFragment;
-import com.example.memfixref.ui.mainfragments.kit.network.UploadKitFragment;
+import com.example.memfixref.ui.mainfragments.kit.network.upload.UploadKitFragment;
 import com.example.memfixref.ui.mainfragments.kit.onekitdata.cellist.CellAdapter;
 import com.example.memfixref.ui.mainfragments.plots.totalstats.TotalStatsByKit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -78,11 +78,12 @@ public class KitFragment extends Fragment {
         if (getArguments()!= null && getArguments().containsKey("kit")) {
             Kit tempKit = (Kit) getArguments().getSerializable("kit");
             kitViewModel.setKit(tempKit);
-
+            if (kitViewModel.getKit().cells == null || kitViewModel.getKit().cells.size() == 0)
+                kitViewModel.uploadCells();//загрузка содержимого kit
             changeKitBtn.setText(getResources().getString(R.string.update));
             kitNameEditText.setText(kitViewModel.getKit().kitName);
 
-            kitViewModel.uploadCells();//загрузка содержимого kit
+
             //работа с плавающими кнопками только при работе с УЖЕ созданными kit
             floatBtnInit(view, savedInstanceState);
 

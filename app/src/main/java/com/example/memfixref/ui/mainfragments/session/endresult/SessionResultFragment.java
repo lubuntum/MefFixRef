@@ -24,6 +24,7 @@ import database.entities.Session;
 
 public class SessionResultFragment extends Fragment {
     SessionResultViewModel sessionResultViewModel;
+    public static DecimalFormat decimalFormat = new DecimalFormat("###.##");
     public static SessionResultFragment newInstance(Session session) {
 
         Bundle args = new Bundle();
@@ -53,10 +54,11 @@ public class SessionResultFragment extends Fragment {
         TextView resultTextView = view.findViewById(R.id.resultTextView);
         TextView kitNameTextView = view.findViewById(R.id.kitNameTextView);
         TextView promptTextView = view.findViewById(R.id.promptUseTextView);
-        TextView totalTextView = view.findViewById(R.id.totalTextView);
         TextView incorrectTextView = view.findViewById(R.id.incorrectTextView);
         TextView correctTextView = view.findViewById(R.id.correctTextView);
-        TextView averageResultTextView = view.findViewById(R.id.averageResultTextView);
+
+        TextView totalAverageResultTextView = view.findViewById(R.id.totalAverageResultTextView);
+        TextView averageResultTextView = view.findViewById(R.id.averageResultByNowTextView);
 
         String kitNameStr = getResources().getString(R.string.session_end_kit_theme) +
                 sessionResultViewModel.getKitName();
@@ -66,6 +68,8 @@ public class SessionResultFragment extends Fragment {
                 sessionResultViewModel.getIncorrect();
         String correctStr = getResources().getString(R.string.session_end_right) +
                 sessionResultViewModel.getCorrect();
+        String averageResultByNowStr = getResources().getString(R.string.session_end_average_result) +
+                decimalFormat.format(sessionResultViewModel.getAverageResultByNow()*100) + "%";
 
         if (sessionResultViewModel.getSession().prompt == 0)
             resultTextView.setTextColor(getResources().getColor(R.color.bootstrap_brand_success));
@@ -74,6 +78,7 @@ public class SessionResultFragment extends Fragment {
         //totalTextView.setText(String.valueOf(sessionResultViewModel.getSession().));
         incorrectTextView.setText(incorrectStr);
         correctTextView.setText(correctStr);
+        averageResultTextView.setText(averageResultByNowStr);
 
         //Для подсчета среднего значения по успеваемости
         Observer<List<Session>> sessionsObserver = new Observer<List<Session>>() {
@@ -86,10 +91,10 @@ public class SessionResultFragment extends Fragment {
                     general += session.correct + session.incorrect;
                 }
                 if (general != 0){
-                    DecimalFormat format = new DecimalFormat("###.##");
-                    String averageResultStr = getResources().getString(R.string.session_end_average_result) +
-                            format.format((double)correct/general);
-                    averageResultTextView.setText(averageResultStr);
+
+                    String averageResultStr = getResources().getString(R.string.session_end_total_average_result) +
+                            decimalFormat.format((double)correct/general * 100) + "%";
+                    totalAverageResultTextView.setText(averageResultStr);
 
                 }
             }

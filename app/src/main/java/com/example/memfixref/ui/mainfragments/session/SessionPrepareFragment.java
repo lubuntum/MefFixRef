@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -24,10 +25,12 @@ import com.example.memfixref.ui.mainfragments.session.relativelists.SessionRelat
 import com.example.memfixref.ui.mainfragments.session.sessionselectkit.SessionSelectKitFragment;
 import com.example.memfixref.ui.mainfragments.session.bykey.SessionByKeyFragment;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import database.entities.Cell;
 import database.entities.Kit;
+import services.DateFormat;
 
 public class SessionPrepareFragment extends Fragment {
     SessionPrepareViewModel sessionViewModel;
@@ -138,6 +141,11 @@ public class SessionPrepareFragment extends Fragment {
             @Override
             public void onChanged(Kit kit) {
                 kitNameTextView.setText(kit.kitName);
+
+                DateFormat dateFormat = new DateFormat();
+                kit.lastUse = dateFormat.getCurrentDateWithFormat();
+                kit.frequencyUse++;
+                sessionViewModel.updateKit(kit);
             }
         };
         sessionViewModel.getPickedKit().observe(getViewLifecycleOwner(),kitObserver);

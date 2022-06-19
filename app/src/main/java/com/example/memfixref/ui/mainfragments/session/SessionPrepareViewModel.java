@@ -35,6 +35,9 @@ public class SessionPrepareViewModel extends AndroidViewModel {
         repo.getAllCellsByKit(kit,cellList);
         this.pickedKit.setValue(kit);
     }
+    public void updateKit(Kit kit){
+        repo.updateKit(kit);
+    }
 
     public MutableLiveData<Kit> getPickedKit() {
         return pickedKit;

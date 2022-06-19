@@ -213,6 +213,9 @@ public class SessionRelativeListsFragment extends Fragment {
         pickedViewByValue = null;
         pickedViewByKey = null;
         relativeListsViewModel.removePickedCells();
+        if (relativeListsViewModel.getAdapterByKey().cellList.size() == 0){
+            progressBar.setProgress(100);
+        }
     }
     private void progressBarProcessing(){
         Runnable runnable = new Runnable() {
@@ -246,6 +249,7 @@ public class SessionRelativeListsFragment extends Fragment {
         Thread thread = new Thread(runnable);
         thread.start();
     }
+
     private void sessionBtnInit(){
         endSessionBtn.setOnClickListener((View v)->{
             progressBar.setProgress(100);

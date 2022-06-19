@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,18 +51,23 @@ public class TotalStatsByKit extends Fragment {
         View fragmentKeyValuePlot = view.findViewById(R.id.fragmentKeyValuePlot);
         View fragmentRelativeLists = view.findViewById(R.id.fragmentRelativeListsPlot);
         View fragmentImageByValue = view.findViewById(R.id.imageByValueContainer);
-        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentManager fragmentManager = getChildFragmentManager();
 
         Runnable loadKeyValueRnb = new Runnable() {
             @Override
             public void run() {
-                fragmentManager.beginTransaction().add(R.id.fragmentKeyValuePlot,
-                        SessionSuccessPlotFragment.newInstance(totalStatsViewModel.getKit(),
-                                SessionByKeyViewModel.SESSION_TYPE_KEY),
-                        "fragment_plot_key_value")
-                        .commit();
+                try {
+                    fragmentManager.beginTransaction().add(R.id.fragmentKeyValuePlot,
+                            SessionSuccessPlotFragment.newInstance(totalStatsViewModel.getKit(),
+                                    SessionByKeyViewModel.SESSION_TYPE_KEY),
+                            "fragment_plot_key_value")
+                            .commit();
 
-                totalStatsViewModel.setSessionByKeyIsLoad(true);
+                    totalStatsViewModel.setSessionByKeyIsLoad(true);
+                }
+                catch (IllegalStateException e){
+
+                }
             }
         };
 
@@ -73,13 +79,18 @@ public class TotalStatsByKit extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                fragmentManager.beginTransaction().add(R.id.fragmentRelativeListsPlot,
-                        SessionSuccessPlotFragment.newInstance(totalStatsViewModel.getKit(),
-                                SessionRelativeListsViewModel.SESSION_TYPE_RELATIVE_LISTS),
-                        "fragment_plot_relative_lists")
-                        .commit();
+                try {
+                    fragmentManager.beginTransaction().add(R.id.fragmentRelativeListsPlot,
+                            SessionSuccessPlotFragment.newInstance(totalStatsViewModel.getKit(),
+                                    SessionRelativeListsViewModel.SESSION_TYPE_RELATIVE_LISTS),
+                            "fragment_plot_relative_lists")
+                            .commit();
 
-                totalStatsViewModel.setSessionListsIsLoad(true);
+                    totalStatsViewModel.setSessionListsIsLoad(true);
+                }
+                catch (IllegalStateException e){
+
+                }
             }
         };
 
@@ -91,12 +102,17 @@ public class TotalStatsByKit extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                try {
 
-                fragmentManager.beginTransaction().add(R.id.fragmentValueByImage,
-                        SessionSuccessPlotFragment.newInstance(totalStatsViewModel.getKit(),
-                                ImageByValueViewModel.SESSION_TYPE_IMAGE_BY_VALUE),"fragment_plot_image_by_value")
-                        .commit();
-                totalStatsViewModel.setSessionImageByValueIsLoad(true);
+                    fragmentManager.beginTransaction().add(R.id.fragmentValueByImage,
+                            SessionSuccessPlotFragment.newInstance(totalStatsViewModel.getKit(),
+                                    ImageByValueViewModel.SESSION_TYPE_IMAGE_BY_VALUE), "fragment_plot_image_by_value")
+                            .commit();
+                    totalStatsViewModel.setSessionImageByValueIsLoad(true);
+                }
+                catch (IllegalStateException e){
+
+                }
             }
         };
 

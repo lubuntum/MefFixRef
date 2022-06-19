@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
                 }
                 else if (position == 2){
                     Intent intent = new Intent(getContext(), NetworkSearchActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     getActivity().startActivity(intent);
                 }
             }

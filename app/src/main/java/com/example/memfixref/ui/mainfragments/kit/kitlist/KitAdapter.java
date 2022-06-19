@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,16 +38,20 @@ public class KitAdapter extends ArrayAdapter<Kit> {
         }
         TextView kitName = convertView.findViewById(R.id.kitNameTextView);
         TextView totalUsage = convertView.findViewById(R.id.totalUsageTextView);
-        TextView  lastUsageDate = convertView.findViewById(R.id.lastUsageDateTextView);
+        TextView lastUsageDate = convertView.findViewById(R.id.lastUsageDateTextView);
+
         Kit kitItem = kitList.get(position);
 
         kitName.setText(kitItem.kitName);
 
-        String totalUsageStr = getContext().getResources().getString(R.string.total)+ " " + kitItem.frequencyUse;
-        totalUsage.setText(totalUsageStr);
-
-        String lastUsageDateStr = getContext().getResources().getString(R.string.last_use) +" "+ kitItem.lastUse;
-        lastUsageDate.setText(lastUsageDateStr);
+        if(kitItem.frequencyUse != 0) {
+            String totalUsageStr = getContext().getResources().getString(R.string.total_use) + " " + (int)kitItem.frequencyUse;
+            totalUsage.setText(totalUsageStr);
+        }
+        if (kitItem.lastUse != null){
+            String lastUsageDateStr = getContext().getResources().getString(R.string.last_use) +" "+ kitItem.lastUse;
+            lastUsageDate.setText(lastUsageDateStr);
+        }
 
         return convertView;
     }
