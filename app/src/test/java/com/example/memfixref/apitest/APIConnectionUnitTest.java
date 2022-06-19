@@ -1,4 +1,4 @@
-package com.example.memfixref;
+package com.example.memfixref.apitest;
 
 import org.junit.Test;
 
