@@ -54,11 +54,12 @@
                 app:bootstrapBrand="info"
                 app:roundedCorners="true"/>
             <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/uploadKitBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
-                android:text="upload"
+                android:text="@string/upload"
                 app:bootstrapSize="md"
                 app:bootstrapBrand="success"
                 app:roundedCorners="true"/>
@@ -86,11 +87,9 @@
                 />
         </LinearLayout>
 
-
-
     </LinearLayout>
         <com.beardedhen.androidbootstrap.BootstrapEditText
-            android:id="@+id/kitTags"
+            android:id="@+id/tagsEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/bootstrap_gray_light"
@@ -112,11 +111,12 @@
         android:id="@+id/cellListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="250dp"
         app:layout_constraintTop_toBottomOf="@id/kitInfoContainer"
         app:layout_constraintLeft_toLeftOf="parent"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/uploadKitBtn"
+        android:id="@+id/uploadKitFloatBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_upload_kit"
@@ -132,7 +132,7 @@
         android:src="@drawable/ic_edit_kit"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        app:layout_constraintRight_toLeftOf="@id/uploadKitBtn"
+        app:layout_constraintRight_toLeftOf="@id/uploadKitFloatBtn"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

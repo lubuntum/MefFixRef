@@ -13,16 +13,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:id="@+id/findByTagEditText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="9"
             app:bootstrapSize="lg"
-            android:hint="Find by tag"/>
+            android:hint="@string/find_by_tags"/>
         <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Search"
+            android:text="@string/search"
             app:bootstrapSize="lg"
             app:bootstrapBrand="info" />
     </LinearLayout>

@@ -43,12 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/session_end_prompt_use" />
-        <TextView
-            style="@style/app_text"
-            android:id="@+id/totalTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/session_end_total" />
+
         <TextView
             style="@style/app_text"
             android:id="@+id/incorrectTextView"
@@ -64,10 +59,16 @@
         <TextView
             style="@style/app_text"
             android:paddingBottom="4dp"
-            android:id="@+id/averageResultTextView"
+            android:id="@+id/averageResultByNowTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/session_end_average_result" />
+        <TextView
+            style="@style/app_text"
+            android:id="@+id/totalAverageResultTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/session_end_total_average_result" />
 
     </LinearLayout>
     <include layout="@layout/thin_gray_line"
