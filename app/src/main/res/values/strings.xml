@@ -54,6 +54,8 @@
     <string name="toast_correct">Correct</string>
     <string name="toast_wrong">This value doesn\'t match</string>
     <string name="toast_empty_image">Please fill all cells with images</string>
+    <string name="toast_cant_find_favorite_tags">Can\'t find kits by your favorite tag %s</string>
+    <string name="toast_add_favorite_tags">Please add favorite tags</string>
 
     <string name="toast_success_authorisation">Authorisation is successful</string>
     <string name="toast_network_trouble">Can\'t establish network connection </string>
@@ -129,4 +131,5 @@
     <string name="find_by_tags">Find by tags</string>
     <string name="search">Search</string>
     <string name="upload">upload</string>
+    <string name="you_may_also_like">You may also like by tag</string>
 </resources>
